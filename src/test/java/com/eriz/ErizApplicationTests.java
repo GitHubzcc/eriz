@@ -1,4 +1,4 @@
-package com.eriz.sys;
+package com.eriz;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
