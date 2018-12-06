@@ -18,14 +18,14 @@ import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 public class MpGenerator {
 
     public static void main(String[] args) {
-//        assert (false) : "代码生成属于危险操作，请确定配置后取消断言执行代码生成！";
+        //assert (false) : "代码生成属于危险操作，请确定配置后取消断言执行代码生成！";
         AutoGenerator mpg = new AutoGenerator();
         // 选择 freemarker 引擎，默认 Velocity
         //mpg.setTemplateEngine(new FreemarkerTemplateEngine());
 
         // 全局配置
         GlobalConfig gc = new GlobalConfig();
-        gc.setAuthor("Mht");
+        gc.setAuthor("eriz");
         gc.setOutputDir("D://mpg");
         gc.setFileOverride(false);// 是否覆盖同名文件，默认是false
         gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
@@ -61,9 +61,9 @@ public class MpGenerator {
         // 策略配置
         StrategyConfig strategy = new StrategyConfig();
         // strategy.setCapitalMode(true);// 全局大写命名 ORACLE 注意
-        strategy.setTablePrefix(new String[]{"user_"});// 此处可以修改为您的表前缀
+        strategy.setTablePrefix(new String[]{"sys_"});// 此处可以修改为您的表前缀
         strategy.setNaming(NamingStrategy.nochange);// 表名生成策略
-        strategy.setInclude(new String[]{"user"}); // 需要生成的表
+        strategy.setInclude(new String[]{"sys_user"}); // 需要生成的表
         // strategy.setExclude(new String[]{"test"}); // 排除生成的表
         // 自定义实体父类
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
@@ -87,7 +87,7 @@ public class MpGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setParent("com.mht.springbootmybatisplus");
+        pc.setParent("com.eriz.sys.domain.UserDo");
         // pc.setModuleName("test");
         mpg.setPackageInfo(pc);
 

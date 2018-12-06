@@ -1,6 +1,6 @@
 package com.eriz.testUtil;
 
-import com.eriz.ErizApplication;
+import com.eriz.Application;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.UserService;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import java.util.List;
  * <small> 2018年12月5日 | eriz</small>
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = ErizApplication.class)
+@SpringBootTest(classes = Application.class)
 public class mysqlDataTest {
 
 
