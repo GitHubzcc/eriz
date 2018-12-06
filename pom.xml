@@ -81,7 +81,7 @@
         </dependency>
         <!-- mybatis-plus E -->
 
-        <!--druid -->
+        <!--druid S-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
@@ -112,13 +112,15 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
         </dependency>
+
+        <!-- 热部署-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!--commons -->
+        <!--commons utils -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -141,6 +143,8 @@
             <artifactId>freemarker</artifactId>
             <version>${freemarker.version}</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
+
+        <!-- junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -177,6 +181,4 @@
             </resource>
         </resources>
     </build>
-
-
 </project>

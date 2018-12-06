@@ -1,5 +1,5 @@
-# eriz 2018年12月5日 12:06:42
-集成springboot vue mybatisPlus 开发框架（v1.0）
+# eriz 2018年12月5日
+集成springboot vue mybatisPlus 开发框架（v1.0.0）
 
 框架待开发：
 1、集成mybatisPlus框架，数据库使用mysql
@@ -7,9 +7,11 @@
 3、集成微信sdk开发
 4、集成微信小程序
 5、集成restful
+6、集成logback日志
+
 
 功能模块待开发：
-1、自动生成代码（entity，dao，service，controller）
+1、自动生成代码（entity，dao，service，controller）mybatis plus自动生成代码
 2、七牛文件上传服务器
 3、系统后台管理功能
     --本功能：

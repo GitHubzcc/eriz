@@ -1,0 +1,23 @@
+package com.eriz.testUtil;
+
+import com.eriz.ErizApplication;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = ErizApplication.class)
+public class logbackTest {
+
+    // init sys recored ,get by loggerFactory
+    private final static Logger logger = LoggerFactory.getLogger(logbackTest.class);
+
+    @Test
+    public void logback() {
+        logger.info("logback info success");
+        logger.error("logback error success");
+    }
+}
