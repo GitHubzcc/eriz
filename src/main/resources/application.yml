@@ -9,22 +9,9 @@ server:
     min-spare-threads: 30
   port: 8181
   uri-encoding: utf-8
-#配置freemarker
+
+#配置database
 spring:
-  freemarker:
-    # 设置模板后缀名
-    suffix: .ftl
-    #设置文档类型
-    content-type: text/html
-    #页面编码格式
-    charset: UTF-8
-    #页面缓存
-    cache: false
-    #ftl文件路径
-    template-loder-path: classpath:/templates
-  #设置静态文件路径,js,css
-  mvc:
-    static-path-pattern: /static/**
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
@@ -55,7 +42,14 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
     # 合并多个DruidDataSource的监控数据
     #useGlobalDataSourceStat: true
-
+  #配置thymeleaf 页面引擎
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: utf-8
+    content-type: text/html
+    cache: false
+    mode: LEGACYHTML5
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Mapper.xml
   typeAliasesPackage: com.eriz.**.domain

@@ -20,29 +20,8 @@ public interface CoreService<T> extends IService<T> {
 
     T findOneByKv(Object... param);
 
-    /**
-     * <pre>
-     *
-     * </pre>
-     *
-     * <small> 2018/6/14 17:32 | Aron</small>
-     * @param [clazz, param]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     *
-     */
-
     Map<String, Object> convertToMap(Object... param);
 
-    /**
-     * <pre>
-     *
-     * </pre>
-     *
-     * <small> 2018/6/14 17:14 | Aron</small>
-     * @param [clazz, params]
-     * @return java.util.Map<java.lang.String,java.lang.Object>
-     *
-     */
     EntityWrapper<T> convertToEntityWrapper(Object... params);
 
 }
