@@ -1,31 +1,35 @@
 package com.eriz.sys.domain;
 
+import com.baomidou.mybatisplus.annotations.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@TableName("sys_menu")
 public class MenuDo implements Serializable {
 
     private static long serialVersionUID = 1L;
 
+    //
     private Long id;
-
+    // 父菜单ID，一级菜单为0
     private Long parentId;
-
+    // 菜单名称
     private String name;
-
+    // 菜单URL
     private String url;
-
+    // 授权(多个用逗号分隔，如：user:list,user:create)
     private String perms;
-
+    // 类型 0：目录 1：菜单 2：按钮
     private Integer type;
-
+    // 菜单图标
     private String icon;
-
+    // 排序
     private Integer orderNum;
-
-    private Date createDate;
-
-    private Date modifiedDate;
+    // 创建时间
+    private Date gmtCreate;
+    // 修改时间
+    private Date gmtModified;
 
     public Long getId() {
         return id;
@@ -91,19 +95,19 @@ public class MenuDo implements Serializable {
         this.orderNum = orderNum;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
-    public Date getModifiedDate() {
-        return modifiedDate;
+    public Date getGmtModified() {
+        return gmtModified;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setGmtModified(Date gmtModified) {
+        this.gmtModified = gmtModified;
     }
 }

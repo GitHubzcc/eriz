@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 1992lcg@163.com
- * @Time 2017年9月6日
- * @description
- * 
+ *2018年12月11日 eriz
  */
 @Service
 public interface GeneratorService {

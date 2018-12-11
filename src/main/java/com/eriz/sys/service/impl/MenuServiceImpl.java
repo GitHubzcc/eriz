@@ -34,7 +34,6 @@ public class MenuServiceImpl extends CoreServiceImpl<MenuDao, MenuDo> implements
         for (MenuDo menuDo : list) {
             TreeDo<MenuDo> treeDo = new TreeDo<>();
             treeDo.setId(menuDo.getId().toString());
-            System.out.println(menuDo.getId()+"----"+menuDo.getParentId());
             treeDo.setParentId(menuDo.getParentId().toString());
             treeDo.setText(menuDo.getName());
             Map<String, Object> attributes = new HashMap<>();

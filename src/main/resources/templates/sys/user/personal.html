@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>personal</title>
+</head>
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+<script type="text/javascript" src="/js/vue.min.js"></script>
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+
+<body>
+<div class="container" id="app">
+    <div class="row clearfix">
+        <div class="col-md-6 column">
+            <form role="form">
+                <div class="form-group">
+                    <label>Name{{user.username}}</label><input type="text" class="form-control" v-model="user.username" />
+                </div>
+                <div class="form-group">
+                    <label>Email</label><input type="email" class="form-control" v-model="user.email" />
+                </div>
+                <div class="form-group">
+                    <label>Mobile</label><input type="text" class="form-control" v-model="user.mobile" />
+                </div>
+                <div class="form-group">
+                    <label>Address</label><input type="text" class="form-control" v-model="user.liveAddress"/>
+                </div>
+                <div class="form-group">
+                    <label>Passward</label><input type="text" class="form-control" v-model="newPaw"/>
+                </div>
+
+                <button type="submit" class="btn btn-default" @click="submit()">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var app = new Vue({
+        el : "#app",
+        data : {
+            text:"123",
+            user:{},
+            newPaw: ''
+        },
+        methods: {
+            getUser: function () {
+                console.log(1)
+                $.getJSON("userInfo", function (r) {
+                    app.user = r;
+                    console.log(app.user)
+                });
+            },
+            submit: function () {
+                $.getJSON("update",{
+                    username : app.user.username
+                }, function (r) {
+                    layer.open({
+                        // type : 1,
+                        // title : '个人设置',
+                        // maxmin : true,
+                        // shadeClose : false,
+                        // area : [ '980px', '600px' ],
+                        // content : '/sys/user/personal'
+                    });
+                });
+            }
+        },
+        created: function () {
+            this.getUser();
+        }
+    });
+</script>
+</html>
