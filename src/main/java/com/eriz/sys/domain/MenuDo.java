@@ -1,13 +1,12 @@
 package com.eriz.sys.domain;
 
-import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @TableName("sys_menu")
-public class MenuDo  extends Model implements Serializable {
+public class MenuDo implements Serializable {
 
     private static long serialVersionUID = 1L;
 
@@ -112,8 +111,4 @@ public class MenuDo  extends Model implements Serializable {
         this.gmtModified = gmtModified;
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return null;
-    }
 }
