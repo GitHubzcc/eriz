@@ -45,7 +45,7 @@ public class UserDo implements Serializable {
     @TableField(exist = false)
     private List<Long> roleIds;
     //性别
-    private Long sex;
+    private int sex;
     //出身日期
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
@@ -102,11 +102,11 @@ public class UserDo implements Serializable {
         this.roleIds = roleIds;
     }
 
-    public Long getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(Long sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 
@@ -228,5 +228,32 @@ public class UserDo implements Serializable {
 
     public void setDeptName(String deptName) {
         this.deptName = deptName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserDo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", deptId=" + deptId +
+                ", deptName='" + deptName + '\'' +
+                ", email='" + email + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", status=" + status +
+                ", userIdCreate=" + userIdCreate +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                ", roleIds=" + roleIds +
+                ", sex=" + sex +
+                ", birth=" + birth +
+                ", picId=" + picId +
+                ", liveAddress='" + liveAddress + '\'' +
+                ", hobby='" + hobby + '\'' +
+                ", province='" + province + '\'' +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                '}';
     }
 }

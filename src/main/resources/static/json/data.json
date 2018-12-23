@@ -1,0 +1,87 @@
+{
+  "data": [
+    {
+      "img": "fa fa-bars",
+      "name": "基础管理",
+      "pId": -1,
+      "id": 1
+    },
+    {
+      "id": 1,
+      "name": "xx",
+      "sex": "male",
+      "pId": -1,
+      "img": "kkkkk"
+    },
+    {
+      "id": 2,
+      "name": "xx",
+      "sex": "male",
+      "pId": 1,
+      "img": "kkkkk"
+    },
+    {
+      "id": 3,
+      "name": "xx",
+      "sex": "male",
+      "pId": 1,
+      "img": "kkkkk"
+    },
+    {
+      "id": 4,
+      "name": "xx",
+      "sex": "male",
+      "pId": 1,
+      "img": "kkkkk"
+    },
+    {
+      "id": 5,
+      "name": "xx",
+      "sex": "male",
+      "pId": -1,
+      "img": "kkkkk"
+    },
+    {
+      "id": 6,
+      "name": "xx",
+      "sex": "male",
+      "pId": 5,
+      "img": "kkkkk"
+    },
+    {
+      "id": 7,
+      "name": "xx",
+      "sex": "male",
+      "pId": 5,
+      "img": "kkkkk"
+    },
+    {
+      "id": 8,
+      "name": "xx",
+      "sex": "male",
+      "pId": 6,
+      "img": "kkkkk"
+    },
+    {
+      "id": 9,
+      "name": "xx",
+      "sex": "male",
+      "pId": 6,
+      "img": "kkkkk"
+    },
+    {
+      "id": 10,
+      "name": "xx",
+      "sex": "male",
+      "pId": 9,
+      "img": "kkkkk"
+    },
+    {
+      "id": 11,
+      "name": "xx",
+      "sex": "male",
+      "pId": 9,
+      "img": "kkkkk"
+    }
+  ]
+}

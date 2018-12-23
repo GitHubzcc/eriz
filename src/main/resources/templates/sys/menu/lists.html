@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tree-table</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+<div class="layui-container layui-text" style="width: 100%;margin-top: 10px">
+    <div class="layui-btn-group">
+        <button class="layui-btn" id="add-root" onclick="add('','')">添加根目录</button>
+        <button class="layui-btn" id="btn-expand">全部展开</button>
+        <button class="layui-btn" id="btn-fold">全部折叠</button>
+        <button class="layui-btn" id="btn-refresh">刷新表格</button>
+    </div>
+    &emsp;
+    <table id="table1" class="layui-table" lay-filter="table1"></table>
+</div>
+    <!-- 操作列 -->
+<script type="text/html" id="oper-col">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">添加</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/eriz/sys/menu/lists.js"></script>
+</body>
+</html>

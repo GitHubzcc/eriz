@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        body{margin: 10px;}
+    </style>
+</head>
+<body>
+<div class="layui-container layui-text" style="width: 100%;margin-top: 10px">
+    <div class="layui-form-item" style="display: inline-flex;">
+        <div class="layui-form-item" style="display: inline-flex;">
+            <div class="layui-input-block" style="display: inline-flex;margin-left:0px">
+                <input type="text" id="search" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+                <button class="layui-btn layui-btn-normal" onclick="search()">搜索</button>
+            </div>
+        </div>
+        <div class="layui-btn-group">
+            <button class="layui-btn" id="add-root" onclick="add('','')">添加根部门</button>
+            <button class="layui-btn" id="btn-expand">全部展开</button>
+            <button class="layui-btn" id="btn-fold">全部折叠</button>
+            <button class="layui-btn" id="btn-refresh">刷新表格</button>
+        </div>
+    </div>
+    <table id="table-tree" class="layui-table" lay-filter="table-tree"></table>
+</div>
+<!-- 操作列 -->
+<script type="text/html" id="oper-col">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="add">添加</a>
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/eriz/sys/dept/lists.js"></script>
+</body>
+</html>

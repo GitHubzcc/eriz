@@ -14,4 +14,34 @@
 		order by m.orderNum asc
     </select>
 
+	<select id="menuTree" resultType="map">
+		SELECT
+			menu.id AS "id",
+			menu.name AS "name",
+			menu.parentId AS "pId",
+			menu.icon AS "img"
+		FROM
+			sys_menu menu ORDER BY menu.id;
+	</select>
+
+	<select id="menuTreeRid" resultType="map">
+		SELECT menu.id as "id",menu.parentId as "pId",menu.name as "name",
+		rm.checkstate as "checked",menu.icon as "img"
+		FROM sys_menu menu LEFT JOIN (
+		SELECT DISTINCT rmenu.menuId, 'true' AS 'checkstate'
+		FROM sys_role_menu rmenu
+		<where>
+			<if test="keyValue != '' and keyValue!= null">
+				rmenu.roleId = #{keyValue}
+			</if>
+		</where>) rm ON menu.id = rm.menuId
+		ORDER BY menu.parentId
+	</select>
+	
+	<select id="findPermByUserId" resultType="string">
+		select distinct menu.perms
+		from sys_menu menu left join sys_role_menu rmenu on menu.id = rmenu.menuId
+		left join sys_user_role urole on rmenu.roleId = urole.roleId
+		where urole.userId = #{id}
+	</select>
 </mapper>

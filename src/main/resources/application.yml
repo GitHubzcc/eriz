@@ -15,7 +15,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ifast-new2?useUnicode=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/eriz?useUnicode=true&useSSL=false
     # 推荐utf8mb4编码以便支持表情字符，sys_log记录系统数据变动需要支持utf8mb4
     connectionInitSqls: SET NAMES utf8mb4;
     username: root
@@ -54,7 +54,7 @@ mybatis-plus:
   mapper-locations: classpath:/mapper/**/*Mapper.xml
   typeAliasesPackage: com.eriz.**.domain
   global-config:
-      id-type: 2
+      id-type: 0 #0:数据库ID自增   1:用户输入id  2:全局唯一id(IdWorker)  3:全局唯一ID(uuid)
       field-strategy: 1
       db-column-underline: false
       capital-mode: false
@@ -64,3 +64,10 @@ mybatis-plus:
   configuration:
       map-underscore-to-camel-case: false
       cache-enabled: false
+
+eriz:
+  jwt:
+    userPrimaryKey: username
+    expireTokenKeyPrefix: eriz:expireToken
+    expireTime: 7200000
+    refreshTokenExpire: 86400000

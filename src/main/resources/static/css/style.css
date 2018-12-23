@@ -7363,4 +7363,7 @@ body.skin-3 {
     background-color: #ffffff!important;
     border-color: #cccccc!important;
 }
+/*重写样式*/
+.body-page{margin: 10px;}
+.search-left{margin-left: -13px}
 

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>添加用户</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/js/jquery-ztree/css/metro2.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+</head>
+<body>
+
+<div class="container" style="width: 100%;">
+    <form id="signupForm" class="layui-form" lay-filter="example">
+        <div class="layui-form-item">
+            <input type="hidden" id="rId" th:value="${role?.id}" name="id">
+            <label class="layui-form-label">角色名</label>
+            <div class="layui-input-block">
+                <input type="text" name="roleName" th:value="${role?.roleName}" lay-verify="roleName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <input type="text" name="remark" th:value="${role?.remark}" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+            </div>
+        </div>
+        <input type="hidden" name="menuIds" id="menuIds">
+        <div class="layui-form-item">
+            <label class="layui-form-label">角色权限</label>
+            <div class="layui-input-inline">
+                <ul id="menuTree" class="ztree" style="overflow-y: auto"></ul>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ztree/js/jquery.ztree.all.min.js"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/eriz/sys/role/add.js"></script>
+</body>
+</html>

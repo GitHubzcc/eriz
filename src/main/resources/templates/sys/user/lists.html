@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include :: header"></head>
+<body class="body-page">
+<div class="container" style="width: 100%">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="form-group pull-left col-md-5 search-left">
+                <form id="searchForm" class="form-line">
+                    <div class="input-group pull-left col-md-7">
+                        <div class="input-group-addon ui-filter-text">
+                            <a href="#" style="text-decoration:none">更多条件 <i class="layui-icon layui-icon-more" aria-hidden="true"></i></a>
+                        </div>
+                        <input id="name" type="text" class="form-control ui-filter-input ui-filter-more" placeholder="用户名"/>
+                    </div>
+                    <div class="btn-group pull-left" style="margin-left:10px">
+                        <a id="btn-search" class="btn btn-default btn-search" data-type="reload"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                        <a id="btn-resets" class="btn btn-default"><i class="fa fa-eraser"></i>&nbsp;重置</a>
+                    </div>
+                    <div class="ui-filter-list" style="padding-top:50px;display:none">
+                        <table class="form">
+                            <tr>
+                                <td><label>邮箱</label></td>
+                                <td>
+                                    <input id="remarks" type="text" class="form-control" style="margin-left: 10px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="btn-group operation-btns pull-right">
+                <button id="btn-add" onclick="add()" class="layui-btn">增加</button>
+                <button id="btn-delete" class="layui-btn">批量删除</button>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <table class="layui-hide" id="table-data" lay-filter="test"></table>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="barDemo">
+    <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/js/eriz/sys/user/lists.js"></script>
+<script type="text/javascript" src="/js/eriz/common/core.js"></script>
+</body>
+</html>

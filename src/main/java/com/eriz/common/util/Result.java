@@ -1,5 +1,8 @@
 package com.eriz.common.util;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * 消息返回结果集
  *

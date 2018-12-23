@@ -20,41 +20,19 @@ import java.util.Map.Entry;
  * 2018年12月11日 eriz
  */
 public final class WebUtil {
-    private static HttpServletRequest REQUEST = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-    private static HttpServletResponse RESPONSE = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
 
     /**
      * 获取 HttpServletRequest
      */
     public static HttpServletRequest getRequest() {
-        if (REQUEST == null) {
-            throw new RuntimeException("没有设置HttpServletRequest！");
-        }
-        return REQUEST;
-    }
-
-    /**
-     * 设置 HttpServletRequest
-     */
-    public static void setRequest(HttpServletRequest req) {
-        REQUEST = req;
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 
     /**
      * 获取 HttpServletResponse
      */
     public static HttpServletResponse getResponse() {
-        if (RESPONSE == null) {
-            throw new RuntimeException("没有设置HttpServletResponse！");
-        }
-        return RESPONSE;
-    }
-
-    /**
-     * 备份当前请求的response到本地(没有被拦截器拦截的请求路径，需要手动调用该方法)..
-     */
-    public static void setResponse(HttpServletResponse resp) {
-        RESPONSE = resp;
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
     /**

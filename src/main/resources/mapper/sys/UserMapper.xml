@@ -6,4 +6,17 @@
 	<select id="listAllDept" resultType="long">
 		select DISTINCT name from sys_user
 	</select>
+
+	<!-- 插入用户和角色关联表数据 -->
+	<insert id="insertUserRole">
+		INSERT INTO sys_user_role (userId, roleId) values
+		<foreach collection="ids" item="roles" separator=",">
+			(#{roles.userId,jdbcType=INTEGER}, #{roles.roleId,jdbcType=INTEGER})
+		</foreach>
+	</insert>
+	
+	<delete id="removeUserRole">
+		DELETE FROM sys_user_role WHERE userId = #{uid,jdbcType=INTEGER}
+	</delete>
+
 </mapper>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>添加部门</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
+</head>
+<body>
+    <div class="container" style="width: 100%;">
+        <form id="signupForm" class="layui-form" lay-filter="example">
+            <input type="hidden" id="id" th:value="${dept?.id}" name="id">
+            <input type="hidden" id="parentId" name="parentId" th:value="${pId}">
+            <div class="layui-form-item">
+                <label class="layui-form-label">上级部门：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="" th:value="${pName}" disabled autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门名称：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" th:value="${dept?.name}" autocomplete="off" placeholder="部门名称" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">排序：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="orderNum" th:value="${dept?.orderNum}" autocomplete="off" placeholder="排序" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否启用：</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="delFlag" value="1" title="启用" th:checked="${dept?.delFlag}">
+                    <input type="radio" name="delFlag" value="0" title="禁止" th:checked="${dept?.delFlag}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">图标：</label>
+                <div class="layui-input-block">
+                    <input type="text" name="icon" autocomplete="off" placeholder="图标" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script src="/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/eriz/sys/dept/add.js"></script>
+</body>
+</html>

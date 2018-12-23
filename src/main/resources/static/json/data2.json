@@ -1,0 +1,410 @@
+{
+  "data": [
+    {
+      "img": "fa fa-bars",
+      "name": "基础管理",
+      "pId": 0,
+      "id": 1
+    },
+    {
+      "img": "fa fa-gear",
+      "name": "系统工具",
+      "pId": 0,
+      "id": 77
+    },
+    {
+      "img": "fa fa-file-code-o",
+      "name": "微信公众号",
+      "pId": 0,
+      "id": 199
+    },
+    {
+      "img": "fa fa-bar-chart",
+      "name": "图表管理",
+      "pId": 0,
+      "id": 97
+    },
+    {
+      "img": "",
+      "name": "api测试-appUser角色",
+      "pId": 0,
+      "id": 213
+    },
+    {
+      "img": "fa fa-desktop",
+      "name": "系统管理",
+      "pId": 0,
+      "id": 3
+    },
+    {
+      "img": "",
+      "name": "api测试-用户更新",
+      "pId": 0,
+      "id": 212
+    },
+    {
+      "img": "fa fa-video-camera",
+      "name": "系统监控",
+      "pId": 0,
+      "id": 91
+    },
+    {
+      "img": "fa fa-file-code-o",
+      "name": "系统配置",
+      "pId": 1,
+      "id": 175
+    },
+    {
+      "img": "fa fa-file-code-o",
+      "name": "[Demo]基础表",
+      "pId": 1,
+      "id": 206
+    },
+    {
+      "img": "fa fa-folder-open",
+      "name": "文件管理",
+      "pId": 1,
+      "id": 71
+    },
+    {
+      "img": "fa fa-book",
+      "name": "数据字典",
+      "pId": 1,
+      "id": 78
+    },
+    {
+      "img": "",
+      "name": "新增",
+      "pId": 2,
+      "id": 20
+    },
+    {
+      "name": "批量删除",
+      "pId": 2,
+      "id": 61
+    },
+    {
+      "img": "",
+      "name": "删除",
+      "pId": 2,
+      "id": 22
+    },
+    {
+      "img": "",
+      "name": "编辑",
+      "pId": 2,
+      "id": 21
+    },
+    {
+      "img": "fa fa-paw",
+      "name": "角色管理",
+      "pId": 3,
+      "id": 7
+    },
+    {
+      "img": "fa fa-th-list",
+      "name": "系统菜单",
+      "pId": 3,
+      "id": 2
+    },
+    {
+      "img": "fa fa-user",
+      "name": "用户管理",
+      "pId": 3,
+      "id": 6
+    },
+    {
+      "img": "fa fa-users",
+      "name": "部门管理",
+      "pId": 3,
+      "id": 73
+    },
+    {
+      "img": "",
+      "name": "编辑",
+      "pId": 6,
+      "id": 13
+    },
+    {
+      "img": "",
+      "name": "新增",
+      "pId": 6,
+      "id": 12
+    },
+    {
+      "name": "删除",
+      "pId": 6,
+      "id": 14
+    },
+    {
+      "img": "",
+      "name": "批量删除",
+      "pId": 6,
+      "id": 24
+    },
+    {
+      "name": "停用",
+      "pId": 6,
+      "id": 25
+    },
+    {
+      "img": "",
+      "name": "重置密码",
+      "pId": 6,
+      "id": 26
+    },
+    {
+      "name": "批量删除",
+      "pId": 7,
+      "id": 62
+    },
+    {
+      "img": "",
+      "name": "新增",
+      "pId": 7,
+      "id": 15
+    },
+    {
+      "name": "删除",
+      "pId": 7,
+      "id": 56
+    },
+    {
+      "img": "",
+      "name": "编辑",
+      "pId": 7,
+      "id": 55
+    },
+    {
+      "name": "删除",
+      "pId": 27,
+      "id": 29
+    },
+    {
+      "name": "刷新",
+      "pId": 27,
+      "id": 28
+    },
+    {
+      "name": "清空",
+      "pId": 27,
+      "id": 30
+    },
+    {
+      "name": "增加",
+      "pId": 71,
+      "id": 193
+    },
+    {
+      "name": "删除",
+      "pId": 71,
+      "id": 197
+    },
+    {
+      "name": "列表",
+      "pId": 71,
+      "id": 194
+    },
+    {
+      "name": "查询",
+      "pId": 71,
+      "id": 196
+    },
+    {
+      "name": "编辑",
+      "pId": 71,
+      "id": 195
+    },
+    {
+      "name": "刪除",
+      "pId": 73,
+      "id": 75
+    },
+    {
+      "name": "编辑",
+      "pId": 73,
+      "id": 76
+    },
+    {
+      "name": "增加",
+      "pId": 73,
+      "id": 74
+    },
+    {
+      "img": "fa fa-hourglass-1",
+      "name": "计划任务",
+      "pId": 77,
+      "id": 72
+    },
+    {
+      "img": "fa fa-code",
+      "name": "代码生成",
+      "pId": 77,
+      "id": 48
+    },
+    {
+      "img": "",
+      "name": "批量删除",
+      "pId": 78,
+      "id": 83
+    },
+    {
+      "img": "",
+      "name": "删除",
+      "pId": 78,
+      "id": 81
+    },
+    {
+      "name": "增加",
+      "pId": 78,
+      "id": 79
+    },
+    {
+      "name": "编辑",
+      "pId": 78,
+      "id": 80
+    },
+    {
+      "img": "fa fa-caret-square-o-right",
+      "name": "运行监控",
+      "pId": 91,
+      "id": 57
+    },
+    {
+      "img": "fa fa-user",
+      "name": "在线用户",
+      "pId": 91,
+      "id": 92
+    },
+    {
+      "img": "fa fa-warning",
+      "name": "系统日志",
+      "pId": 91,
+      "id": 27
+    },
+    {
+      "img": "fa fa-area-chart",
+      "name": "百度chart",
+      "pId": 97,
+      "id": 98
+    },
+    {
+      "name": "查看",
+      "pId": 175,
+      "id": 176
+    },
+    {
+      "name": "新增",
+      "pId": 175,
+      "id": 177
+    },
+    {
+      "name": "修改",
+      "pId": 175,
+      "id": 178
+    },
+    {
+      "name": "删除",
+      "pId": 175,
+      "id": 179
+    },
+    {
+      "name": "批量删除",
+      "pId": 175,
+      "id": 180
+    },
+    {
+      "name": "新增",
+      "pId": 181,
+      "id": 183
+    },
+    {
+      "name": "批量删除",
+      "pId": 181,
+      "id": 186
+    },
+    {
+      "name": "删除",
+      "pId": 181,
+      "id": 185
+    },
+    {
+      "name": "查看",
+      "pId": 181,
+      "id": 182
+    },
+    {
+      "name": "修改",
+      "pId": 181,
+      "id": 184
+    },
+    {
+      "img": "fa fa-refresh",
+      "name": "同步",
+      "pId": 187,
+      "id": 205
+    },
+    {
+      "name": "批量删除",
+      "pId": 187,
+      "id": 192
+    },
+    {
+      "name": "新增",
+      "pId": 187,
+      "id": 189
+    },
+    {
+      "name": "查看",
+      "pId": 187,
+      "id": 188
+    },
+    {
+      "name": "修改",
+      "pId": 187,
+      "id": 190
+    },
+    {
+      "name": "删除",
+      "pId": 187,
+      "id": 191
+    },
+    {
+      "img": "fa fa-file-code-o",
+      "name": "微信粉丝表",
+      "pId": 199,
+      "id": 187
+    },
+    {
+      "img": "fa fa-file-code-o",
+      "name": "公众号管理",
+      "pId": 199,
+      "id": 181
+    },
+    {
+      "name": "查看",
+      "pId": 206,
+      "id": 207
+    },
+    {
+      "name": "修改",
+      "pId": 206,
+      "id": 209
+    },
+    {
+      "name": "删除",
+      "pId": 206,
+      "id": 210
+    },
+    {
+      "name": "批量删除",
+      "pId": 206,
+      "id": 211
+    },
+    {
+      "name": "新增",
+      "pId": 206,
+      "id": 208
+    }
+  ]
+}

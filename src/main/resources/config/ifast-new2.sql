@@ -421,7 +421,7 @@ INSERT INTO `sys_menu` VALUES ('1034090238251876354', '0', 'api测试-appUser角
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` bigint(10) NOT NULL AUTO_INCREMENT,
   `roleName` varchar(100) DEFAULT NULL COMMENT '角色名称',
   `roleSign` varchar(100) DEFAULT NULL COMMENT '角色标识',
   `remark` varchar(100) DEFAULT NULL COMMENT '备注',
@@ -429,14 +429,14 @@ CREATE TABLE `sys_role` (
   `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
   `gmtModified` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1034088931742957570 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '超级用户角色', 'adminRole', '超级管理员', '2', '2017-08-12 00:43:52', '2017-08-12 19:14:59');
 INSERT INTO `sys_role` VALUES ('56', '普通用户', null, '普通用户', null, null, null);
-INSERT INTO `sys_role` VALUES ('1034088931742957569', '前端API', 'apiRole', '前端API', null, null, null);
+INSERT INTO `sys_role` VALUES ('2', '前端API', 'apiRole', '前端API', null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_role_menu

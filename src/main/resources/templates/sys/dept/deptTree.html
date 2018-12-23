@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>部门树</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/js/jquery-ztree/css/metro2.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+</head>
+<body>
+<div class="zTreeDemoBackground">
+    <ul id="treeDemo" class="ztree" style="overflow-y: auto"></ul>
+</div>
+</body>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<!--<script type="text/javascript" src="/js/plugins/jquery-ztree/js/jquery.ztree.core.js"></script>-->
+<script type="text/javascript" src="/js/jquery-ztree/js/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+
+    var setting = {
+        view: {
+            showLine: false
+        },
+        check: {
+            /*enable: true,
+            chkStyle: "checkbox",
+            chkboxType: { "Y": "ps", "N": "ps" }*/
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: function(treeId, treeNode) {
+                var treeObj = $.fn.zTree.getZTreeObj(treeNode);
+                var selectedNode = treeObj.getSelectedNodes()[0];
+                parent.loadDept(selectedNode.id,selectedNode.name);
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
+            }
+
+        }
+    };
+
+    //点击之前触发事件
+    function beforeClick(treeId,treeNode,clickFlag){
+        if(treeNode.isParent){
+            //alert("当前是子节点，不能操作!")
+            return false;
+        }
+        return true;
+    }
+
+    var nodes = [{name: "研发部", pId: 0, id: 6,icon:"fa fa-gears"},
+        {name: "销售部", pId: 0, id: 9,icon:"fa fa-gears"},
+        {name: "产品部", pId: 0, id: 11,icon:"fa fa-gears"},
+        {name: "测试部", pId: 0, id: 13,icon:"fa fa-gears"},
+        {name: "研发一部", pId: 6, id: 7,icon:"fa fa-gears"},
+        {name: "研发二部", pId: 6, id: 8,icon:"fa fa-gears"},
+        {name: "销售一部", pId: 9, id: 16,icon:"fa fa-gears"},
+        {name: "产品一部", pId: 11, id: 12,icon:"fa fa-gears"},
+        {name: "测试一部", pId: 13, id: 14,icon:"fa fa-gears"},
+        {name: "测试二部", pId: 13, id: 15,icon:"fa fa-gears"}]
+
+    $(function(){
+        $.ajax({
+            url: "/sys/dept/deptTree",
+            success: function(data){
+                console.log(data)
+                var treeObj = $.fn.zTree.init($("#treeDemo"), setting, nodes);
+                treeObj.expandAll(true);
+            }
+        })
+    });
+</script>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.eriz.sys.dao.RoleDao">
+	<select id="userRole" resultType="com.eriz.sys.domain.RoleDo">
+		SELECT DISTINCT
+			ro.id AS id,
+			ro.roleName AS roleName,
+			temp.roleId AS ridDo
+		FROM
+			sys_role ro
+		LEFT JOIN (
+			SELECT
+				ur.roleId
+			FROM
+				sys_user_role ur
+			LEFT JOIN sys_user us ON ur.userId = us.id
+			<where>
+				<if test="uid != null and uid != ''">
+					us.id = #{uid}
+				</if>
+			</where>
+		) temp ON ro.id = temp.roleId
+	</select>
+
+	<delete id="deleteRoleMenu">
+		delete from sys_role_menu where roleId = #{rid}
+	</delete>
+	
+	<insert id="insertRoleMenu" >
+		insert into sys_role_menu (roleId, menuId) values
+		<foreach collection="list" item="item" separator=",">
+			(#{item.roleId,jdbcType=INTEGER},#{item.menuId,jdbcType=INTEGER})
+		</foreach>
+	</insert>
+</mapper>

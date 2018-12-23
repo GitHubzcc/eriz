@@ -2,12 +2,135 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>list.html</title>
+    <title>登录</title>
+    <link rel="stylesheet" href="/layui/css/layui.css"  media="all">
 </head>
-<body>
-<h2>用户列表</h2>
-<div>
-    <h1>thymeleaf</h1>
+<style>
+.warpper{
+    width: 30%;
+    height: 40%;
+    margin-top: 91px;
+}
+.error{
+    text-align: center;
+    color: red;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 7px 0 0 10px;
+}
+</style>
+<body style="background-image: url(../img/kwallpaper.jpg);background-size:cover;">
+<div class="layui-container" style="width: 100%">
+    <div class="layui-container warpper">
+        <!-- top -->
+        <div class="layui-form-item" style="text-align: center;margin-bottom: 30px;">
+            <h1>G</h1>
+        </div>
+        <!-- from -->
+        <div class="layui-container" style="width: 100%">
+            <form id="signupForm" class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 42px;padding: 9px 3px;">用户名</label>
+                    <div class="layui-input-block" style="margin-left: 73px;">
+                        <input type="text" id="username" name="username" autocomplete="off" placeholder="请输入用户名"
+                               class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" style="width: 42px;padding: 9px 3px;">密码框</label>
+                    <div class="layui-input-block" style="margin-left: 73px;">
+                        <input type="password" id="password" name="password" lay-verify="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <!-- 验证码 -->
+                <div class="layui-form-item" style="display: inline-flex">
+                    <div class="layui-form-item" style="width: 144px">
+                        <input id="kaptcha" type="text" class="layui-input" name="captchamy" placeholder="请输入验证码" size="4" >
+                    </div>
+                    <div class="layui-form-item" style="margin-left: 15px;">
+                        <img alt="如果看不清楚，请单击图片刷新！" class="pointer imgmy" src="kaptcha">
+                        <a href="javascript:$('.imgmy').attr('src','kaptcha');">点击刷新</a>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block" style="display: flex;">
+                        <button class="layui-btn" type="button" onclick="loginForm()">登录</button>
+                        <div id="error" class="error"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- pwd -->
+        <div class="layui-form-item">
+            <a>注册</a>
+            <a style="margin-left: 276px">忘记密码</a>
+        </div>
+        <!-- other 第三方登陆-->
+        <!--<div class="layui-form-item">
+            <a>qq</a>
+            <a>qq</a>
+            <a>qq</a>
+        </div>-->
+    </div>
 </div>
+
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/layui/layui.js"></script>
+<script type="text/javascript" src="/layui/layui.all.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#username').mouseout(function(){
+            var username = $('#username').val();
+            if (username){
+                clear()
+            }
+        });
+        $('#password').mouseout(function(){
+            var password = $('#password').val();
+            if (password){
+                clear()
+            }
+        });
+    })
+    loginForm = function () {
+        var username = $('#username').val();
+        var password = $('#password').val();
+        var kaptcha = $('#kaptcha').val();
+        if (!username){
+            $('#error').html("请输入用户名")
+            return
+        }
+        if (!password){
+            $('#error').html("请输入密码")
+            return
+        }
+        if (!kaptcha){
+            $('#error').html("请输入验证码")
+            return
+        }
+        var params = {};
+        params.username = username;
+        params.password = password;
+        params.kaptcha = kaptcha;
+        $.ajax({
+            type: "POST",
+            url: "loginFrom",
+            data: params,
+            success: function (r) {
+                console.log(r)
+                if (r.code === 0) {
+                    parent.location.href = '/index';
+                } else {
+                    layer.msg(r.message);
+                }
+            }
+        });
+    };
+    clear = function () {
+        $('#error').html('')
+    }
+</script>
 </body>
 </html>
