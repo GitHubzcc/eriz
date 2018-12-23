@@ -1,6 +1,6 @@
 package com.eriz.app.service;
 
-import com.eriz.app.pojo.TokenVO;
+import com.eriz.app.pojo.vo.TokenVO;
 import com.eriz.common.base.CoreService;
 import com.eriz.sys.domain.UserDo;
 

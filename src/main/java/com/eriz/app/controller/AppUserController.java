@@ -1,8 +1,8 @@
 package com.eriz.app.controller;
 
-import com.eriz.app.pojo.TokenVO;
 import com.eriz.app.pojo.dto.UserLoginDTO;
 import com.eriz.app.pojo.dto.UserLogoutDTO;
+import com.eriz.app.pojo.vo.TokenVO;
 import com.eriz.app.service.AppUserService;
 import com.eriz.common.annotation.Log;
 import com.eriz.common.util.Result;

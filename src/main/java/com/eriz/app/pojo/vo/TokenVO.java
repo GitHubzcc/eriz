@@ -1,4 +1,4 @@
-package com.eriz.app.pojo;
+package com.eriz.app.pojo.vo;
 
 /**
  * <pre>

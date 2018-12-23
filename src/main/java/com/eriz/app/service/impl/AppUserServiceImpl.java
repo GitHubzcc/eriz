@@ -1,7 +1,7 @@
 package com.eriz.app.service.impl;
 
 import com.eriz.app.config.JWTConfigProperties;
-import com.eriz.app.pojo.TokenVO;
+import com.eriz.app.pojo.vo.TokenVO;
 import com.eriz.app.service.AppUserService;
 import com.eriz.app.util.JWTUtil;
 import com.eriz.common.base.CoreServiceImpl;
