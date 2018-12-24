@@ -2,6 +2,7 @@ package com.eriz.sys.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.eriz.common.annotation.Log;
 import com.eriz.common.base.SysController;
 import com.eriz.common.util.Result;
 import com.eriz.common.util.WebUtil;
@@ -46,6 +47,7 @@ public class UserController extends SysController {
     }
 
     @ResponseBody
+    @Log("用户列表")
     @PostMapping(value = "userList")
     public Result<List<UserDo>> userList(UserDo userDo) {
         Page<UserDo> page = userService.selectPage(getPage(UserDo.class),

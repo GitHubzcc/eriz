@@ -1,5 +1,6 @@
 package com.eriz.sys.controller;
 
+import com.eriz.common.annotation.Log;
 import com.eriz.common.base.SysController;
 import com.eriz.common.domain.TreeDo;
 import com.eriz.common.util.MD5Utils;
@@ -69,6 +70,7 @@ public class LoginController extends SysController {
     }
 
     @ResponseBody
+    @Log("登陆")
     @PostMapping(value = "loginFrom")
     public Result loginFrom(String username, String password, String kaptcha) {
         password = MD5Utils.encrypt(username, password);
