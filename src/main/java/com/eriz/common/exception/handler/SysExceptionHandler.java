@@ -26,6 +26,23 @@ public class SysExceptionHandler {
     public final static String ERROR_DEFAULT_PAGE = "error/error";
 
     /**
+     * 未知错误
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public Object handleException(Exception e) {
+        if (!WebUtil.isAjax()) {
+            ModelAndView mv = new ModelAndView();
+            mv.setViewName(ERROR_DEFAULT_PAGE);
+            return mv;
+        } else {
+            log.error(e.getMessage());
+            return Result.build(EnumErrorCode.unknowFail.getCode(), EnumErrorCode.unknowFail.getMsg());
+        }
+    }
+
+    /**
      * 参数校验异常
      */
     @ExceptionHandler(IllegalArgumentException.class)
@@ -102,24 +119,5 @@ public class SysExceptionHandler {
             return Result.build(EnumErrorCode.apiAuthorizationExpired.getCode(), EnumErrorCode.apiAuthorizationExpired.getMsg());
         }
         return Result.build(EnumErrorCode.notAuthorization.getCode(), EnumErrorCode.notAuthorization.getMsg());
-    }
-
-    /**
-     * 未知错误
-     * @param e
-     * @return
-     */
-    @ExceptionHandler(Exception.class)
-    public Object handleException(Exception e) {
-        if (!WebUtil.isAjax()) {
-            ModelAndView mv = new ModelAndView();
-            mv.setViewName(ERROR_DEFAULT_PAGE);
-            return mv;
-        } else {
-            log.error(e.getMessage());
-            return Result.build(EnumErrorCode.unknowFail.getCode(), EnumErrorCode.unknowFail.getMsg());
-        }
-
-
     }
 }
