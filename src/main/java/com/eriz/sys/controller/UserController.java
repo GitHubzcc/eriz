@@ -10,6 +10,7 @@ import com.eriz.sys.domain.RoleDo;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,14 +43,15 @@ public class UserController extends SysController {
      * 用户列表
      */
     @GetMapping(value = "/")
-    public String userList() {
+    @RequiresPermissions("sys:user:user")
+    public String user() {
         return "sys/user/lists";
     }
 
     @ResponseBody
     @Log("用户列表")
     @PostMapping(value = "userList")
-    public Result<List<UserDo>> userList(UserDo userDo) {
+    public Result<List<UserDo>> userList() {
         Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
                 new EntityWrapper<UserDo>().like("name", WebUtil.getParameter("keyword")));
         return Result.success(0, "成功", page.getTotal(), page.getRecords());
@@ -58,6 +60,7 @@ public class UserController extends SysController {
     /**
      * 添加/编辑 用户
      */
+    @RequiresPermissions("sys:user:add")
     @RequestMapping(value = "add")
     public String add(Model model, Long uid) {
         List<RoleDo> list = roleService.userRole(uid);
@@ -105,7 +108,7 @@ public class UserController extends SysController {
 
     @ResponseBody
     @RequestMapping(value = "userInfo")
-    public UserDo user() {
+    public UserDo userInfo() {
         return userService.selectById(1L);
     }
 

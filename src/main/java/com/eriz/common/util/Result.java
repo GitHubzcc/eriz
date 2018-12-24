@@ -1,8 +1,5 @@
 package com.eriz.common.util;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * 消息返回结果集
  *
@@ -51,6 +48,11 @@ public class Result<T> {
         this.data = data;
     }
 
+    public Result(int status, String msg) {
+        this.code = status;
+        this.message = msg;
+    }
+
     /**
      * 成功返回数据
      *
@@ -80,6 +82,10 @@ public class Result<T> {
      */
     public static <T> Result<T> build(int status, String msg, T data) {
         return new Result<T>(status, msg, data);
+    }
+
+    public static <T> Result<T> build(int status, String msg) {
+        return new Result<T>(status, msg);
     }
 
     public static <T> Result<T> success(int status, String msg, Integer total, T data) {

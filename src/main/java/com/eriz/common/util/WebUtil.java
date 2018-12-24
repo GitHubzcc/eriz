@@ -250,4 +250,10 @@ public final class WebUtil {
         getSession().setAttribute(name, value);
     }
 
+    public static boolean isAjax(){
+        HttpServletRequest httpRequest = getRequest();
+        String requestHeader = httpRequest.getHeader("X-Requested-With");
+        return  requestHeader != null && "XMLHttpRequest".equals(requestHeader);
+    }
+
 }

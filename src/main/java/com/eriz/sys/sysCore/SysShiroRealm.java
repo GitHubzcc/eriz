@@ -1,6 +1,6 @@
 package com.eriz.sys.sysCore;
 
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.common.util.ShiroUtils;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.MenuService;
 import com.eriz.sys.service.RoleService;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -60,23 +59,19 @@ public class SysShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
-        String loginName = (String) principal.getPrimaryPrincipal();
-        SimpleAuthorizationInfo authenticationInfo = null;
-        if (loginName != null) {
-            UserDo userDo = userService.findOneByKv("username", loginName);
-            //角色授权
-            List<RoleDo> roleList = roleService.userRole(userDo.getId());
-            Set<String> roles = new HashSet<>();
-            for (RoleDo role : roleList) {
-                roles.add(role.getRoleSign());
-            }
-            authenticationInfo = new SimpleAuthorizationInfo();
-            authenticationInfo.setRoles(roles);
-            //获取权限perms
-            Set<String> permsSet = menuService.findPermByUserId(userDo.getId());
-            authenticationInfo.setStringPermissions(permsSet);
+        Object next = principal.getPrimaryPrincipal();
+        SimpleAuthorizationInfo authz = null;
+        if (next instanceof UserDo) { // 避免授权报错
+            Long userId = ShiroUtils.getUserId();
+            Set<String> permsSet = menuService.findPermByUserId(userId);
+            authz = new SimpleAuthorizationInfo();
+            authz.setStringPermissions(permsSet);
+
+            HashSet<String> roles = new HashSet<>();
+            roleService.userRole(userId).forEach(bean -> roles.add(bean.getRoleSign()));
+            authz.setRoles(roles);
         }
-        return authenticationInfo;
+        return authz;
     }
 
     /**
