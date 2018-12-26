@@ -7,6 +7,7 @@ import com.eriz.common.util.WebUtil;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authc.ExpiredCredentialsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.session.UnknownSessionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DuplicateKeyException;
@@ -119,5 +120,11 @@ public class SysExceptionHandler {
             return Result.build(EnumErrorCode.apiAuthorizationExpired.getCode(), EnumErrorCode.apiAuthorizationExpired.getMsg());
         }
         return Result.build(EnumErrorCode.notAuthorization.getCode(), EnumErrorCode.notAuthorization.getMsg());
+    }
+
+    @ExceptionHandler(UnknownSessionException.class)
+    public String unknownSessionException(UnknownSessionException e){
+        log.error(e.getMessage());
+        return ERROR_DEFAULT_PAGE;
     }
 }

@@ -71,3 +71,6 @@ eriz:
     expireTokenKeyPrefix: eriz:expireToken
     expireTime: 7200000
     refreshTokenExpire: 86400000
+  shiro:
+    jsessionidKey: SESSION
+    sessionKeyPrefix: eriz:session

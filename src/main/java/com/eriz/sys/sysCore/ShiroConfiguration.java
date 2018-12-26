@@ -1,21 +1,33 @@
 package com.eriz.sys.sysCore;
 
+import com.eriz.common.shiro.config.ShiroProperties;
+import com.eriz.common.shiro.session.RedisSessionDAO;
+import com.eriz.sys.config.BDSessionListener;
+import org.apache.shiro.authc.Authenticator;
+import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
+import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
+import org.apache.shiro.authz.Authorizer;
+import org.apache.shiro.authz.ModularRealmAuthorizer;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.realm.Realm;
+import org.apache.shiro.session.SessionListener;
+import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <pre>
@@ -30,22 +42,89 @@ import java.util.Map;
 @Configuration
 public class ShiroConfiguration {
 
+    /**
+     * 设置sessionDAO
+     * @param config
+     * @return
+     */
+    @Bean
+    SessionDAO sessionDAO(ShiroProperties config){
+        RedisSessionDAO sessionDAO = new RedisSessionDAO(config.getSessionKeyPrefix());
+        return sessionDAO;
+    }
+
+    /**
+     * cookie 配置
+     * @param config
+     * @return
+     */
+    @Bean
+    public SimpleCookie sessionIdCookie(ShiroProperties config) {
+        return new SimpleCookie(config.getJsessionidKey());
+    }
+
+    /**
+     * 设置sessionManager
+     * @param sessionDAO
+     * @param simpleCookie
+     * @return
+     */
+    @Bean
+    public SessionManager sessionManager(SessionDAO sessionDAO, SimpleCookie simpleCookie) {
+        DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
+        sessionManager.setSessionIdCookie(simpleCookie);
+
+        Collection<SessionListener> sessionListeners = new ArrayList<SessionListener>();
+        sessionListeners.add(new BDSessionListener());
+        sessionManager.setSessionListeners(sessionListeners);
+        sessionManager.setSessionDAO(sessionDAO);
+        return sessionManager;
+    }
+
+    /**
+     * 添加自己得认证器
+     * @param sysShiroRealm
+     * @return
+     */
+    @Bean
+    Authenticator authenticator(SysShiroRealm sysShiroRealm) {
+        ModularRealmAuthenticator authenticator = new ModularRealmAuthenticator();
+        authenticator.setAuthenticationStrategy(new AtLeastOneSuccessfulStrategy());
+        List<Realm> realms = new ArrayList<>();
+        realms.add(sysShiroRealm);
+        authenticator.setRealms(realms);
+        return authenticator;
+    }
+
+    /**
+     * 添加自己的shiro
+     * @param sysShiroRealm
+     * @return
+     */
+    @Bean
+    Authorizer authorizer(SysShiroRealm sysShiroRealm) {
+        ModularRealmAuthorizer authorizer = new ModularRealmAuthorizer();
+        List<Realm> realms = new ArrayList<>();
+        realms.add(sysShiroRealm);
+        authorizer.setRealms(realms);
+        return authorizer;
+    }
+
+    /**
+     * 配置securityManager
+     * @param sessionManager
+     * @param authenticator
+     * @param authorizer
+     * @return
+     */
     @Bean("securityManager")
-    public DefaultWebSecurityManager getManager(SysShiroRealm realm) {
+    public DefaultWebSecurityManager getManager(SessionManager sessionManager,Authenticator authenticator,Authorizer authorizer) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         // 使用自己的realm
-        manager.setRealm(realm);
-
-        /*
-         * 关闭shiro自带的session，详情见文档
-         * http://shiro.apache.org/session-management.html#SessionManagement-StatelessApplications%28Sessionless%29
-         */
-        DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
-        DefaultSessionStorageEvaluator defaultSessionStorageEvaluator = new DefaultSessionStorageEvaluator();
-        defaultSessionStorageEvaluator.setSessionStorageEnabled(false);
-        subjectDAO.setSessionStorageEvaluator(defaultSessionStorageEvaluator);
-        manager.setSubjectDAO(subjectDAO);
-
+        manager.setAuthenticator(authenticator);
+        manager.setAuthorizer(authorizer);
+//        manager.setCacheManager();
+        manager.setSessionManager(sessionManager);
         return manager;
     }
 
@@ -83,29 +162,6 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
-
-    /**
-     * 注入 securityManager
-     */
-    /*@Bean
-    public SecurityManager securityManager() {
-        DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 设置realm.
-        securityManager.setRealm(customRealm());
-        return securityManager;
-    }*/
-
-    /**
-     * 自定义身份认证 realm;
-     * <p>
-     * 必须写这个类，并加上 @Bean 注解，目的是注入 CustomRealm，
-     * 否则会影响 CustomRealm类 中其他类的依赖注入
-     */
-    /*@Bean
-    public SysShiroRealm customRealm() {
-        return new SysShiroRealm();
-    }*/
-
 
     /**
      * 下面的代码是添加注解支持

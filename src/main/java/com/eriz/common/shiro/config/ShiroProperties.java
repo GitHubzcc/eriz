@@ -1,18 +1,18 @@
-package com.eriz.sys.sysCore;
+package com.eriz.common.shiro.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
  * <pre>
- * </pre>
  *
- * <small> 2018年12月23日 | eriz</small>
+ * </pre>
+ * <small> 2018/12/24 | eriz</small>
  */
 @Component
-@ConfigurationProperties(prefix = "ifast.shiro")
+@ConfigurationProperties(prefix = "eriz.shiro")
 public class ShiroProperties {
-    private String sessionKeyPrefix = "ifast:session";
+    private String sessionKeyPrefix = "eriz:session";
     private String jsessionidKey = "SESSION";
 
     public String getSessionKeyPrefix() {
