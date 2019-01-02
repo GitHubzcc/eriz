@@ -2,6 +2,8 @@ package com.eriz.sys.domain;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.eriz.common.annotation.LongJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -16,6 +18,7 @@ public class RoleDo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonSerialize(using = LongJsonSerializer.class)
     private Long id;
     private String roleName;
     private String roleSign;

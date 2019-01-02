@@ -71,7 +71,7 @@
             url: "/sys/dept/deptTree",
             success: function(data){
                 console.log(data)
-                var treeObj = $.fn.zTree.init($("#treeDemo"), setting, nodes);
+                var treeObj = $.fn.zTree.init($("#treeDemo"), setting, data);
                 treeObj.expandAll(true);
             }
         })

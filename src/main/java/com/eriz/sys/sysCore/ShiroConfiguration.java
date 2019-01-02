@@ -1,15 +1,16 @@
 package com.eriz.sys.sysCore;
 
+import com.eriz.common.shiro.cache.SpringCacheManagerWrapper;
 import com.eriz.common.shiro.config.ShiroProperties;
 import com.eriz.common.shiro.session.RedisSessionDAO;
+import com.eriz.common.util.SpringContextHolder;
 import com.eriz.sys.config.BDSessionListener;
 import org.apache.shiro.authc.Authenticator;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.authz.Authorizer;
 import org.apache.shiro.authz.ModularRealmAuthorizer;
-import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
-import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.session.SessionListener;
@@ -108,6 +109,15 @@ public class ShiroConfiguration {
         realms.add(sysShiroRealm);
         authorizer.setRealms(realms);
         return authorizer;
+    }
+
+    @Bean(name="shiroCacheManager")
+    @DependsOn({"springContextHolder","cacheConfiguration"})
+    public CacheManager cacheManager() {
+        SpringCacheManagerWrapper springCacheManager = new SpringCacheManagerWrapper();
+        org.springframework.cache.CacheManager cacheManager = SpringContextHolder.getBean(org.springframework.cache.CacheManager.class);
+        springCacheManager.setCacheManager(cacheManager);
+        return springCacheManager;
     }
 
     /**

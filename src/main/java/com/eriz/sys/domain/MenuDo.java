@@ -1,6 +1,8 @@
 package com.eriz.sys.domain;
 
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.eriz.common.annotation.LongJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,6 +13,7 @@ public class MenuDo implements Serializable {
     private static long serialVersionUID = 1L;
 
     //
+    @JsonSerialize(using = LongJsonSerializer.class)
     private Long id;
     // 父菜单ID，一级菜单为0
     private Long parentId;

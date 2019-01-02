@@ -1,7 +1,56 @@
 $(function () {
-
+    initTree();
 });
 
+initTree = function () {
+    var setting = {
+        view: {
+            showLine: false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: function(treeId, treeNode) {
+                var treeObj = $.fn.zTree.getZTreeObj(treeNode);
+                var selectedNode = treeObj.getSelectedNodes()[0];
+                console.log(selectedNode.id+selectedNode.name)
+                reloadTree(selectedNode.id);
+            }
+
+        }
+    };
+    $.ajax({
+        url: "/sys/dept/deptTree",
+        success: function(data){
+            var treeObj = $.fn.zTree.init($("#deptTree"), setting, data);
+            treeObj.expandAll(true);
+        }
+    })
+}
+
+//点击之前触发事件
+function beforeClick(treeId,treeNode,clickFlag){
+    if(treeNode.isParent){
+        //alert("当前是子节点，不能操作!")
+        return false;
+    }
+    return true;
+}
+
+//选择树触发函数
+reloadTree = function (treeId) {
+    $.ajax({
+        url: "/sys/user/userList?deptId=" + treeId,
+        type: "post",
+        success: function (data) {
+            renderTable(data.data)
+        }
+    });
+}
 function add() {
     layer.open({
         type : 2,
@@ -46,28 +95,32 @@ layui.use(['layer', 'table', 'element'], function(){
         ,table = layui.table; //表格
 
     //执行一个 table 实例
-    table.render({
-        elem: '#table-data'
-        ,height: 420
-        ,url: 'userList' //数据接口
-        ,method: 'POST'
-        ,title: '用户表'
-        ,page: true //开启分页
-        ,id: 'testReload'
-        ,toolbar: false //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-        ,totalRow: false //开启合计行
-        ,cols: [[ //表头
-            {type: 'checkbox', fixed: 'left'}
-            ,{field: 'id', title: 'ID', hidden: true, width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
-            ,{field: 'name', title: '姓名', width:80}
-            ,{field: 'username', title: '用户名', width:80}
-            ,{field: 'email', title: '邮箱', width:80, sort: true}
-            ,{field: 'deptId', title: '部门', width:80, sort: true}
-            ,{field: 'sex', title: '性别', width:80, sort: true}
-            ,{field: 'city', title: '城市', width:150}
-            ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
-        ]]
-    });
+    window.renderTable = function(data){
+        table.render({
+            elem: '#table-data'
+            ,height: 420
+            // ,url: 'userList' //数据接口
+            ,method: 'POST'
+            ,title: '用户表'
+            ,page: true //开启分页
+            ,id: 'testReload'
+            ,toolbar: false //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
+            ,totalRow: false //开启合计行data
+            ,data: data
+            ,cols: [[ //表头
+                {type: 'checkbox', fixed: 'left'}
+                ,{field: 'id', title: 'ID', hidden: true, width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+                ,{field: 'name', title: '姓名', width:80}
+                ,{field: 'username', title: '用户名', width:80}
+                ,{field: 'email', title: '邮箱', width:80, sort: true}
+                ,{field: 'deptId', title: '部门', width:80, sort: true}
+                ,{field: 'sex', title: '性别', width:80, sort: true}
+                ,{field: 'city', title: '城市', width:150}
+                ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+            ]]
+        });
+    };
+    reloadTree('');
     //搜索框重载
     var $ = layui.$, active = {
         reload: function(){
@@ -75,9 +128,10 @@ layui.use(['layer', 'table', 'element'], function(){
             console.log(name)
             table.reload('testReload', {
                 where: {
-                    'keyword': name
+                    'name': name
                 },
-                method: 'POST'
+                method: 'POST',
+                url:'/sys/user/userList'
             });
         }
     };

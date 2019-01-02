@@ -6,7 +6,7 @@
 2、集成vue前端开发框架
 3、集成微信sdk开发
 4、集成微信小程序
-5、集成restful
+5、集成restful(不包括基础模块。访问链接形式为localhost:8181/模块/功能/{值}。接收@PathVariable(值))
 6、集成logback日志
 
 

@@ -3,7 +3,9 @@ package com.eriz.common.domain;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.eriz.common.annotation.LongJsonSerializer;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,7 +16,9 @@ public class LogDo implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = -938654836571738415L;
 
+
     @TableId
+    @JsonSerialize(using = LongJsonSerializer.class)
     private Long id;
 
     /**

@@ -48,7 +48,7 @@
     <logger name="com.baomidou.mybatisplus.plugins.pagination.optimize.JsqlParserCountOptimize" level="debug"></logger>
 
     <!-- 日志输出级别 -->
-    <root level="INFO">
+    <root level="info">
     	<appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

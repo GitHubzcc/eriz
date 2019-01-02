@@ -1,6 +1,8 @@
 package com.eriz.sys.domain;
 
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.eriz.common.annotation.LongJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 
@@ -14,6 +16,7 @@ public class DeptDo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //
+    @JsonSerialize(using = LongJsonSerializer.class)
     private Long id;
     // 上级部门ID，一级部门为0
     private Long parentId;

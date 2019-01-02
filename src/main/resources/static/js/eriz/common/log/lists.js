@@ -44,7 +44,10 @@ layui.use(['layer', 'table', 'element'], function(){
         ,totalRow: false //开启合计行
         ,cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
+            ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left',templet: function(id){
+                    console.log(id)
+                    return id.id.toString()
+                }}
             ,{field: 'username', title: '用户名称', width:80}
             ,{field: 'operation', title: '操作', width:80}
             ,{field: 'method', title: '方法', width:80}

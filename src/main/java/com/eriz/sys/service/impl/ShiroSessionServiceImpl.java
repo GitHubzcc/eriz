@@ -31,7 +31,7 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
             if (session == null) continue;
             OnlineDo onlineDo = new OnlineDo();
             UserDo userDo = new UserDo();
-            //principalCollection 身份集合
+            //principalCollection 身份
             SimplePrincipalCollection principalCollection = new SimplePrincipalCollection();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 continue;

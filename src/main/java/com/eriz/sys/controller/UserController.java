@@ -51,9 +51,12 @@ public class UserController extends SysController {
     @ResponseBody
     @Log("用户列表")
     @PostMapping(value = "userList")
-    public Result<List<UserDo>> userList() {
+    public Result<List<UserDo>> userList(UserDo userDo) {
+        System.out.println("get userList ================================================");
+//        Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
+//                new EntityWrapper<UserDo>().like("name", WebUtil.getParameter("keyword")));
         Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
-                new EntityWrapper<UserDo>().like("name", WebUtil.getParameter("keyword")));
+                userService.convertToEntityWrapper("name", userDo.getName(), "deptId", userDo.getDeptId()));
         return Result.success(0, "成功", page.getTotal(), page.getRecords());
     }
 

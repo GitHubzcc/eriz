@@ -2,6 +2,8 @@ package com.eriz.sys.domain;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.eriz.common.annotation.LongJsonSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -18,6 +20,7 @@ public class UserDo implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //
+    @JsonSerialize(using = LongJsonSerializer.class)
     private Long id;
     // 用户名
     private String username;

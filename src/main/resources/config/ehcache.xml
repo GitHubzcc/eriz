@@ -2,7 +2,7 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
 	updateCheck="false">
-	
+	<!-- 缓存路径，分为磁盘和内存两级。此定义为磁盘 -->
 	<diskStore path="java.io.tmpdir/Tmp_EhCache" />
 	
 	<defaultCache eternal="false" maxElementsInMemory="1000"
@@ -12,6 +12,15 @@
 		timeToLiveSeconds="600" 
 		memoryStoreEvictionPolicy="LRU" 
 	/>
+
+	<cache name="demo" eternal="false"
+		   maxElementsInMemory="1000"
+		   overflowToDisk="false"
+		   diskPersistent="false"
+		   timeToIdleSeconds="0"
+		   timeToLiveSeconds="600"
+		   memoryStoreEvictionPolicy="LRU" />
+
 	<!-- @CacheConfig(cacheNames = {“role”})设置了ehcache的名称，这个名称就是ehcache.xml内的名称；  -->
 	<cache name="role" 
 	   eternal="false" 

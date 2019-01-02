@@ -5,6 +5,7 @@ import com.eriz.sys.dao.RoleDao;
 import com.eriz.sys.domain.RoleDo;
 import com.eriz.sys.domain.RoleMenuDo;
 import com.eriz.sys.service.RoleService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,16 @@ import java.util.List;
 @Service("sysRoleServiceImpl")
 public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDo> implements RoleService {
 
+    /**
+     * 缓存的key
+     */
+    public static final String THING_ALL_KEY   = "\"thing_all\"";
+    /**
+     * value属性表示使用哪个缓存策略，缓存策略在ehcache.xml
+     */
+    public static final String DEMO_CACHE_NAME = "demo";
+
+    @Cacheable(value = DEMO_CACHE_NAME, key = THING_ALL_KEY)
     @Override
     public List<RoleDo> userRole(Long uid) {
         if (uid != null) {
