@@ -17,7 +17,12 @@ import java.util.Map;
  */
 @Service
 public class ConfigServiceImpl extends CoreServiceImpl<ConfigDao, ConfigDo> implements ConfigService {
-    
+
+    /**
+     * 通过k值模糊查询
+     * @param k 值
+     * @return 模糊结果
+     */
     @Override
     public ConfigDo getByKey(String k) {
         ConfigDo entity = new ConfigDo();

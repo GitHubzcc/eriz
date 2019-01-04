@@ -1,10 +1,18 @@
 /*
-* 角色模块js
+* 字典模块js
 *
 * */
 $(function () {
-    var tableIns;
+    var tableIns;//定义data-table全局名称
 });
+
+reload = function () {
+    tableIns.reload({
+        page: {
+            curr: 1 //重新从第 1 页开始
+        }
+    })
+};
 
 function add() {
     layer.open({
@@ -36,8 +44,7 @@ function remove(index){
             'ids' : index
         },
         success : function(data) {
-            console.log(data)
-            if (data.code == 0) {
+            if (data.code === 0) {
                 layer.msg(data.message);
                 tableIns.reload({
                     page: {
@@ -51,10 +58,8 @@ function remove(index){
     });
 }
 layui.use(['layer', 'table', 'element'], function(){
-    var  layer = layui.layer //弹层
-        ,table = layui.table; //表格
+    var  layer = layui.layer,table = layui.table;
 
-    //执行一个 table 实例
     tableIns = table.render({
         elem: '#table-data'
         ,height: 420
@@ -67,13 +72,13 @@ layui.use(['layer', 'table', 'element'], function(){
         ,totalRow: false //开启合计行
         ,cols: [[ //表头
             {type: 'checkbox', fixed: 'left'}
-            ,{field: 'id', title: 'ID', width:80, sort: true, fixed: 'left', totalRowText: '合计：'}
-            ,{field: 'name', title: '名称', width:80}
-            ,{field: 'value', title: '数据值', width:80}
-            ,{field: 'type', title: '类型', width:80, sort: true}
-            ,{field: 'description', title: '描述', width:80, sort: true}
-            ,{field: 'remarks', title: '备注', width:80, sort: true}
-            ,{fixed: 'right', width: 165, align:'center', toolbar: '#barDemo'}
+            ,{field: 'id', title: 'ID', sort: true, fixed: 'left'}
+            ,{field: 'name', title: '名称'}
+            ,{field: 'value', title: '数据值'}
+            ,{field: 'type', title: '类型', sort: true}
+            ,{field: 'description', title: '描述', sort: true}
+            ,{field: 'remarks', title: '备注', sort: true}
+            ,{fixed: 'right', align:'center', toolbar: '#barDemo'}
         ]]
     });
     //搜索框重载
@@ -94,16 +99,19 @@ layui.use(['layer', 'table', 'element'], function(){
         active[type] ? active[type].call(this) : '';
     });
 
-    //获取选择行
-    $('#btn-delete').on('click', function(){
-        var checkStatus = table.checkStatus('table-reload'); //idTest 即为基础参数 id 对应的值
+    //批量删除
+    window.batchRemove = function(){
+        var checkStatus = table.checkStatus('table-reload');
         var ids = "";
         $.each(checkStatus.data,function(key,value){
             ids +=  "," + value.id
-        })
+        });
+        if (ids.length <= 0) {
+            layer.msg('请选择要删除的行');
+            return;
+        }
         remove(ids);
-    });
-
+    };
 
     //监听头工具栏事件
     table.on('toolbar(test)', function(obj){
@@ -137,7 +145,6 @@ layui.use(['layer', 'table', 'element'], function(){
         var data = obj.data //获得当前行数据
             ,layEvent = obj.event; //获得 lay-event 对应的值
         if(layEvent === 'detail'){
-            console.log(data)
             layer.msg('查看操作');
         } else if(layEvent === 'del'){
             layer.confirm('真的删除行么', function(index){

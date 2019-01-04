@@ -1,5 +1,6 @@
 package com.eriz.sys.sysCore;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.eriz.common.shiro.cache.SpringCacheManagerWrapper;
 import com.eriz.common.shiro.config.ShiroProperties;
 import com.eriz.common.shiro.session.RedisSessionDAO;
@@ -188,6 +189,14 @@ public class ShiroConfiguration {
     @Bean
     public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
         return new LifecycleBeanPostProcessor();
+    }
+
+    /**
+     * thymeleaf 整合需要添加此bean，否则页面shiro权限不生效
+     */
+    @Bean
+    public ShiroDialect shiroDialect() {
+        return new ShiroDialect();
     }
 
     @Bean

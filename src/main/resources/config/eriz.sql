@@ -4,7 +4,7 @@ Navicat MySQL Data Transfer
 Source Server         : localhostMySql
 Source Server Version : 50612
 Source Host           : localhost:3306
-Source Database       : ifast-new2
+Source Database       : eriz
 
 Target Server Type    : MYSQL
 Target Server Version : 50612
@@ -887,3 +887,16 @@ CREATE TABLE `wx_mp_wechat_keys` (
 -- ----------------------------
 -- Records of wx_mp_wechat_keys
 -- ----------------------------
+
+-------------------------------
+-- 业务表
+-------------------------------
+DROP TABLE IF EXISTS `module_book`;
+CREATE TABLE `module_book` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(100) DEFAULT NULL COMMENT '书名',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+	`price` DECIMAL(10,2) DEFAULT '0' COMMENT '价格',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='图书表';

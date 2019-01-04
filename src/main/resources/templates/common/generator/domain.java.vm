@@ -9,10 +9,7 @@ import java.math.BigDecimal;
 
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import com.ifast.common.base.BaseDO;
-
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.eriz.common.base.BaseDo;
 
 /**
  * 
@@ -21,11 +18,8 @@ import lombok.EqualsAndHashCode;
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */
-@Data
-@SuppressWarnings("serial")
 @TableName("${tableName}")
-@EqualsAndHashCode(callSuper=true) 
-public class ${className}DO extends BaseDO {
+public class ${className}DO extends BaseDo {
 	@TableId
 	private Long id;
 #foreach ($column in $columns)

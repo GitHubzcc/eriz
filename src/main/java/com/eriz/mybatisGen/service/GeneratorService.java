@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.eriz.mybatisGen.service;
 
 import org.springframework.stereotype.Service;

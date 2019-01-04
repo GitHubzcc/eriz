@@ -110,6 +110,7 @@ public class GenUtils {
 
         // 封装模板数据
         Map<String, Object> map = new HashMap<>(16);
+        map.put("module","module");
         map.put("tableName", tableDO.getTableName());
         map.put("comments", tableDO.getComments());
         map.put("pk", tableDO.getPk());

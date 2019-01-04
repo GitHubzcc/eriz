@@ -17,49 +17,49 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ifast.common.annotation.Log;
-import com.ifast.common.base.AdminBaseController;
-import ${package}.domain.${className}DO;
-import ${package}.service.${className}Service;
-import com.ifast.common.utils.Result;
+import com.eriz.common.annotation.Log;
+import com.eriz.common.base.SysController;
+import ${package}.${module}.domain.${className}DO;
+import ${package}.${module}.service.${className}Service;
+import com.eriz.common.util.Result;
 
 /**
  * 
  * <pre>
- * ${comments}
+ * ${comments} controller
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */
 @Controller
 @RequestMapping("/${pathName}/${classname}")
-public class ${className}Controller extends AdminBaseController {
+public class ${className}Controller extends SysController {
 	@Autowired
 	private ${className}Service ${classname}Service;
 	
-	@GetMapping()
+	@GetMapping(value = "/")
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
-	String ${className}(){
+	public String ${className}(){
 	    return "${pathName}/${classname}/${classname}";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("${pathName}:${classname}:${classname}")
-	public Result<Page<${className}DO>> list(${className}DO ${classname}DTO){
+	public Result list(${className}DO ${classname}DTO){
         Wrapper<${className}DO> wrapper = new EntityWrapper<${className}DO>().orderBy("id", false);
         Page<${className}DO> page = ${classname}Service.selectPage(getPage(${className}DO.class), wrapper);
-        return Result.ok(page);
+        return Result.success(0, "success", page.getTotal(), page.getRecords());
 	}
 	
 	@GetMapping("/add")
 	@RequiresPermissions("${pathName}:${classname}:add")
-	String add(){
+    public String add(){
 	    return "${pathName}/${classname}/add";
 	}
 
 	@GetMapping("/edit/{${pk.attrname}}")
 	@RequiresPermissions("${pathName}:${classname}:edit")
-	String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
+    public String edit(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname},Model model){
 		${className}DO ${classname} = ${classname}Service.selectById(${pk.attrname});
 		model.addAttribute("${classname}", ${classname});
 	    return "${pathName}/${classname}/edit";
@@ -69,9 +69,9 @@ public class ${className}Controller extends AdminBaseController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("${pathName}:${classname}:add")
-	public Result<String> save( ${className}DO ${classname}){
+	public Result save( ${className}DO ${classname}){
 		${classname}Service.insert(${classname});
-        return Result.ok();
+        return Result.success();
 	}
 	
 	@Log("修改${comments}")
@@ -80,25 +80,25 @@ public class ${className}Controller extends AdminBaseController {
 	@RequiresPermissions("${pathName}:${classname}:edit")
 	public Result<String>  update( ${className}DO ${classname}){
 		boolean update = ${classname}Service.updateById(${classname});
-		return update ? Result.ok() : Result.fail();
+		return update ? Result.success() : Result.fail();
 	}
 	
 	@Log("删除${comments}")
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:remove")
-	public Result<String>  remove( ${pk.attrType} ${pk.attrname}){
+	public Result  remove( ${pk.attrType} ${pk.attrname}){
 		${classname}Service.deleteById(${pk.attrname});
-        return Result.ok();
+        return Result.success();
 	}
 	
 	@Log("批量删除${comments}")
 	@PostMapping( "/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("${pathName}:${classname}:batchRemove")
-	public Result<String>  remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
+	public Result  remove(@RequestParam("ids[]") ${pk.attrType}[] ${pk.attrname}s){
 		${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s));
-		return Result.ok();
+		return Result.success();
 	}
 	
 }

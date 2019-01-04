@@ -1,12 +1,12 @@
 package ${package}.service;
 
-import ${package}.domain.${className}DO;
-import com.ifast.common.base.CoreService;
+import ${package}.${module}.domain.${className}DO;
+import com.eriz.common.base.CoreService;
 
 /**
  * 
  * <pre>
- * ${comments}
+ * ${comments}service
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */

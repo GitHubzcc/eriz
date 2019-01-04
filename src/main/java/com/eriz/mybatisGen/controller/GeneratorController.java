@@ -1,16 +1,21 @@
 package com.eriz.mybatisGen.controller;
 
+import com.eriz.common.domain.ConfigDo;
 import com.eriz.common.service.ConfigService;
+import com.eriz.common.util.Result;
 import com.eriz.mybatisGen.service.GeneratorService;
+import com.eriz.mybatisGen.type.EnumGen;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -18,22 +23,67 @@ import java.io.IOException;
  * </pre>
  * <small> 2018年12月6日 | eriz</small>
  */
-@RequestMapping("/common/generator")
+@RequestMapping("common/generator")
 @Controller
 public class GeneratorController {
     String prefix = "common/generator";
     @Autowired
-    GeneratorService generatorService;
+    private GeneratorService generatorService;
     @Autowired
-    ConfigService configService;
+    private ConfigService configService;
 
-    
+    /**
+     * code page
+     */
+    @GetMapping("/")
+    public String list() {
+        return "common/generator/list";
+    }
+
+    /**
+     * code data page
+     */
+    @ResponseBody
+    @PostMapping(value = "/list")
+    public Result tableList() {
+        List<Map<String, Object>> list = generatorService.list();
+        return Result.build(0, "操作成功", list);
+    }
+
+    /**
+     * strategy edit
+     */
+    @GetMapping(value = "/strategyEdit")
+    public String strategyEdit(Model model) {
+        List<ConfigDo> list = configService.findListByKvType(EnumGen.KvType.mapping.getValue());
+        List<ConfigDo> list2 = configService.findListByKvType(EnumGen.KvType.base.getValue());
+        HashMap<String, String> map = new HashMap<>();
+        for (ConfigDo config : list2) {
+            map.put(config.getK(), config.getV());
+        }
+
+        model.addAttribute("list", list);
+        model.addAttribute("property", map);
+        return "common/generator/edit";
+    }
+
+    @ResponseBody
+    @PostMapping(value = "/update")
+    public Result update(@RequestParam Map<String, String> map) {
+        configService.updateKV(map);
+        return Result.success();
+    }
+
+    /**
+     * generator code
+     *
+     * @param response  response
+     * @param tableName table name
+     */
     @RequestMapping("/code/{tableName}")
-    public void code(HttpServletRequest request, HttpServletResponse response,
-            @PathVariable("tableName") String tableName) throws IOException {
-        System.out.println(tableName+"--------");
-        tableName = "sys_user";
-        String[] tableNames = new String[] { tableName };
+    public void code(HttpServletResponse response,
+                     @PathVariable("tableName") String tableName) throws IOException {
+        String[] tableNames = new String[]{tableName};
         byte[] data = generatorService.generatorCode(tableNames);
         response.reset();
         response.setHeader("Content-Disposition", "attachment; filename=\"code.zip\"");

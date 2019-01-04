@@ -5,6 +5,7 @@ import com.eriz.base.domain.DictDo;
 import com.eriz.base.service.DictService;
 import com.eriz.common.base.SysController;
 import com.eriz.common.util.Result;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +30,7 @@ public class DictController extends SysController {
     private DictService dictService;
 
     @RequestMapping(value = "/")
+    @RequiresPermissions("common:sysDict:sysDict")
     public String list() {
         return "base/dict/lists";
     }

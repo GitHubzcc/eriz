@@ -1,12 +1,12 @@
 package ${package}.dao;
 
-import ${package}.domain.${className}DO;
-import com.ifast.common.base.BaseDao;
+import ${package}.${module}.domain.${className}DO;
+import com.eriz.common.base.BaseDao;
 
 /**
  * 
  * <pre>
- * ${comments}
+ * ${comments}dao
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */

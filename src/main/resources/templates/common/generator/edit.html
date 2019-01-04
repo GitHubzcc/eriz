@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -51,7 +51,7 @@
 						<div class="form-group" th:each="item : ${list}">
                             <label class="col-sm-3 control-label" th:text="${item.k} + ' :'"></label>
                             <div class="col-sm-8">
-                                <input id="tablePrefix" th:name="${item.k}" class="form-control"
+                                <input th:name="${item.k}" class="form-control"
                                     type="text" th:value="${item.v}">
                             </div>
                         </div>
@@ -68,7 +68,7 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/common/generator/edit.js">
-	</script>
+	<script type="text/javascript" src="/js/valida/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="/js/eriz/common/generator/edit.js"></script>
 </body>
 </html>

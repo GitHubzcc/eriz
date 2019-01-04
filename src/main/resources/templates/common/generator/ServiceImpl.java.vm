@@ -2,15 +2,15 @@ package ${package}.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import ${package}.dao.${className}Dao;
-import ${package}.domain.${className}DO;
-import ${package}.service.${className}Service;
-import com.ifast.common.base.CoreServiceImpl;
+import ${package}.${module}.dao.${className}Dao;
+import ${package}.${module}.domain.${className}DO;
+import ${package}.${module}.service.${className}Service;
+import com.eriz.common.base.CoreServiceImpl;
 
 /**
  * 
  * <pre>
- * ${comments}
+ * ${comments} impl
  * </pre>
  * <small> ${datetime} | ${author}</small>
  */
