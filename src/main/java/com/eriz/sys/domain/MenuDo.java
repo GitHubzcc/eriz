@@ -33,6 +33,16 @@ public class MenuDo implements Serializable {
     private Date gmtCreate;
     // 修改时间
     private Date gmtModified;
+    //是否删除
+    private int delFlag;
+
+    public int getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(int delFlag) {
+        this.delFlag = delFlag;
+    }
 
     public Long getId() {
         return id;

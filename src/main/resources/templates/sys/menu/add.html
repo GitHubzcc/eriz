@@ -56,7 +56,13 @@
                     <input type="text" name="icon" th:value="${menu?.icon}" autocomplete="off" placeholder="图标" class="layui-input">
                 </div>
             </div>
-
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否启用</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="delFlag" value="0" title="是" th:checked="${menu?.delFlag} == 0">
+                    <input type="radio" name="delFlag" value="1" title="否" th:checked="${menu?.delFlag} == 1">
+                </div>
+            </div>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>

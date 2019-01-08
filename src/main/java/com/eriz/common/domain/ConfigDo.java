@@ -19,7 +19,9 @@ public class ConfigDo extends Model<ConfigDo> implements Serializable {
     
     @TableId
     private Long id;
+    /* 键 */
     private String k;
+    /* 值 */
     private String v;
     private String remark;
     private Date createTime;

@@ -54,7 +54,7 @@
                 </div>
                 <div class="layui-form-item">
                     <div class="layui-input-block" style="display: flex;">
-                        <button class="layui-btn" type="button" onclick="loginForm()">登录</button>
+                        <button id="login" class="layui-btn" type="button" onclick="loginForm()">登录</button>
                         <div id="error" class="error"></div>
                     </div>
                 </div>
@@ -93,7 +93,13 @@
                 clear()
             }
         });
-    })
+    });
+    // 登录的回车事件
+    $(window).keydown(function(event) {
+        if (event.keyCode == 13) {
+            loginForm();
+        }
+    });
     loginForm = function () {
         var username = $('#username').val();
         var password = $('#password').val();

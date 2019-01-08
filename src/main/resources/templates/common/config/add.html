@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body>
+<div class="container" style="width: 100%;">
+    <form class="layui-form" id="signupForm">
+        <div class="layui-form-item">
+            <label class="layui-form-label">键：</label>
+            <div class="layui-input-block">
+                <input id="k" name="k" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">值：</label>
+            <div class="layui-input-block">
+                <input id="v" name="v" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <input id="remark" name="remark" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间：</label>
+            <div class="layui-input-block">
+                <input id="createtime" name="createtime" class="layui-input" type="text"
+                       onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">keType：</label>
+            <div class="layui-input-block">
+                <input id="kvtype" name="kvtype" class="layui-input" type="text">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="submit">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script src="//s.xlongwei.com/res/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="/js/eriz/common/config/add.js">
+</script>
+</body>
+</html>

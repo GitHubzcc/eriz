@@ -11,6 +11,7 @@
 		where
 		  ur.userId = #{id}
 		  and m.type in(0,1)
+		  and m.delFlag = 0
 		order by m.orderNum asc
     </select>
 
@@ -21,7 +22,8 @@
 			menu.parentId AS "pId",
 			menu.icon AS "img"
 		FROM
-			sys_menu menu ORDER BY menu.id;
+			sys_menu menu
+			where menu.delFlag = 0 ORDER BY menu.id
 	</select>
 
 	<select id="menuTreeRid" resultType="map">
@@ -35,6 +37,7 @@
 				rmenu.roleId = #{keyValue}
 			</if>
 		</where>) rm ON menu.id = rm.menuId
+		where menu.delFlag = 0
 		ORDER BY menu.parentId
 	</select>
 	
@@ -42,6 +45,6 @@
 		select distinct menu.perms
 		from sys_menu menu left join sys_role_menu rmenu on menu.id = rmenu.menuId
 		left join sys_user_role urole on rmenu.roleId = urole.roleId
-		where urole.userId = #{id}
+		where menu.delFlag = 0 and urole.userId = #{id}
 	</select>
 </mapper>

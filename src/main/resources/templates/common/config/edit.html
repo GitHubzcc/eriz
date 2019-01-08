@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body>
+<div class="container" style="width: 100%;">
+	<form class="layui-form" id="signupForm">
+		<input id="id" name="id" th:value="${sysConfig.id}" type="hidden">
+												<div class="layui-form-item">
+		<label class="layui-form-label">键：</label>
+		<div class="layui-input-block">
+				<input id="k" name="k" th:value="${sysConfig.k}" class="layui-input" type="text">
+				</div>
+		</div>
+								<div class="layui-form-item">
+		<label class="layui-form-label">值：</label>
+		<div class="layui-input-block">
+				<input id="v" name="v" th:value="${sysConfig.v}" class="layui-input" type="text">
+				</div>
+		</div>
+								<div class="layui-form-item">
+		<label class="layui-form-label">备注：</label>
+		<div class="layui-input-block">
+				<input id="remark" name="remark" th:value="${sysConfig.remark}" class="layui-input" type="text">
+				</div>
+		</div>
+								<div class="layui-form-item">
+		<label class="layui-form-label">创建时间：</label>
+		<div class="layui-input-block">
+				<input id="createtime" name="createtime" th:value="${sysConfig.createtime} eq null ? '' : ${#dates.format(sysConfig.createtime, 'yyyy-MM-dd HH:mm:ss')}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="layui-input" type="text">
+				</div>
+		</div>
+								<div class="layui-form-item">
+		<label class="layui-form-label">：</label>
+		<div class="layui-input-block">
+				<input id="kvtype" name="kvtype" th:value="${sysConfig.kvtype}" class="layui-input" type="text">
+				</div>
+		</div>
+						<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button type="submit" class="layui-btn">提交</button>
+			</div>
+		</div>
+	</form>
+</div>
+<div th:include="include::footer"></div>
+	<script src="//s.xlongwei.com/res/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript" src="/js/eriz/eriz/sysConfig/edit.js">
+	</script>
+</body>
+</html>
