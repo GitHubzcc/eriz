@@ -1,24 +1,22 @@
 package com.eriz.sys.controller;
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.annotation.Log;
 import com.eriz.common.base.SysController;
 import com.eriz.common.util.Result;
-import com.eriz.common.util.WebUtil;
 import com.eriz.sys.domain.RoleDo;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
@@ -32,6 +30,7 @@ import java.util.List;
  */
 @RequestMapping(value = "sys/user")
 @Controller
+@ApiIgnore
 public class UserController extends SysController {
 
     @Resource
@@ -53,6 +52,7 @@ public class UserController extends SysController {
     @ResponseBody
     @Log("用户列表")
     @PostMapping(value = "userList")
+    @ApiOperation("api测试-查询用户列表")
     public Result<List<UserDo>> userList(UserDo userDo) {
         Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
                 userService.convertToEntityWrapper("name", userDo.getName(), "deptId", userDo.getDeptId()));

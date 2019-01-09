@@ -24,6 +24,8 @@
       --系统菜单
       --部门管理
       
+接口测试：
+http://localhost:8181/swagger-ui.html#/
 系统部署
 1、linux
 2、docker

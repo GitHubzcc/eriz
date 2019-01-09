@@ -97,3 +97,12 @@ eriz:
   shiro:
     jsessionidKey: SESSION
     sessionKeyPrefix: eriz:session
+  swagger2:
+    title: api接口
+    description: live and learn
+    contact-name: eriz
+    contact-email: eriz@163.com
+    contact-url:
+    version: 1.0
+    base-package: com.eriz
+    terms-of-service-url:

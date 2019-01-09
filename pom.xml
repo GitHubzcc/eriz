@@ -33,6 +33,7 @@
         <shiro.version>1.3.2</shiro.version>
         <jwtAu.version>3.2.0</jwtAu.version>
         <ehcache.version>1.3.2</ehcache.version>
+        <swagger2.version>2.6.1</swagger2.version>
     </properties>
 
     <dependencies>
@@ -222,6 +223,27 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.5.3</version>
         </dependency>
+
+        <!--  七牛云SDK -->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>[7.2.0, 7.2.99]</version>
+        </dependency>
+
+        <!-- swagger2 s -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+        <!-- swagger2 e -->
     </dependencies>
 
     <build>

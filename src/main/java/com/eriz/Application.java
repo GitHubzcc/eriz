@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * <pre>
@@ -16,6 +17,7 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
  */
 @MapperScan("com.eriz.*.dao")
 @SpringBootApplication
+@EnableSwagger2
 public class Application {
 
     private static Logger log = LoggerFactory.getLogger(Application.class);

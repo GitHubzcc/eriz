@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Arrays;
 
@@ -25,6 +26,7 @@ import java.util.Arrays;
  */
 @Controller
 @RequestMapping("/common/config")
+@ApiIgnore
 public class ConfigController extends SysController {
     @Autowired
     private ConfigService configService;

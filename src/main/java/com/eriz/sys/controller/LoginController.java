@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -36,6 +37,7 @@ import java.util.List;
  * 2018年12月18日 | eriz
  */
 @Controller
+@ApiIgnore
 public class LoginController extends SysController {
 
     @Resource
