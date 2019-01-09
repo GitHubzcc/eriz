@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class SysController {
 
-    private final static Logger log = LoggerFactory.getLogger(SysController.class);
+    public final static Logger log = LoggerFactory.getLogger(SysController.class);
 
     public UserDo getUser(){
         return ShiroUtils.getSysUser();

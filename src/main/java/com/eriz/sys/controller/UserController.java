@@ -11,6 +11,8 @@ import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,12 +54,9 @@ public class UserController extends SysController {
     @Log("用户列表")
     @PostMapping(value = "userList")
     public Result<List<UserDo>> userList(UserDo userDo) {
-        System.out.println("get userList ================================================");
-//        Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
-//                new EntityWrapper<UserDo>().like("name", WebUtil.getParameter("keyword")));
         Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
                 userService.convertToEntityWrapper("name", userDo.getName(), "deptId", userDo.getDeptId()));
-        return Result.success(0, "成功", page.getTotal(), page.getRecords());
+        return Result.success(0, "success", page.getTotal(), page.getRecords());
     }
 
     /**
