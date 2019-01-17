@@ -13,7 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 /**
  * <pre>
  * </pre>
- * <small> 2018年12月5日 | eriz</small>
+ * @author  2018年12月5日 | eriz
  */
 @MapperScan("com.eriz.*.dao")
 @SpringBootApplication

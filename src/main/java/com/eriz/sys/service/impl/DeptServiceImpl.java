@@ -15,7 +15,7 @@ import java.util.Map;
  * </pre>
  * <small> 2018年12月13日 | eriz</small>
  */
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 @Service("sysDeptServiceImpl")
 public class DeptServiceImpl extends CoreServiceImpl<DeptDao, DeptDo> implements DeptService {
 

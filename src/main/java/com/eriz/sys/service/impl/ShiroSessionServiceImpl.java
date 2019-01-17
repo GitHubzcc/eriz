@@ -28,7 +28,9 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
         Collection<Session> sessions = sessionDAO.getActiveSessions();
         List<OnlineDo> list = new ArrayList<>();
         for (Session session : sessions) {
-            if (session == null) continue;
+            if (session == null) {
+                continue;
+            }
             OnlineDo onlineDo = new OnlineDo();
             UserDo userDo = new UserDo();
             //principalCollection 身份

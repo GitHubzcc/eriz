@@ -8,7 +8,10 @@ import java.util.Map;
 
 /**
  * <pre>
- * 通用业务层实现
+ * 通用业务层实现，采用策略模式
+ * 1、service接口
+ * 2、impl实现
+ * 3、创建context类
  * </pre>
  * 
  * <small> 2018年12月5日 | eriz</small>

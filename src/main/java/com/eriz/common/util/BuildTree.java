@@ -9,8 +9,9 @@ import java.util.List;
 public class BuildTree {
 
     public static <T> List<TreeDo<T>> buildList(List<TreeDo<T>> nodes, String idParam) {
-        if (nodes == null)
+        if (nodes == null) {
             return null;
+        }
         List<TreeDo<T>> topNodes = new ArrayList<>();
 
         for (TreeDo<T> children : nodes) {
