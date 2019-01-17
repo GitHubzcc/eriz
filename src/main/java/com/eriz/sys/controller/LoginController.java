@@ -1,15 +1,13 @@
 package com.eriz.sys.controller;
 
 import com.eriz.common.annotation.Log;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.domain.TreeDo;
 import com.eriz.common.util.MD5Utils;
 import com.eriz.common.util.Result;
 import com.eriz.sys.domain.MenuDo;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.MenuService;
-import com.eriz.sys.service.RoleService;
-import com.eriz.sys.service.UserService;
 import com.google.code.kaptcha.Producer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -38,7 +36,7 @@ import java.util.List;
  */
 @Controller
 @ApiIgnore
-public class LoginController extends SysController {
+public class LoginController extends BaseController {
 
     @Resource
     private MenuService menuService;
@@ -109,7 +107,6 @@ public class LoginController extends SysController {
         UserDo userDo = getUser();
         model.addAttribute("menus", list);
         model.addAttribute("user", userDo);
-        //FileDO fileDO = fileService.selectById(getUser().getPicId());
         model.addAttribute("picUrl", "/img/avator.jpg");
         return "index";
     }

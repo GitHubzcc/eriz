@@ -5,15 +5,13 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.TimeZone;
 
 /**
  * 简单封装Jackson，实现JSON String<->Java Object的Mapper. 封装不同的输出风格,
@@ -55,18 +53,8 @@ public class JsonUtil extends ObjectMapper {
                 }
         );
 
-        // 进行HTML解码。
-        this.registerModule(new SimpleModule().addSerializer(String.class,
-                new JsonSerializer<String>() {
-                    @Override
-                    public void serialize(String value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
-                        jgen.writeString(StringEscapeUtils.unescapeHtml4(value));
-                    }
-                }
-        ));
-
-        // 设置时区
-        this.setTimeZone(TimeZone.getDefault());// getTimeZone("GMT+8:00")
+        // 设置时区 getTimeZone("GMT+8:00")
+        this.setTimeZone(TimeZone.getDefault());
     }
 
     /**
@@ -138,15 +126,6 @@ public class JsonUtil extends ObjectMapper {
             logger.warn("parse json string error:" + jsonString, e);
             return null;
         }
-    }
-
-    /**
-     * 構造泛型的Collection Type如: ArrayList<MyBean>,
-     * 则调用constructCollectionType(ArrayList.class,MyBean.class)
-     * HashMap<String,MyBean>, 则调用(HashMap.class,String.class, MyBean.class)
-     */
-    public JavaType createCollectionType(Class<?> collectionClass, Class<?>... elementClasses) {
-        return this.getTypeFactory().constructParametricType(collectionClass, elementClasses);
     }
 
     /**
@@ -230,18 +209,18 @@ public class JsonUtil extends ObjectMapper {
         return JsonUtil.getInstance().fromJson(jsonString, clazz);
     }
 
-    public static int ff(int a[],int tag){
+    public static int ff(int[] a, int tag) {
         int first = 0;
-        int end = a.length -1 ;
-        for (int i = 0; i<a.length-1;i++){
+        int end = a.length - 1;
+        for (int i = 0; i < a.length - 1; i++) {
             int middle = (first + end) / 2;
-            if (tag == middle){
+            if (tag == middle) {
                 return middle;
             }
-            if (tag > middle){
+            if (tag > middle) {
                 first = middle + 1;
             }
-            if (tag < middle){
+            if (tag < middle) {
                 end = middle - 1;
             }
         }
@@ -252,8 +231,8 @@ public class JsonUtil extends ObjectMapper {
      * 测试
      */
     public static void main(String[] args) {
-        int []a = {1,2,3,4,5,6,7,8};
-        System.out.println(JsonUtil.ff(a,1));
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8};
+        System.out.println(JsonUtil.ff(a, 1));
 		/*List<Map<String, Object>> list = new ArrayList<>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("id", 1);

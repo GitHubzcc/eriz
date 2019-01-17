@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.annotation.Log;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.domain.ConfigDo;
 import com.eriz.common.service.ConfigService;
 import com.eriz.common.util.Result;
@@ -27,13 +27,13 @@ import java.util.Arrays;
 @Controller
 @RequestMapping("/common/config")
 @ApiIgnore
-public class ConfigController extends SysController {
+public class ConfigController extends BaseController {
     @Autowired
     private ConfigService configService;
 
     @GetMapping(value = "/")
     @RequiresPermissions("common:config:config")
-    public String SysConfig() {
+    public String sysConfig() {
         return "common/config/config";
     }
 

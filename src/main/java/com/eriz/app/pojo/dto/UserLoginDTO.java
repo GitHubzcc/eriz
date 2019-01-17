@@ -26,4 +26,12 @@ public class UserLoginDTO {
     public void setPasswd(String passwd) {
         this.passwd = passwd;
     }
+
+    @Override
+    public String toString() {
+        return "UserLoginDTO{" +
+                "uname='" + uname + '\'' +
+                ", passwd='" + passwd + '\'' +
+                '}';
+    }
 }

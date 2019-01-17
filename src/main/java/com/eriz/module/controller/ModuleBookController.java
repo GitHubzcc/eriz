@@ -18,7 +18,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.annotation.Log;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.module.domain.ModuleBookDO;
 import com.eriz.module.service.ModuleBookService;
 import com.eriz.common.util.Result;
@@ -32,13 +32,13 @@ import com.eriz.common.util.Result;
  */
 @Controller
 @RequestMapping("/eriz/moduleBook")
-public class ModuleBookController extends SysController {
+public class ModuleBookController extends BaseController {
 	@Autowired
 	private ModuleBookService moduleBookService;
 	
 	@GetMapping(value = "/")
 	@RequiresPermissions("eriz:moduleBook:moduleBook")
-	public String ModuleBook(){
+	public String moduleBook(){
 	    return "eriz/moduleBook/moduleBook";
 	}
 	

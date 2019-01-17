@@ -12,9 +12,9 @@ import org.slf4j.LoggerFactory;
  * 2018年12月17日 | eriz
  * 系统层控制层
  */
-public abstract class SysController {
+public abstract class BaseController {
 
-    public final static Logger log = LoggerFactory.getLogger(SysController.class);
+    public final static Logger log = LoggerFactory.getLogger(BaseController.class);
 
     public UserDo getUser(){
         return ShiroUtils.getSysUser();

@@ -54,4 +54,14 @@ public class TokenVO {
     public void setRefreshTokenExpire(Long refreshTokenExpire) {
         this.refreshTokenExpire = refreshTokenExpire;
     }
+
+    @Override
+    public String toString() {
+        return "TokenVO{" +
+                "token='" + token + '\'' +
+                ", tokenExpire=" + tokenExpire +
+                ", refleshToken='" + refleshToken + '\'' +
+                ", refreshTokenExpire=" + refreshTokenExpire +
+                '}';
+    }
 }

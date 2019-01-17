@@ -1,8 +1,7 @@
 package com.eriz.sys.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.util.JsonUtil;
 import com.eriz.common.util.Result;
 import com.eriz.sys.domain.MenuDo;
@@ -26,7 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "sys/menu")
 @Controller
 @ApiIgnore
-public class MenuController extends SysController {
+public class MenuController extends BaseController {
 
     @Resource
     MenuService menuService;

@@ -27,8 +27,8 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
      * Holder for lazy-init
      */
     private static class Holder {
-        static final JWTConfigProperties jwtConfig = SpringContextHolder.getBean(JWTConfigProperties.class);
-        static final Cache logoutTokens = null;
+        static final JWTConfigProperties JWT_CONFIG_PROPERTIES = SpringContextHolder.getBean(JWTConfigProperties.class);
+        static final Cache LOGOUT_TOKENS = null;
 //		static final Cache logoutTokens = CacheConfiguration.dynaConfigCache(jwtConfig.getExpireTokenKeyPrefix(), jwtConfig
 //                .getRefreshTokenExpire());
     }
@@ -62,18 +62,18 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
 
     @Override
     public void logoutToken(String token, String refreshToken) {
-        Holder.logoutTokens.putIfAbsent(token, null);
-        Holder.logoutTokens.putIfAbsent(refreshToken, null);
+        Holder.LOGOUT_TOKENS.putIfAbsent(token, null);
+        Holder.LOGOUT_TOKENS.putIfAbsent(refreshToken, null);
     }
 
     private TokenVO createToken(UserDo user) {
         TokenVO vo = new TokenVO();
-        String token = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.jwtConfig.getExpireTime());
-        String refreshToken = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.jwtConfig.getExpireTime(), true);
+        String token = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.JWT_CONFIG_PROPERTIES.getExpireTime());
+        String refreshToken = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.JWT_CONFIG_PROPERTIES.getExpireTime(), true);
         vo.setToken(token);
         vo.setRefleshToken(refreshToken);
-        vo.setTokenExpire(Holder.jwtConfig.getExpireTime());
-        vo.setRefreshTokenExpire(Holder.jwtConfig.getRefreshTokenExpire());
+        vo.setTokenExpire(Holder.JWT_CONFIG_PROPERTIES.getExpireTime());
+        vo.setRefreshTokenExpire(Holder.JWT_CONFIG_PROPERTIES.getRefreshTokenExpire());
         return vo;
     }
 
@@ -85,7 +85,7 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
         if (StringUtils.isBlank(userId)) {
             throw new ErizException(EnumErrorCode.apiAuthorizationInvalid.getCodeStr());
         }
-        if (Holder.logoutTokens.get(token) != null) {
+        if (Holder.LOGOUT_TOKENS.get(token) != null) {
             throw new ErizException(EnumErrorCode.apiAuthorizationLoggedout.getCodeStr());
         }
 

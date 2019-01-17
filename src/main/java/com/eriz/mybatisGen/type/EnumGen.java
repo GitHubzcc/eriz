@@ -8,6 +8,9 @@ package com.eriz.mybatisGen.type;
  */
 public class EnumGen {
     public static enum KvType {
+        /**
+         * java与db字段映射关系
+         */
         mapping(4400, "java与db字段映射关系")
         , base(4401, "生成注释基本配置");
 

@@ -3,7 +3,7 @@ package com.eriz.base.controller;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.base.domain.DictDo;
 import com.eriz.base.service.DictService;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RequestMapping(value = "base/dict")
 @Controller
-public class DictController extends SysController {
+public class DictController extends BaseController {
 
     @Resource
     private DictService dictService;

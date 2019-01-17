@@ -1,7 +1,7 @@
 package com.eriz.common.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.domain.LogDo;
 import com.eriz.common.service.LogService;
 import com.eriz.common.util.Result;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RequestMapping("/common/log")
 @Controller
-public class LogController extends SysController {
+public class LogController extends BaseController {
 
     @Resource
     private LogService logService;

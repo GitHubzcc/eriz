@@ -8,7 +8,9 @@ package com.eriz.common.enumType;
  */
 public enum EnumErrorCode {
 
-
+    /**
+     * 系统枚举
+     */
     ok(200, "请求成功")
     , unknowFail(500, "未知错误")
     , illegalArgument(400, "参数校验异常")

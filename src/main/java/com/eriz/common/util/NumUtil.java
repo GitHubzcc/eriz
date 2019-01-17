@@ -160,11 +160,9 @@ public final class NumUtil {
 	}
 
 	/**
-	 * @Title: deciMal @Description: 计算百分比，保留两位有效数字 @author: wangzhiping @date:
-	 *         2018年9月17日 下午4:15:13 @param: @param top @param: @param
-	 *         below @param: @return @return: double @throws
+	 * @param top @param: @param
 	 */
-	public static String PercentageCalculation(double top, double below) {
+	public static String percentageCalculation(double top, double below) {
 		if (top == 0 || below == 0) {
 			return "--";
 		} else if (top >= below) {
@@ -175,16 +173,15 @@ public final class NumUtil {
 		// 设置精确到小数点后2位
 		numberFormat.setMaximumFractionDigits(2);
 		String result = numberFormat.format((float) top / (float) below * 100);
-		// return Double.parseDouble(result);
 		return result;
 	}
 
 	/**
-	 * @Title: deciMal @Description: 计算百分比，保留两位有效数字 @author: wangzhiping @date:
-	 *         2018年9月17日 下午4:15:13 @param: top @param: below @param: floatNum
-	 *         保留小数点位数 @param: @return @return: double @throws
+	 *
+	 * top @param: below @param: floatNum
+	 * 保留小数点位数 @param: @return @return: double @throws
 	 */
-	public static String PercentageCalculation(double top, double below, int floatNum) {
+	public static String percentageCalculation(double top, double below, int floatNum) {
 		if (top == 0 || below == 0) {
 			return "--";
 		}

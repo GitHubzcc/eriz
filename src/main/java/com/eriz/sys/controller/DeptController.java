@@ -1,11 +1,10 @@
 package com.eriz.sys.controller;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.eriz.common.base.SysController;
+import com.eriz.common.base.BaseController;
 import com.eriz.common.util.JsonUtil;
 import com.eriz.common.util.Result;
 import com.eriz.sys.domain.DeptDo;
-import com.eriz.sys.domain.MenuDo;
 import com.eriz.sys.service.DeptService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +25,7 @@ import java.util.Map;
 @RequestMapping(value = "sys/dept")
 @Controller
 @ApiIgnore
-public class DeptController extends SysController {
+public class DeptController extends BaseController {
 
     @Resource
     private DeptService deptService;
