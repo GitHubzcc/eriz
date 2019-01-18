@@ -1,7 +1,7 @@
 package com.eriz.sys.service.impl;
 
 import com.eriz.sys.domain.OnlineDO;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.ShiroSessionService;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.session.mgt.eis.SessionDAO;
@@ -31,7 +31,7 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
                 continue;
             }
             OnlineDO onlineDO = new OnlineDO();
-            UserDo userDo = new UserDo();
+            UserDO userDo = new UserDO();
             //principalCollection 身份
             SimplePrincipalCollection principalCollection = new SimplePrincipalCollection();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
@@ -39,7 +39,7 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
             } else {
                 principalCollection = (SimplePrincipalCollection) session
                         .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-                userDo = (UserDo) principalCollection.getPrimaryPrincipal();
+                userDo = (UserDO) principalCollection.getPrimaryPrincipal();
                 onlineDO.setUsername(userDo.getUsername());
             }
             onlineDO.setId(session.getId().toString());

@@ -10,7 +10,7 @@ import com.eriz.common.exception.ErizException;
 import com.eriz.common.util.MD5Utils;
 import com.eriz.common.util.SpringContextHolder;
 import com.eriz.sys.dao.UserDao;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.cache.Cache;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
  * <small> 2018年12月23日 | eriz</small>
  */
 @Service
-public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> implements AppUserService {
+public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDO> implements AppUserService {
     /**
      * Holder for lazy-init
      */
@@ -35,7 +35,7 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
 
     @Override
     public TokenVO getToken(String username, String passwd) {
-        UserDo user = findOneByKv("username", username);
+        UserDO user = findOneByKv("username", username);
         if (null == user || !user.getPassword().equals(MD5Utils.encrypt(username, passwd))) {
             throw new ErizException(EnumErrorCode.apiAuthorizationLoginFailed.getCodeStr());
         }
@@ -52,7 +52,7 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
 
         ensureAvailable(refreshToken, true);
 
-        UserDo user = findOneByKv("username", uname);
+        UserDO user = findOneByKv("username", uname);
         if (user == null) {
             throw new ErizException(EnumErrorCode.apiAuthorizationInvalid.getCodeStr());
         }
@@ -66,7 +66,7 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
         Holder.LOGOUT_TOKENS.putIfAbsent(refreshToken, null);
     }
 
-    private TokenVO createToken(UserDo user) {
+    private TokenVO createToken(UserDO user) {
         TokenVO vo = new TokenVO();
         String token = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.JWT_CONFIG_PROPERTIES.getExpireTime());
         String refreshToken = JWTUtil.sign(user.getId() + "", user.getUsername() + user.getPassword(), Holder.JWT_CONFIG_PROPERTIES.getExpireTime(), true);
@@ -89,7 +89,7 @@ public class AppUserServiceImpl extends CoreServiceImpl<UserDao, UserDo> impleme
             throw new ErizException(EnumErrorCode.apiAuthorizationLoggedout.getCodeStr());
         }
 
-        UserDo userDO = selectById(userId);
+        UserDO userDO = selectById(userId);
 
         if (userDO == null) {
             throw new ErizException(EnumErrorCode.apiAuthorizationInvalid.getCodeStr());

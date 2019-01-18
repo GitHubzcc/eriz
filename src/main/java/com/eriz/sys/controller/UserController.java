@@ -5,7 +5,7 @@ import com.eriz.common.annotation.Log;
 import com.eriz.common.base.BaseController;
 import com.eriz.common.util.Result;
 import com.eriz.sys.domain.RoleDO;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -53,8 +53,8 @@ public class UserController extends BaseController {
     @Log("用户列表")
     @PostMapping(value = "userList")
     @ApiOperation("api测试-查询用户列表")
-    public Result<List<UserDo>> userList(UserDo userDo) {
-        Page<UserDo> page = userService.selectPage(getPage(UserDo.class),
+    public Result<List<UserDO>> userList(UserDO userDo) {
+        Page<UserDO> page = userService.selectPage(getPage(UserDO.class),
                 userService.convertToEntityWrapper("name", userDo.getName(), "deptId", userDo.getDeptId()));
         return Result.success(0, "success", page.getTotal(), page.getRecords());
     }
@@ -66,7 +66,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "add")
     public String add(Model model, Long uid) {
         List<RoleDO> list = roleService.userRole(uid);
-        UserDo userDo = new UserDo();
+        UserDO userDo = new UserDO();
         if (uid != null) {
             userDo = userService.selectById(uid);
         }
@@ -83,7 +83,7 @@ public class UserController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "save")
-    public Result save(UserDo userDo) {
+    public Result save(UserDO userDo) {
         return userService.insert(userDo) ? Result.success() : Result.fail();
     }
 
@@ -110,7 +110,7 @@ public class UserController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "userInfo")
-    public UserDo userInfo() {
+    public UserDO userInfo() {
         return userService.selectById(1L);
     }
 

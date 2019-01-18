@@ -1,7 +1,7 @@
 package com.eriz.sys.sysCore;
 
 import com.eriz.common.util.ShiroUtils;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.MenuService;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
@@ -61,7 +61,7 @@ public class SysShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principal) {
         Object next = principal.getPrimaryPrincipal();
         SimpleAuthorizationInfo authz = null;
-        if (next instanceof UserDo) { // 避免授权报错
+        if (next instanceof UserDO) { // 避免授权报错
             Long userId = ShiroUtils.getUserId();
             Set<String> permsSet = menuService.findPermByUserId(userId);
             authz = new SimpleAuthorizationInfo();
@@ -90,7 +90,7 @@ public class SysShiroRealm extends AuthorizingRealm {
         String name = (String) token.getPrincipal();
         String paw = new String((char[]) token.getCredentials());
         // 查询用户信息
-        UserDo userDo = userService.findOneByKv("username", name);
+        UserDO userDo = userService.findOneByKv("username", name);
         // 账号不存在
         if (userDo == null) {
             throw new UnknownAccountException("账号不存在");

@@ -7,7 +7,7 @@ import com.eriz.common.util.IPUtils;
 import com.eriz.common.util.JsonUtil;
 import com.eriz.common.util.ShiroUtils;
 import com.eriz.common.util.WebUtil;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -99,7 +99,7 @@ public class LogAspect {
         }
         sysLog.setParams(params);
         // 用户名
-        UserDo currUser = ShiroUtils.getSysUser();
+        UserDO currUser = ShiroUtils.getSysUser();
         if (null == currUser) {
             sysLog.setUserId(-1L);
             sysLog.setUsername("");

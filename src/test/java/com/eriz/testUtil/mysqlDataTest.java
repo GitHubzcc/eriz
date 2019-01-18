@@ -1,7 +1,7 @@
 package com.eriz.testUtil;
 
 import com.eriz.Application;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,9 +28,9 @@ public class mysqlDataTest {
     @Test
     public void testSelect() {
         System.out.println(("----- selectAll method test ------"));
-        List<UserDo> userList = userService.selectList(null);
+        List<UserDO> userList = userService.selectList(null);
         //Assert.assertEquals(5, userList.size());
-        for (UserDo u : userList) {
+        for (UserDO u : userList) {
             System.out.println(u.getName());
         }
     }

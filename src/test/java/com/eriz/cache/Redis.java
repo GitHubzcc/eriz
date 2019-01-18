@@ -3,7 +3,7 @@ package com.eriz.cache;
 
 import com.eriz.Application;
 import com.eriz.common.redis.cache.RedisUtil;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class Redis {
 
     @Test
     public void putRedis() {
-        UserDo userDo = new UserDo();
+        UserDO userDo = new UserDO();
         userDo.setId(1L);
         userDo.setName("admin");
         userDo.setUsername("eriz.admin");

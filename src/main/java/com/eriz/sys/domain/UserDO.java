@@ -16,7 +16,7 @@ import java.util.List;
  * <small> 2018年12月5日 | eriz</small>
  */
 @TableName("sys_user")
-public class UserDo implements Serializable {
+public class UserDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //

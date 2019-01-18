@@ -2,7 +2,7 @@ package com.eriz.sys.service.impl;
 
 import com.eriz.common.base.CoreServiceImpl;
 import com.eriz.sys.dao.UserDao;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.domain.UserRoleDO;
 import com.eriz.sys.service.UserService;
 import org.springframework.stereotype.Service;
@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @Transactional
 @Service("sysUserServiceImpl")
-public class UserServiceImpl extends CoreServiceImpl<UserDao, UserDo> implements UserService {
+public class UserServiceImpl extends CoreServiceImpl<UserDao, UserDO> implements UserService {
 
     @Override
     public boolean exist(Map<String, Object> params) {
@@ -28,7 +28,7 @@ public class UserServiceImpl extends CoreServiceImpl<UserDao, UserDo> implements
 
 
     @Override
-    public boolean insert(UserDo userDo) {
+    public boolean insert(UserDO userDo) {
         int count = baseMapper.insert(userDo);
         Long uId = userDo.getId();
         if (count > 0 && uId != null) {

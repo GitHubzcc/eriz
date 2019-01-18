@@ -1,7 +1,7 @@
 package com.eriz.app.controller;
 
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -25,7 +25,7 @@ public class SwaggerController {
     @GetMapping("user/{id}")
     @ResponseBody
     public Result user(@PathVariable(value = "id") Long id) {
-        UserDo userDo = userService.selectById(id);
+        UserDO userDo = userService.selectById(id);
         return Result.build(0, "success", userDo);
     }
 
@@ -35,7 +35,7 @@ public class SwaggerController {
     @ResponseBody
     public Result user2(@PathVariable(value = "name") String name, @PathVariable(value = "id") Long id) {
         System.out.println(name);
-        UserDo userDo = userService.selectById(id);
+        UserDO userDo = userService.selectById(id);
         return Result.build(0, "success", userDo);
     }
 }

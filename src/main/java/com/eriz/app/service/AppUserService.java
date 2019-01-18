@@ -2,7 +2,7 @@ package com.eriz.app.service;
 
 import com.eriz.app.pojo.vo.TokenVO;
 import com.eriz.common.base.CoreService;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 
 /**
  * <pre>
@@ -10,7 +10,7 @@ import com.eriz.sys.domain.UserDo;
  *
  * <small> 2018年12月23日 | eriz</small>
  */
-public interface AppUserService extends CoreService<UserDo> {
+public interface AppUserService extends CoreService<UserDO> {
     /**
      * 申请token
      */

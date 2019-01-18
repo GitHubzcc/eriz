@@ -3,7 +3,7 @@ package com.eriz.common.base;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.util.ShiroUtils;
 import com.eriz.common.util.WebUtil;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ public abstract class BaseController {
 
     public final static Logger log = LoggerFactory.getLogger(BaseController.class);
 
-    public UserDo getUser(){
+    public UserDO getUser(){
         return ShiroUtils.getSysUser();
     }
 

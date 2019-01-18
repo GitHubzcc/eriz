@@ -6,7 +6,7 @@ import com.eriz.common.domain.TreeDO;
 import com.eriz.common.util.MD5Utils;
 import com.eriz.common.util.Result;
 import com.eriz.sys.domain.MenuDO;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.MenuService;
 import com.google.code.kaptcha.Producer;
 import org.apache.shiro.SecurityUtils;
@@ -104,7 +104,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/index")
     public String root(Model model) {
         List<TreeDO<MenuDO>> list = menuService.findListByUserId(1L);
-        UserDo userDo = getUser();
+        UserDO userDo = getUser();
         model.addAttribute("menus", list);
         model.addAttribute("user", userDo);
         model.addAttribute("picUrl", "/img/avator.jpg");

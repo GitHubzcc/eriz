@@ -3,7 +3,7 @@ package com.eriz.cache;
 import com.eriz.Application;
 import com.eriz.common.shiro.cache.EhcacheUtil;
 import com.eriz.sys.domain.RoleDO;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.sys.domain.UserDO;
 import com.eriz.sys.service.RoleService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,24 +42,24 @@ public class Ehcache {
     }
 
     @CacheEvict(cacheNames = DEMO_CACHE_NAME, key = THING_ALL_KEY)
-    public UserDo create(UserDo userDo) {
+    public UserDO create(UserDO userDo) {
         return userDo;
     }
 
     @Cacheable(value = DEMO_CACHE_NAME, key = "#userDo.getId()+'thing'")
-    public UserDo findById(Long id) {
+    public UserDO findById(Long id) {
         System.err.println("没有走缓存！" + id);
-        UserDo userDo = new UserDo();
+        UserDO userDo = new UserDO();
         userDo.setId(id);
         return userDo;
     }
 
     @Cacheable(cacheNames = DEMO_CACHE_NAME, key = THING_ALL_KEY)
-    public List<UserDo> findAll() {
+    public List<UserDO> findAll() {
         System.out.println("进入缓存============");
-        List<UserDo> list = new ArrayList<>();
+        List<UserDO> list = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            UserDo userDo = new UserDo();
+            UserDO userDo = new UserDO();
             userDo.setId(2L + i);
             userDo.setName("didi" + i);
         }
