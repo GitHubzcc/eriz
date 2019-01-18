@@ -1,9 +1,8 @@
 package com.eriz.testUtil;
 
 import com.eriz.Application;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.service.RoleService;
-import com.eriz.sys.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -32,7 +31,7 @@ public class logbackTest {
 
     @Test
     public void sql(){
-        List<RoleDo> roleDo = roleService.userRole(1L);
+        List<RoleDO> roleDo = roleService.userRole(1L);
         roleDo.forEach(key -> System.out.println(key.getRoleName()));
     }
 

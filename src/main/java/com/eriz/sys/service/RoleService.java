@@ -1,7 +1,7 @@
 package com.eriz.sys.service;
 
 import com.eriz.common.base.CoreService;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  * <small> 2018年12月5日 | eriz</small>
  */
 @Service
-public interface RoleService extends CoreService<RoleDo> {
+public interface RoleService extends CoreService<RoleDO> {
 
-    List<RoleDo> userRole(Long uid);
+    List<RoleDO> userRole(Long uid);
 }

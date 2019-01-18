@@ -14,7 +14,7 @@ import java.util.List;
  * 2018年12月13日 eriz
  */
 @TableName("sys_role")
-public class RoleDo implements Serializable {
+public class RoleDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

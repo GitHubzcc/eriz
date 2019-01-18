@@ -2,7 +2,7 @@ package com.eriz.sys.service.impl;
 
 import com.eriz.common.base.CoreServiceImpl;
 import com.eriz.sys.dao.RoleDao;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.domain.RoleMenuDO;
 import com.eriz.sys.service.RoleService;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Transactional
 @Service("sysRoleServiceImpl")
-public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDo> implements RoleService {
+public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDO> implements RoleService {
 
     /**
      * 缓存的key
@@ -32,7 +32,7 @@ public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDo> implements
 
     @Cacheable(value = DEMO_CACHE_NAME, key = THING_ALL_KEY)
     @Override
-    public List<RoleDo> userRole(Long uid) {
+    public List<RoleDO> userRole(Long uid) {
         if (uid != null) {
             return baseMapper.userRole(uid);
         }
@@ -40,7 +40,7 @@ public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDo> implements
     }
 
     @Override
-    public boolean insert(RoleDo roleDo) {
+    public boolean insert(RoleDO roleDo) {
         //更新
         if (roleDo != null && roleDo.getId() != null) {
             baseMapper.updateById(roleDo);

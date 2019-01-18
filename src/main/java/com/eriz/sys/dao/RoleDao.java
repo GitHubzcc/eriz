@@ -1,7 +1,7 @@
 package com.eriz.sys.dao;
 
 import com.eriz.common.base.BaseDao;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.domain.RoleMenuDO;
 import org.apache.ibatis.annotations.Param;
 
@@ -12,9 +12,9 @@ import java.util.List;
  * </pre>
  * <small> 2018年12月13日 | eriz</small>
  */
-public interface RoleDao extends BaseDao<RoleDo> {
+public interface RoleDao extends BaseDao<RoleDO> {
 
-    List<RoleDo> userRole(@Param("uid") Long uid);
+    List<RoleDO> userRole(@Param("uid") Long uid);
 
     int deleteRoleMenu(@Param("rid") Long rid);
 

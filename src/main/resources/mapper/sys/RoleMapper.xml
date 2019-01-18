@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.eriz.sys.dao.RoleDao">
-	<select id="userRole" resultType="com.eriz.sys.domain.RoleDo">
+	<select id="userRole" resultType="com.eriz.sys.domain.RoleDO">
 		SELECT DISTINCT
 			ro.id AS id,
 			ro.roleName AS roleName,

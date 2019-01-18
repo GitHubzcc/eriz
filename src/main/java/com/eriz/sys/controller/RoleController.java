@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.base.BaseController;
 import com.eriz.common.util.Result;
 import com.eriz.common.util.WebUtil;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.service.RoleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,9 +38,9 @@ public class RoleController extends BaseController {
 
     @ResponseBody
     @PostMapping(value = "list")
-    public Result<List<RoleDo>> roleList(RoleDo roleDo) {
-        Page<RoleDo> page = roleService.selectPage(getPage(RoleDo.class),
-                new EntityWrapper<RoleDo>().like("roleName", WebUtil.getParameter("keyword")));
+    public Result<List<RoleDO>> roleList(RoleDO roleDo) {
+        Page<RoleDO> page = roleService.selectPage(getPage(RoleDO.class),
+                new EntityWrapper<RoleDO>().like("roleName", WebUtil.getParameter("keyword")));
         return Result.success(0, "成功", page.getTotal(), page.getRecords());
     }
 
@@ -49,7 +49,7 @@ public class RoleController extends BaseController {
      */
     @RequestMapping(value = "add")
     public String add(Model model, Long rid) {
-        RoleDo role = roleService.selectById(rid);
+        RoleDO role = roleService.selectById(rid);
         model.addAttribute("role", role);
         return "sys/role/add";
     }
@@ -59,7 +59,7 @@ public class RoleController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "save")
-    public Result save(RoleDo roleDo) {
+    public Result save(RoleDO roleDo) {
         return roleService.insert(roleDo) ? Result.success() : Result.fail();
     }
 

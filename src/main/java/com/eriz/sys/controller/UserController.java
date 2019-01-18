@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.annotation.Log;
 import com.eriz.common.base.BaseController;
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.RoleService;
 import com.eriz.sys.service.UserService;
@@ -65,7 +65,7 @@ public class UserController extends BaseController {
     @RequiresPermissions("sys:user:add")
     @RequestMapping(value = "add")
     public String add(Model model, Long uid) {
-        List<RoleDo> list = roleService.userRole(uid);
+        List<RoleDO> list = roleService.userRole(uid);
         UserDo userDo = new UserDo();
         if (uid != null) {
             userDo = userService.selectById(uid);

@@ -2,7 +2,7 @@ package com.eriz.cache;
 
 import com.eriz.Application;
 import com.eriz.common.shiro.cache.EhcacheUtil;
-import com.eriz.sys.domain.RoleDo;
+import com.eriz.sys.domain.RoleDO;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.RoleService;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class Ehcache {
 
     @Test
     public void role() {
-        List<RoleDo> list = roleService.userRole(null);
+        List<RoleDO> list = roleService.userRole(null);
         EhcacheUtil.put("list", list);
         Object o = EhcacheUtil.get("list");
         System.out.println(o);
