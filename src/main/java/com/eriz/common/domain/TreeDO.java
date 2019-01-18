@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class TreeDo<T> {
+public class TreeDO<T> {
 
     private static long serialVersionUID = 1L;
     /**
@@ -31,7 +31,7 @@ public class TreeDo<T> {
     /**
      * 节点的子节点
      */
-    private List<TreeDo<T>> children = new ArrayList<TreeDo<T>>();
+    private List<TreeDO<T>> children = new ArrayList<TreeDO<T>>();
 
     /**
      * 父ID
@@ -86,11 +86,11 @@ public class TreeDo<T> {
         this.attributes = attributes;
     }
 
-    public List<TreeDo<T>> getChildren() {
+    public List<TreeDO<T>> getChildren() {
         return children;
     }
 
-    public void setChildren(List<TreeDo<T>> children) {
+    public void setChildren(List<TreeDO<T>> children) {
         this.children = children;
     }
 

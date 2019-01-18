@@ -1,7 +1,7 @@
 package com.eriz.common.ascept;
 
 import com.eriz.common.annotation.Log;
-import com.eriz.common.domain.LogDo;
+import com.eriz.common.domain.LogDO;
 import com.eriz.common.service.LogService;
 import com.eriz.common.util.IPUtils;
 import com.eriz.common.util.JsonUtil;
@@ -71,7 +71,7 @@ public class LogAspect {
     private void saveLog(ProceedingJoinPoint joinPoint, long time) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
-        LogDo sysLog = new LogDo();
+        LogDO sysLog = new LogDO();
         Log syslog = method.getAnnotation(Log.class);
         if (syslog != null) {
             // 注解上的描述

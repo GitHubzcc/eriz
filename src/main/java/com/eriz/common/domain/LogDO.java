@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @TableName("sys_log")
-public class LogDo implements Serializable {
+public class LogDO implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = -938654836571738415L;

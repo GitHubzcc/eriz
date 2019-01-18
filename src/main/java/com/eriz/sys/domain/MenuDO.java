@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @TableName("sys_menu")
-public class MenuDo implements Serializable {
+public class MenuDO implements Serializable {
 
     private static long serialVersionUID = 1L;
 

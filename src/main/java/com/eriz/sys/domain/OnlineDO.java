@@ -3,7 +3,7 @@ package com.eriz.sys.domain;
 import java.io.Serializable;
 import java.util.Date;
 
-public class OnlineDo implements Serializable{
+public class OnlineDO implements Serializable{
 
     private static final long serialVersionUID = 1L;
 

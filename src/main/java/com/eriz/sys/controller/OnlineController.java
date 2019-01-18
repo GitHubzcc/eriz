@@ -2,7 +2,7 @@ package com.eriz.sys.controller;
 
 import com.eriz.common.annotation.Log;
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.OnlineDo;
+import com.eriz.sys.domain.OnlineDO;
 import com.eriz.sys.service.ShiroSessionService;
 import org.apache.shiro.session.UnknownSessionException;
 import org.springframework.stereotype.Controller;
@@ -45,7 +45,7 @@ public class OnlineController {
     @Log("用户管理")
     @ResponseBody
     public Result list() {
-        List<OnlineDo> list = shiroSessionService.list();
+        List<OnlineDO> list = shiroSessionService.list();
         return Result.success(0, "操作成功", list.size(), list);
     }
 

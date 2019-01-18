@@ -11,7 +11,7 @@ import java.io.Serializable;
  * 2018年12月13日 eriz
  */
 @TableName("sys_dept")
-public class DeptDo implements Serializable {
+public class DeptDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

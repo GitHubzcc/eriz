@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.annotation.Log;
 import com.eriz.common.base.BaseController;
-import com.eriz.common.domain.ConfigDo;
+import com.eriz.common.domain.ConfigDO;
 import com.eriz.common.service.ConfigService;
 import com.eriz.common.util.Result;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -40,9 +40,9 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @PostMapping("/list")
     @RequiresPermissions("common:config:config")
-    public Result list(ConfigDo sysConfigDTO) {
-        Wrapper<ConfigDo> wrapper = new EntityWrapper<ConfigDo>().orderBy("id", false);
-        Page<ConfigDo> page = configService.selectPage(getPage(ConfigDo.class), wrapper);
+    public Result list(ConfigDO sysConfigDTO) {
+        Wrapper<ConfigDO> wrapper = new EntityWrapper<ConfigDO>().orderBy("id", false);
+        Page<ConfigDO> page = configService.selectPage(getPage(ConfigDO.class), wrapper);
         return Result.success(0, "success", page.getTotal(), page.getRecords());
     }
 
@@ -55,7 +55,7 @@ public class ConfigController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresPermissions("common:config:edit")
     public String edit(@PathVariable("id") Long id, Model model) {
-        ConfigDo sysConfig = configService.selectById(id);
+        ConfigDO sysConfig = configService.selectById(id);
         model.addAttribute("sysConfig", sysConfig);
         return "common/config/edit";
     }
@@ -64,7 +64,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("common:config:add")
-    public Result save(ConfigDo sysConfig) {
+    public Result save(ConfigDO sysConfig) {
         configService.insert(sysConfig);
         return Result.success();
     }
@@ -73,7 +73,7 @@ public class ConfigController extends BaseController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("common:config:edit")
-    public Result<String> update(ConfigDo sysConfig) {
+    public Result<String> update(ConfigDO sysConfig) {
         boolean update = configService.updateById(sysConfig);
         return update ? Result.success() : Result.fail();
     }

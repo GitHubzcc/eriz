@@ -1,9 +1,8 @@
 package com.eriz.sys.service;
 
 import com.eriz.common.base.CoreService;
-import com.eriz.common.domain.TreeDo;
-import com.eriz.sys.domain.MenuDo;
-import com.eriz.sys.domain.UserDo;
+import com.eriz.common.domain.TreeDO;
+import com.eriz.sys.domain.MenuDO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +15,14 @@ import java.util.Set;
  * <small> 2018年12月5日 | eriz</small>
  */
 @Service
-public interface MenuService extends CoreService<MenuDo> {
+public interface MenuService extends CoreService<MenuDO> {
 
     /**
      * 菜单树
      * @param id 用户id
      * @return tree
      */
-    List<TreeDo<MenuDo>> findListByUserId(Long id);
+    List<TreeDO<MenuDO>> findListByUserId(Long id);
 
     /**
      * 菜单树

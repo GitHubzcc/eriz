@@ -6,7 +6,7 @@ import java.io.Serializable;
  * 角色菜单实体
  * 2018年12月14日 eriz
  */
-public class RoleMenuDo implements Serializable {
+public class RoleMenuDO implements Serializable {
 
     private Long id;
 

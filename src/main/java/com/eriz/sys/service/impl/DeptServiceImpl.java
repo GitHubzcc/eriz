@@ -2,7 +2,7 @@ package com.eriz.sys.service.impl;
 
 import com.eriz.common.base.CoreServiceImpl;
 import com.eriz.sys.dao.DeptDao;
-import com.eriz.sys.domain.DeptDo;
+import com.eriz.sys.domain.DeptDO;
 import com.eriz.sys.service.DeptService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Transactional(rollbackFor = Exception.class)
 @Service("sysDeptServiceImpl")
-public class DeptServiceImpl extends CoreServiceImpl<DeptDao, DeptDo> implements DeptService {
+public class DeptServiceImpl extends CoreServiceImpl<DeptDao, DeptDO> implements DeptService {
 
     @Override
     public List<Map<String, Object>> deptTree() {
@@ -25,13 +25,13 @@ public class DeptServiceImpl extends CoreServiceImpl<DeptDao, DeptDo> implements
     }
 
     @Override
-    public boolean insert(DeptDo deptDo) {
-        if (deptDo != null && deptDo.getId() != null) {
-            baseMapper.updateById(deptDo);
+    public boolean insert(DeptDO deptDO) {
+        if (deptDO != null && deptDO.getId() != null) {
+            baseMapper.updateById(deptDO);
         }
-        if (deptDo != null && deptDo.getParentId() == null) {
-            deptDo.setParentId(0L);
-            super.insert(deptDo);
+        if (deptDO != null && deptDO.getParentId() == null) {
+            deptDO.setParentId(0L);
+            super.insert(deptDO);
         }
         return true;
     }

@@ -1,6 +1,6 @@
 package com.eriz.mybatisGen.controller;
 
-import com.eriz.common.domain.ConfigDo;
+import com.eriz.common.domain.ConfigDO;
 import com.eriz.common.service.ConfigService;
 import com.eriz.common.util.Result;
 import com.eriz.mybatisGen.service.GeneratorService;
@@ -57,10 +57,10 @@ public class GeneratorController {
      */
     @GetMapping(value = "/strategyEdit")
     public String strategyEdit(Model model) {
-        List<ConfigDo> list = configService.findListByKvType(EnumGen.KvType.mapping.getValue());
-        List<ConfigDo> list2 = configService.findListByKvType(EnumGen.KvType.base.getValue());
+        List<ConfigDO> list = configService.findListByKvType(EnumGen.KvType.mapping.getValue());
+        List<ConfigDO> list2 = configService.findListByKvType(EnumGen.KvType.base.getValue());
         HashMap<String, String> map = new HashMap<>();
-        for (ConfigDo config : list2) {
+        for (ConfigDO config : list2) {
             map.put(config.getK(), config.getV());
         }
 

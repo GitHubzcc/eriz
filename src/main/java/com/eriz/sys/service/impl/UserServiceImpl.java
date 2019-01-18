@@ -3,7 +3,7 @@ package com.eriz.sys.service.impl;
 import com.eriz.common.base.CoreServiceImpl;
 import com.eriz.sys.dao.UserDao;
 import com.eriz.sys.domain.UserDo;
-import com.eriz.sys.domain.UserRoleDo;
+import com.eriz.sys.domain.UserRoleDO;
 import com.eriz.sys.service.UserService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,9 +34,9 @@ public class UserServiceImpl extends CoreServiceImpl<UserDao, UserDo> implements
         if (count > 0 && uId != null) {
             baseMapper.removeUserRole(uId);
             List<Long> roles = userDo.getRoleIds();
-            List<UserRoleDo> list = new ArrayList<>();
+            List<UserRoleDO> list = new ArrayList<>();
             for (Long id : roles) {
-                UserRoleDo u = new UserRoleDo();
+                UserRoleDO u = new UserRoleDO();
                 u.setUserId(uId);
                 u.setRoleId(id);
                 list.add(u);

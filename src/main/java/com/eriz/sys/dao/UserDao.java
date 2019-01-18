@@ -2,7 +2,7 @@ package com.eriz.sys.dao;
 
 import com.eriz.common.base.BaseDao;
 import com.eriz.sys.domain.UserDo;
-import com.eriz.sys.domain.UserRoleDo;
+import com.eriz.sys.domain.UserRoleDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -20,6 +20,6 @@ public interface UserDao extends BaseDao<UserDo> {
 
     int removeUserRole(@Param("uid") Long uid);
 
-    int insertUserRole(@Param("ids") List<UserRoleDo> ids);
+    int insertUserRole(@Param("ids") List<UserRoleDO> ids);
 }
 

@@ -3,7 +3,7 @@ package com.eriz.sys.domain;
 /**
  * 用户角色do
  */
-public class UserRoleDo {
+public class UserRoleDO {
 
     private Long id;
 

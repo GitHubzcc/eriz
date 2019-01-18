@@ -13,7 +13,7 @@ import java.util.Date;
  * 2018年12月6日 | eriz
  */
 @TableName("sys_config")
-public class ConfigDo extends Model<ConfigDo> implements Serializable {
+public class ConfigDO extends Model<ConfigDO> implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
     

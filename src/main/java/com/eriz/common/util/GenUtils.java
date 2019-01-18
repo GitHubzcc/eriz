@@ -2,7 +2,7 @@ package com.eriz.common.util;
 
 
 import com.eriz.common.config.Constant;
-import com.eriz.common.domain.ConfigDo;
+import com.eriz.common.domain.ConfigDO;
 import com.eriz.common.service.ConfigService;
 import com.eriz.mybatisGen.domain.ColumnDO;
 import com.eriz.mybatisGen.domain.TableDO;
@@ -187,7 +187,7 @@ public class GenUtils {
      */
     public static Map<String, String> getConfig() {
         ConfigService configService = SpringContextHolder.getBean(ConfigService.class);
-        List<ConfigDo> list = configService.findListByKvType(EnumGen.KvType.base.getValue());
+        List<ConfigDO> list = configService.findListByKvType(EnumGen.KvType.base.getValue());
         list.addAll(configService.findListByKvType(EnumGen.KvType.mapping.getValue()));
         Map<String, String> config = new HashMap<>();
         list.stream().forEach(kv -> config.put(kv.getK(), kv.getV()));

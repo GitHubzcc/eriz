@@ -2,10 +2,10 @@ package com.eriz.sys.controller;
 
 import com.eriz.common.annotation.Log;
 import com.eriz.common.base.BaseController;
-import com.eriz.common.domain.TreeDo;
+import com.eriz.common.domain.TreeDO;
 import com.eriz.common.util.MD5Utils;
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.MenuDo;
+import com.eriz.sys.domain.MenuDO;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.MenuService;
 import com.google.code.kaptcha.Producer;
@@ -65,7 +65,7 @@ public class LoginController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "getUser")
-    public List<TreeDo<MenuDo>> user() {
+    public List<TreeDO<MenuDO>> user() {
         return menuService.findListByUserId(1L);
     }
 
@@ -103,7 +103,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/index")
     public String root(Model model) {
-        List<TreeDo<MenuDo>> list = menuService.findListByUserId(1L);
+        List<TreeDO<MenuDO>> list = menuService.findListByUserId(1L);
         UserDo userDo = getUser();
         model.addAttribute("menus", list);
         model.addAttribute("user", userDo);

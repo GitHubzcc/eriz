@@ -1,10 +1,10 @@
 package com.eriz.sys.service.impl;
 
 import com.eriz.common.base.CoreServiceImpl;
-import com.eriz.common.domain.TreeDo;
+import com.eriz.common.domain.TreeDO;
 import com.eriz.common.util.BuildTree;
 import com.eriz.sys.dao.MenuDao;
-import com.eriz.sys.domain.MenuDo;
+import com.eriz.sys.domain.MenuDO;
 import com.eriz.sys.service.MenuService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -19,20 +19,20 @@ import java.util.*;
  */
 @Transactional
 @Service("sysMenuServiceImpl")
-public class MenuServiceImpl extends CoreServiceImpl<MenuDao, MenuDo> implements MenuService {
+public class MenuServiceImpl extends CoreServiceImpl<MenuDao, MenuDO> implements MenuService {
 
     @Override
-    public List<TreeDo<MenuDo>> findListByUserId(Long id) {
-        List<MenuDo> list = baseMapper.findListByUserId(id);
-        List<TreeDo<MenuDo>> listTree = new ArrayList<>();
-        for (MenuDo menuDo : list) {
-            TreeDo<MenuDo> treeDo = new TreeDo<>();
-            treeDo.setId(menuDo.getId().toString());
-            treeDo.setParentId(menuDo.getParentId().toString());
-            treeDo.setText(menuDo.getName());
+    public List<TreeDO<MenuDO>> findListByUserId(Long id) {
+        List<MenuDO> list = baseMapper.findListByUserId(id);
+        List<TreeDO<MenuDO>> listTree = new ArrayList<>();
+        for (MenuDO menuDO : list) {
+            TreeDO<MenuDO> treeDo = new TreeDO<>();
+            treeDo.setId(menuDO.getId().toString());
+            treeDo.setParentId(menuDO.getParentId().toString());
+            treeDo.setText(menuDO.getName());
             Map<String, Object> attributes = new HashMap<>();
-            attributes.put("icon", menuDo.getIcon());
-            attributes.put("url", menuDo.getUrl());
+            attributes.put("icon", menuDO.getIcon());
+            attributes.put("url", menuDO.getUrl());
             treeDo.setAttributes(attributes);
             listTree.add(treeDo);
         }
@@ -60,11 +60,11 @@ public class MenuServiceImpl extends CoreServiceImpl<MenuDao, MenuDo> implements
     }
 
     @Override
-    public boolean insert(MenuDo menuDo) {
-        if (menuDo != null && menuDo.getId() != null) {
-            baseMapper.updateById(menuDo);
+    public boolean insert(MenuDO menuDO) {
+        if (menuDO != null && menuDO.getId() != null) {
+            baseMapper.updateById(menuDO);
         } else {
-            baseMapper.insert(menuDo);
+            baseMapper.insert(menuDO);
         }
         return true;
     }

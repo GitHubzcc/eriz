@@ -1,6 +1,6 @@
 package com.eriz.sys.service.impl;
 
-import com.eriz.sys.domain.OnlineDo;
+import com.eriz.sys.domain.OnlineDO;
 import com.eriz.sys.domain.UserDo;
 import com.eriz.sys.service.ShiroSessionService;
 import org.apache.shiro.session.Session;
@@ -10,7 +10,6 @@ import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -23,15 +22,15 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
 
 
     @Override
-    public List<OnlineDo> list() {
+    public List<OnlineDO> list() {
         //数据量大时通过 page分页
         Collection<Session> sessions = sessionDAO.getActiveSessions();
-        List<OnlineDo> list = new ArrayList<>();
+        List<OnlineDO> list = new ArrayList<>();
         for (Session session : sessions) {
             if (session == null) {
                 continue;
             }
-            OnlineDo onlineDo = new OnlineDo();
+            OnlineDO onlineDO = new OnlineDO();
             UserDo userDo = new UserDo();
             //principalCollection 身份
             SimplePrincipalCollection principalCollection = new SimplePrincipalCollection();
@@ -41,14 +40,14 @@ public class ShiroSessionServiceImpl implements ShiroSessionService {
                 principalCollection = (SimplePrincipalCollection) session
                         .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
                 userDo = (UserDo) principalCollection.getPrimaryPrincipal();
-                onlineDo.setUsername(userDo.getUsername());
+                onlineDO.setUsername(userDo.getUsername());
             }
-            onlineDo.setId(session.getId().toString());
-            onlineDo.setHost(session.getHost());
-            onlineDo.setLastAccessTime(session.getLastAccessTime());
-            onlineDo.setStartTimestamp(session.getStartTimestamp());
-            onlineDo.setTimeout(session.getTimeout());
-            list.add(onlineDo);
+            onlineDO.setId(session.getId().toString());
+            onlineDO.setHost(session.getHost());
+            onlineDO.setLastAccessTime(session.getLastAccessTime());
+            onlineDO.setStartTimestamp(session.getStartTimestamp());
+            onlineDO.setTimeout(session.getTimeout());
+            list.add(onlineDO);
         }
         return list;
     }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.eriz.common.base.BaseController;
 import com.eriz.common.util.JsonUtil;
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.MenuDo;
+import com.eriz.sys.domain.MenuDO;
 import com.eriz.sys.service.MenuService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +49,7 @@ public class MenuController extends BaseController {
     @GetMapping(value = "menuTreeJson")
     public String tableTree(Long keyValue) {
 //        List<Map<String, Object>> list = menuService.menuTree(keyValue);
-        List<MenuDo> list = menuService.selectList(null);
+        List<MenuDO> list = menuService.selectList(null);
         return JsonUtil.getInstance().toJson(list);
     }
 
@@ -60,18 +60,18 @@ public class MenuController extends BaseController {
     public String save(Model model, Long keyValue, Long pId) {
         //编辑
         if (keyValue != null && pId == null) {
-            MenuDo menuDo = menuService.selectById(keyValue);
-            if (menuDo != null && menuDo.getParentId() != null && menuDo.getParentId() != 0) {
-                model.addAttribute("pName", menuService.selectById(menuDo.getParentId()).getName());
-                model.addAttribute("pId", menuDo.getParentId());
-            } else if (menuDo != null && menuDo.getParentId() == null || 0 == menuDo.getParentId()) {
+            MenuDO menuDO = menuService.selectById(keyValue);
+            if (menuDO != null && menuDO.getParentId() != null && menuDO.getParentId() != 0) {
+                model.addAttribute("pName", menuService.selectById(menuDO.getParentId()).getName());
+                model.addAttribute("pId", menuDO.getParentId());
+            } else if (menuDO != null && menuDO.getParentId() == null || 0 == menuDO.getParentId()) {
                 model.addAttribute("pName", "根目录");
             }
-            model.addAttribute("menu", menuDo);
+            model.addAttribute("menu", menuDO);
         } else if (keyValue == null && pId != null) {
             //添加下级菜单
-            MenuDo menuDo = menuService.selectById(pId);
-            model.addAttribute("pName", menuDo.getName());
+            MenuDO menuDO = menuService.selectById(pId);
+            model.addAttribute("pName", menuDO.getName());
             model.addAttribute("pId", pId);
         } else {
             //添加根级目录
@@ -85,8 +85,8 @@ public class MenuController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "save")
-    public Result save(MenuDo menuDo) {
-        return menuService.insert(menuDo) ? Result.success() : Result.fail();
+    public Result save(MenuDO menuDO) {
+        return menuService.insert(menuDO) ? Result.success() : Result.fail();
     }
 
     /**
@@ -95,7 +95,7 @@ public class MenuController extends BaseController {
     @ResponseBody
     @PostMapping(value = "remove")
     public Result remove(Long id) {
-        List<MenuDo> list = menuService.selectList(new EntityWrapper<MenuDo>().eq("parentId", id));
+        List<MenuDO> list = menuService.selectList(new EntityWrapper<MenuDO>().eq("parentId", id));
         if (list != null && list.size() > 0) {
             return Result.build(-1, "该菜单目录下有子菜单，删除失败!", null);
         } else {

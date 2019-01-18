@@ -3,7 +3,7 @@ package com.eriz.sys.service.impl;
 import com.eriz.common.base.CoreServiceImpl;
 import com.eriz.sys.dao.RoleDao;
 import com.eriz.sys.domain.RoleDo;
-import com.eriz.sys.domain.RoleMenuDo;
+import com.eriz.sys.domain.RoleMenuDO;
 import com.eriz.sys.service.RoleService;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -49,10 +49,10 @@ public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDo> implements
         }
         Long rid = roleDo.getId();
         List<Long> mids = roleDo.getMenuIds();
-        List<RoleMenuDo> list = new ArrayList<>();
+        List<RoleMenuDO> list = new ArrayList<>();
         if (rid != null) {
             for (Long mid : mids) {
-                RoleMenuDo r = new RoleMenuDo();
+                RoleMenuDO r = new RoleMenuDO();
                 r.setRoleId(rid);
                 r.setMenuId(mid);
                 list.add(r);

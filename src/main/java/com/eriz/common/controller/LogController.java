@@ -2,7 +2,7 @@ package com.eriz.common.controller;
 
 import com.baomidou.mybatisplus.plugins.Page;
 import com.eriz.common.base.BaseController;
-import com.eriz.common.domain.LogDo;
+import com.eriz.common.domain.LogDO;
 import com.eriz.common.service.LogService;
 import com.eriz.common.util.Result;
 import org.springframework.stereotype.Controller;
@@ -40,7 +40,7 @@ public class LogController extends BaseController {
     @ResponseBody
     @PostMapping("list")
     public Result list() {
-        Page<LogDo> page = logService.selectPage(getPage(LogDo.class), null);
+        Page<LogDO> page = logService.selectPage(getPage(LogDO.class), null);
         return Result.success(0, "操作成功", page.getTotal(), page.getRecords());
     }
 

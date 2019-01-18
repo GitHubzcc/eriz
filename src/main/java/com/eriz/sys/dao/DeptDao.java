@@ -1,7 +1,7 @@
 package com.eriz.sys.dao;
 
 import com.eriz.common.base.BaseDao;
-import com.eriz.sys.domain.DeptDo;
+import com.eriz.sys.domain.DeptDO;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * </pre>
  * <small> 2018年12月13日 | eriz</small>
  */
-public interface DeptDao extends BaseDao<DeptDo> {
+public interface DeptDao extends BaseDao<DeptDO> {
     List<Map<String,Object>> deptTree();
 }
 

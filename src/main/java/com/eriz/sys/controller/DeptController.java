@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.eriz.common.base.BaseController;
 import com.eriz.common.util.JsonUtil;
 import com.eriz.common.util.Result;
-import com.eriz.sys.domain.DeptDo;
+import com.eriz.sys.domain.DeptDO;
 import com.eriz.sys.service.DeptService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +46,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @GetMapping(value = "deptTreeJson")
     public String tableTree(String keyValue) {
-        List<DeptDo> dos = deptService.selectList(new EntityWrapper<DeptDo>().like("name",keyValue));
+        List<DeptDO> dos = deptService.selectList(new EntityWrapper<DeptDO>().like("name",keyValue));
         return JsonUtil.getInstance().toJson(dos);
     }
 
@@ -57,18 +57,18 @@ public class DeptController extends BaseController {
     public String save(Model model, Long keyValue, Long pId) {
         //编辑
         if (keyValue != null && pId == null) {
-            DeptDo deptDo = deptService.selectById(keyValue);
-            if (deptDo != null && deptDo.getParentId() != null && deptDo.getParentId() != 0) {
-                model.addAttribute("pName", deptService.selectById(deptDo.getParentId()).getName());
-                model.addAttribute("pId", deptDo.getParentId());
-            } else if (deptDo != null && deptDo.getParentId() == null || 0 == deptDo.getParentId()) {
+            DeptDO deptDO = deptService.selectById(keyValue);
+            if (deptDO != null && deptDO.getParentId() != null && deptDO.getParentId() != 0) {
+                model.addAttribute("pName", deptService.selectById(deptDO.getParentId()).getName());
+                model.addAttribute("pId", deptDO.getParentId());
+            } else if (deptDO != null && deptDO.getParentId() == null || 0 == deptDO.getParentId()) {
                 model.addAttribute("pName", "根目录");
             }
-            model.addAttribute("dept", deptDo);
+            model.addAttribute("dept", deptDO);
         } else if (keyValue == null && pId != null) {
             //添加下级菜单
-            DeptDo deptDo = deptService.selectById(pId);
-            model.addAttribute("pName", deptDo.getName());
+            DeptDO deptDO = deptService.selectById(pId);
+            model.addAttribute("pName", deptDO.getName());
             model.addAttribute("pId", pId);
         } else {
             //添加根级目录
@@ -82,8 +82,8 @@ public class DeptController extends BaseController {
      */
     @ResponseBody
     @PostMapping(value = "save")
-    public Result save(DeptDo deptDo) {
-        return deptService.insert(deptDo) ? Result.success() : Result.fail();
+    public Result save(DeptDO deptDO) {
+        return deptService.insert(deptDO) ? Result.success() : Result.fail();
     }
 
     /**
@@ -92,7 +92,7 @@ public class DeptController extends BaseController {
     @ResponseBody
     @PostMapping(value = "remove")
     public Result remove(Long id) {
-        List<DeptDo> list = deptService.selectList(new EntityWrapper<DeptDo>().eq("parentId", id));
+        List<DeptDO> list = deptService.selectList(new EntityWrapper<DeptDO>().eq("parentId", id));
         if (list != null && list.size() > 0) {
             return Result.build(-1, "该部门目录下有子部门，删除失败!", null);
         } else {
