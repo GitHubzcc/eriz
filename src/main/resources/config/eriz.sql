@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2018-12-11 21:56:50
+Date: 2019-01-21 09:12:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,23 @@ CREATE TABLE `app_demo_base` (
 INSERT INTO `app_demo_base` VALUES ('1027118616500408321', 'Vue 2.0 Hello World', '2018-08-17 11:59:00', '这是我的征文', '\0', '7', '2018-08-08 17:05:35', '2018-08-22 15:34:46', '1', '1', null);
 
 -- ----------------------------
+-- Table structure for module_book
+-- ----------------------------
+DROP TABLE IF EXISTS `module_book`;
+CREATE TABLE `module_book` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `name` varchar(100) DEFAULT NULL COMMENT '书名',
+  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
+  `price` decimal(10,2) DEFAULT '0.00' COMMENT '价格',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='图书表';
+
+-- ----------------------------
+-- Records of module_book
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for sys_config
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_config`;
@@ -60,7 +77,7 @@ INSERT INTO `sys_config` VALUES ('2', 'oss_qiniu', '{\"AccessKey\" : \"8-HMj9EgG
 INSERT INTO `sys_config` VALUES ('3', 'author', 'eriz', '代码生成器配置', '2018-05-27 19:57:04', '4401');
 INSERT INTO `sys_config` VALUES ('4', 'email', 'eriz@163.com', '代码生成器配置', '2018-05-27 19:57:04', '4401');
 INSERT INTO `sys_config` VALUES ('5', 'package', 'com.eriz', '代码生成器配置', '2018-05-27 19:57:04', '4401');
-INSERT INTO `sys_config` VALUES ('6', 'autoRemovePre', 'true', '代码生成器配置', '2018-05-27 19:57:04', '4401');
+INSERT INTO `sys_config` VALUES ('6', 'autoRemovePre', 'on', '代码生成器配置', '2018-05-27 19:57:04', '4401');
 INSERT INTO `sys_config` VALUES ('7', 'tablePrefix', 'app', '代码生成器配置', '2018-05-27 19:57:04', '4401');
 INSERT INTO `sys_config` VALUES ('8', 'tinyint', 'Integer', '代码生成器配置', '2018-05-27 19:57:04', '4400');
 INSERT INTO `sys_config` VALUES ('9', 'smallint', 'Integer', '代码生成器配置', '2018-05-27 19:57:04', '4400');
@@ -93,7 +110,7 @@ CREATE TABLE `sys_dept` (
   `orderNum` int(11) DEFAULT NULL COMMENT '排序',
   `delFlag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
@@ -108,6 +125,9 @@ INSERT INTO `sys_dept` VALUES ('13', '0', '测试部', '5', '1');
 INSERT INTO `sys_dept` VALUES ('14', '13', '测试一部', '1', '1');
 INSERT INTO `sys_dept` VALUES ('15', '13', '测试二部', '2', '1');
 INSERT INTO `sys_dept` VALUES ('16', '9', '销售一部', '0', '1');
+INSERT INTO `sys_dept` VALUES ('18', '13', '测试三部', '1', '1');
+INSERT INTO `sys_dept` VALUES ('19', '0', '测试根部门', '1', '1');
+INSERT INTO `sys_dept` VALUES ('21', '13', '研发一部测试搜索', '1', '1');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -126,17 +146,17 @@ CREATE TABLE `sys_dict` (
   `updateBy` bigint(64) DEFAULT NULL COMMENT '更新者',
   `updateDate` datetime DEFAULT NULL COMMENT '更新时间',
   `remarks` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注信息',
-  `delFlag` char(1) COLLATE utf8_bin DEFAULT '0' COMMENT '删除标记',
+  `delFlag` int(1) DEFAULT '0' COMMENT '删除标记',
   PRIMARY KEY (`id`),
   KEY `sys_dict_value` (`value`),
   KEY `sys_dict_label` (`name`),
   KEY `sys_dict_del_flag` (`delFlag`)
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='字典表';
 
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
-INSERT INTO `sys_dict` VALUES ('1', '正常', '0', 'del_flag', '删除标记', '10', '0', '1', null, '1', null, null, '0');
+INSERT INTO `sys_dict` VALUES ('1', '正常', '0', 'del_flag', '删除标记', '10', '0', '1', null, '1', null, '测试备注', '0');
 INSERT INTO `sys_dict` VALUES ('3', '显示', '1', 'show_hide', '显示/隐藏', '10', '0', '1', null, '1', null, null, '0');
 INSERT INTO `sys_dict` VALUES ('4', '隐藏', '0', 'show_hide', '显示/隐藏', '20', '0', '1', null, '1', null, null, '0');
 INSERT INTO `sys_dict` VALUES ('5', '是', '1', 'yes_no', '是/否', '10', '0', '1', null, '1', null, null, '0');
@@ -244,10 +264,12 @@ INSERT INTO `sys_dict` VALUES ('109', '发布', '1', 'oa_notify_status', '通知
 INSERT INTO `sys_dict` VALUES ('110', '未读', '0', 'oa_notify_read', '通知通告状态', '10', '0', '1', null, '1', null, null, '0');
 INSERT INTO `sys_dict` VALUES ('111', '已读', '1', 'oa_notify_read', '通知通告状态', '20', '0', '1', null, '1', null, null, '0');
 INSERT INTO `sys_dict` VALUES ('112', '草稿', '0', 'oa_notify_status', '通知通告状态', '10', '0', '1', null, '1', null, '', '0');
-INSERT INTO `sys_dict` VALUES ('113', '删除', '0', 'del_flag', '删除标记', null, null, null, null, null, null, '', '');
-INSERT INTO `sys_dict` VALUES ('118', '关于', 'about', 'blog_type', '博客类型', null, null, null, null, null, null, '全url是:/blog/open/page/about', '');
-INSERT INTO `sys_dict` VALUES ('119', '交流', 'communication', 'blog_type', '博客类型', null, null, null, null, null, null, '', '');
-INSERT INTO `sys_dict` VALUES ('120', '文章', 'article', 'blog_type', '博客类型', null, null, null, null, null, null, '', '');
+INSERT INTO `sys_dict` VALUES ('113', '删除', '0', 'del_flag', '删除标记', null, null, null, null, null, null, '', '0');
+INSERT INTO `sys_dict` VALUES ('118', '关于', 'about', 'blog_type', '博客类型', null, null, null, null, null, null, '全url是:/blog/open/page/about', '0');
+INSERT INTO `sys_dict` VALUES ('119', '交流', 'communication', 'blog_type', '博客类型', null, null, null, null, null, null, '', '0');
+INSERT INTO `sys_dict` VALUES ('120', '文章', 'article', 'blog_type', '博客类型', null, null, null, null, null, null, '', '0');
+INSERT INTO `sys_dict` VALUES ('121', '正常1', '01', 'del_flag1', '删除标记1', '101', '0', null, null, null, null, '测试备注', '0');
+INSERT INTO `sys_dict` VALUES ('122', '正常1', '01', 'del_flag1', '删除标记1', '101', '0', null, null, null, null, '测试备注1', '0');
 
 -- ----------------------------
 -- Table structure for sys_file
@@ -259,24 +281,11 @@ CREATE TABLE `sys_file` (
   `url` varchar(200) DEFAULT NULL COMMENT 'URL地址',
   `createDate` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1069496986425634818 DEFAULT CHARSET=utf8 COMMENT='文件上传';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件上传';
 
 -- ----------------------------
 -- Records of sys_file
 -- ----------------------------
-INSERT INTO `sys_file` VALUES ('1069496693109567490', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:40:57');
-INSERT INTO `sys_file` VALUES ('1069496761543831554', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:13');
-INSERT INTO `sys_file` VALUES ('1069496772792954881', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:16');
-INSERT INTO `sys_file` VALUES ('1069496781210923009', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:18');
-INSERT INTO `sys_file` VALUES ('1069496796981506050', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:21');
-INSERT INTO `sys_file` VALUES ('1069496805479165954', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:23');
-INSERT INTO `sys_file` VALUES ('1069496825037205506', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:28');
-INSERT INTO `sys_file` VALUES ('1069496849682935810', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:34');
-INSERT INTO `sys_file` VALUES ('1069496868284674050', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:38');
-INSERT INTO `sys_file` VALUES ('1069496878833348610', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:41');
-INSERT INTO `sys_file` VALUES ('1069496917760684033', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:50');
-INSERT INTO `sys_file` VALUES ('1069496929479569410', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:41:53');
-INSERT INTO `sys_file` VALUES ('1069496986425634817', '0', 'http://p6r7ke2jc.bkt.clouddn.com/wall2.jpg', '2018-12-03 15:42:07');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -293,32 +302,153 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1072468908910383106 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=1082572203033104440 DEFAULT CHARSET=utf8mb4 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
-INSERT INTO `sys_log` VALUES ('1069496198739537921', '1', 'admin', '登录', '644', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-03 15:38:59');
-INSERT INTO `sys_log` VALUES ('1069496693285728258', '1', 'admin', '上传文件', '987', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:40:57');
-INSERT INTO `sys_log` VALUES ('1069496762168782850', '1', 'admin', '上传文件', '440', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:13');
-INSERT INTO `sys_log` VALUES ('1069496773019447298', '1', 'admin', '上传文件', '337', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:16');
-INSERT INTO `sys_log` VALUES ('1069496781370306561', '1', 'admin', '上传文件', '332', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:18');
-INSERT INTO `sys_log` VALUES ('1069496797283495937', '1', 'admin', '上传文件', '1644', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:21');
-INSERT INTO `sys_log` VALUES ('1069496806183809026', '1', 'admin', '上传文件', '449', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:24');
-INSERT INTO `sys_log` VALUES ('1069496825305640962', '1', 'admin', '上传文件', '345', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:28');
-INSERT INTO `sys_log` VALUES ('1069496849854902274', '1', 'admin', '上传文件', '312', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:34');
-INSERT INTO `sys_log` VALUES ('1069496868670550018', '1', 'admin', '上传文件', '387', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:38');
-INSERT INTO `sys_log` VALUES ('1069496879844175873', '1', 'admin', '上传文件', '514', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:41');
-INSERT INTO `sys_log` VALUES ('1069496918419189761', '1', 'admin', '上传文件', '472', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:50');
-INSERT INTO `sys_log` VALUES ('1069496930112909314', '1', 'admin', '上传文件', '451', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:41:53');
-INSERT INTO `sys_log` VALUES ('1069496987079946242', '1', 'admin', '上传文件', '467', 'POST /common/sysFile/upload', '{}', '127.0.0.1', '2018-12-03 15:42:07');
-INSERT INTO `sys_log` VALUES ('1071232675391594498', '1', 'admin', '登录', '70', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-08 10:39:07');
-INSERT INTO `sys_log` VALUES ('1071234386948526082', '1', 'admin', '登录', '49', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-08 10:45:55');
-INSERT INTO `sys_log` VALUES ('1071258462555586561', '1', 'admin', '登录', '186', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-08 12:21:35');
-INSERT INTO `sys_log` VALUES ('1071682957833510914', '1', 'admin', '登录', '61', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-09 16:28:23');
-INSERT INTO `sys_log` VALUES ('1071683605966741506', '1', 'admin', '登录', '44', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-09 16:30:57');
-INSERT INTO `sys_log` VALUES ('1071704106059448322', '1', 'admin', '登录', '69', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-09 17:52:25');
-INSERT INTO `sys_log` VALUES ('1072468908910383105', '1', 'admin', '登录', '160', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-11 20:31:28');
+INSERT INTO `sys_log` VALUES ('1073149354900017154', '1', 'admin', '登录', '49', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2018-12-13 17:35:19');
+INSERT INTO `sys_log` VALUES ('1077863231852232825', '1', 'admin', '登陆', '41', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"mwed\"]}', '127.0.0.1', '2018-12-29 13:19:22');
+INSERT INTO `sys_log` VALUES ('1077863231852232826', '1', 'admin', '登陆', '1525', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 11:18:37');
+INSERT INTO `sys_log` VALUES ('1077863231852232827', '1', 'admin', '登陆', '90', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 11:20:16');
+INSERT INTO `sys_log` VALUES ('1077863231852232828', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-02 11:20:20');
+INSERT INTO `sys_log` VALUES ('1077863231852232829', '1', 'admin', '登陆', '91', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 11:22:03');
+INSERT INTO `sys_log` VALUES ('1077863231852232830', '1', 'admin', '登陆', '85', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 11:24:17');
+INSERT INTO `sys_log` VALUES ('1077863231852232832', '1', 'admin', '登陆', '81', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 11:59:26');
+INSERT INTO `sys_log` VALUES ('1077863231852232833', '1', 'admin', '登陆', '115', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"fc8a\"]}', '127.0.0.1', '2019-01-02 15:07:46');
+INSERT INTO `sys_log` VALUES ('1077863231852232834', '1', 'admin', '登陆', '378', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"wnfw\"]}', '127.0.0.1', '2019-01-02 18:23:14');
+INSERT INTO `sys_log` VALUES ('1077863231852232835', '1', 'admin', '登陆', '1044', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"wnfw\"]}', '127.0.0.1', '2019-01-02 18:23:14');
+INSERT INTO `sys_log` VALUES ('1077863231852232836', '1', 'admin', '登陆', '7', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"wnfw\"]}', '127.0.0.1', '2019-01-02 18:25:51');
+INSERT INTO `sys_log` VALUES ('1077863231852232837', '1', 'admin', '登陆', '89', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"wnfw\"]}', '127.0.0.1', '2019-01-03 09:01:31');
+INSERT INTO `sys_log` VALUES ('1077863231852232838', '1', 'admin', '登陆', '191', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 09:47:50');
+INSERT INTO `sys_log` VALUES ('1077863231852232839', '1', 'admin', '登陆', '6', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:00:35');
+INSERT INTO `sys_log` VALUES ('1077863231852232840', '1', 'admin', '登陆', '71', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:01:57');
+INSERT INTO `sys_log` VALUES ('1077863231852232841', '1', 'admin', '登陆', '99', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:05:26');
+INSERT INTO `sys_log` VALUES ('1077863231852232842', '1', 'admin', '登陆', '71', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:31:35');
+INSERT INTO `sys_log` VALUES ('1077863231852232843', '1', 'admin', '登陆', '72', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:32:42');
+INSERT INTO `sys_log` VALUES ('1077863231852232844', '1', 'admin', '登陆', '112', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:34:44');
+INSERT INTO `sys_log` VALUES ('1077863231852232845', '1', 'admin', '登陆', '90', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 10:59:44');
+INSERT INTO `sys_log` VALUES ('1080662220293029890', '-1', '', '登录', '180', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"11\"]}', '127.0.0.1', '2019-01-03 11:08:45');
+INSERT INTO `sys_log` VALUES ('1080662231718313986', '1', 'admin', '登录', '21', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2019-01-03 11:08:48');
+INSERT INTO `sys_log` VALUES ('1080662336898875393', '1', 'admin', '更新代码生成配置', '2666', 'POST /common/generator/update', '{\"author\":[\"Aron\"],\"email\":[\"eriz@163.com\"],\"package\":[\"com.eriz\"],\"autoRemovePre\":[\"on\"],\"tablePrefix\":[\"app\"],\"tinyint\":[\"Integer1\"],\"smallint\":[\"Integer\"],\"mediumint\":[\"Integer\"],\"int\":[\"Integer\"],\"integer\":[\"Integer\"],\"bigint\":[\"Long\"],\"float\":[\"Float\"],\"double\":[\"Double\"],\"decimal\":[\"BigDecimal\"],\"bit\":[\"Boolean\"],\"char\":[\"String\"],\"varchar\":[\"String\"],\"tinytext\":[\"String\"],\"text\":[\"String\"],\"mediumtext\":[\"String\"],\"longtext\":[\"String\"],\"date\":[\"Date\"],\"datetime\":[\"Date\"],\"timestamp\":[\"Date\"]}', '127.0.0.1', '2019-01-03 11:09:14');
+INSERT INTO `sys_log` VALUES ('1080662424891179009', '1', 'admin', '更新代码生成配置', '1976', 'POST /common/generator/update', '{\"author\":[\"Aron\"],\"email\":[\"eriz@163.com\"],\"package\":[\"com.eriz\"],\"autoRemovePre\":[\"on\"],\"tablePrefix\":[\"app\"],\"tinyint\":[\"Integer\"],\"smallint\":[\"Integer\"],\"mediumint\":[\"Integer\"],\"int\":[\"Integer\"],\"integer\":[\"Integer\"],\"bigint\":[\"Long\"],\"float\":[\"Float\"],\"double\":[\"Double\"],\"decimal\":[\"BigDecimal\"],\"bit\":[\"Boolean\"],\"char\":[\"String\"],\"varchar\":[\"String\"],\"tinytext\":[\"String\"],\"text\":[\"String\"],\"mediumtext\":[\"String\"],\"longtext\":[\"String\"],\"date\":[\"Date\"],\"datetime\":[\"Date\"],\"timestamp\":[\"Date\"]}', '127.0.0.1', '2019-01-03 11:09:34');
+INSERT INTO `sys_log` VALUES ('1080662917872893953', '1', 'admin', '更新代码生成配置', '89195', 'POST /common/generator/update', '{\"author\":[\"eriz\"],\"email\":[\"eriz@163.com\"],\"package\":[\"com.eriz\"],\"autoRemovePre\":[\"on\"],\"tablePrefix\":[\"app\"],\"tinyint\":[\"Integer1\"],\"smallint\":[\"Integer\"],\"mediumint\":[\"Integer\"],\"int\":[\"Integer\"],\"integer\":[\"Integer\"],\"bigint\":[\"Long\"],\"float\":[\"Float\"],\"double\":[\"Double\"],\"decimal\":[\"BigDecimal\"],\"bit\":[\"Boolean\"],\"char\":[\"String\"],\"varchar\":[\"String\"],\"tinytext\":[\"String\"],\"text\":[\"String\"],\"mediumtext\":[\"String\"],\"longtext\":[\"String\"],\"date\":[\"Date\"],\"datetime\":[\"Date\"],\"timestamp\":[\"Date\"]}', '127.0.0.1', '2019-01-03 11:11:32');
+INSERT INTO `sys_log` VALUES ('1080662917872893954', '1', 'admin', '登陆', '12', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 11:30:27');
+INSERT INTO `sys_log` VALUES ('1080662917872893955', '1', 'admin', '登陆', '154', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 11:35:44');
+INSERT INTO `sys_log` VALUES ('1080662917872893956', '1', 'admin', '登陆', '88', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 11:41:03');
+INSERT INTO `sys_log` VALUES ('1080662917872893957', '1', 'admin', '登陆', '90', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 11:46:09');
+INSERT INTO `sys_log` VALUES ('1080662917872893958', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-03 11:46:29');
+INSERT INTO `sys_log` VALUES ('1080662917872893959', '1', 'admin', '用户列表', '16', 'POST /sys/user/userList', '{\"deptId\":[\"12\"]}', '127.0.0.1', '2019-01-03 11:46:38');
+INSERT INTO `sys_log` VALUES ('1080662917872893960', '1', 'admin', '用户列表', '13', 'POST /sys/user/userList', '{\"deptId\":[\"7\"]}', '127.0.0.1', '2019-01-03 11:46:39');
+INSERT INTO `sys_log` VALUES ('1080662917872893961', '1', 'admin', '登陆', '33', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 12:34:25');
+INSERT INTO `sys_log` VALUES ('1080662917872893962', '1', 'admin', '登陆', '90', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 14:23:28');
+INSERT INTO `sys_log` VALUES ('1080662917872893963', '1', 'admin', '登陆', '87', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:25:52');
+INSERT INTO `sys_log` VALUES ('1080662917872893964', '1', 'admin', '登陆', '88', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:29:07');
+INSERT INTO `sys_log` VALUES ('1080662917872893965', '1', 'admin', '登陆', '12545', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:30:05');
+INSERT INTO `sys_log` VALUES ('1080662917872893966', '1', 'admin', '登陆', '5266', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:33:18');
+INSERT INTO `sys_log` VALUES ('1080662917872893967', '1', 'admin', '登陆', '16', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:37:30');
+INSERT INTO `sys_log` VALUES ('1080662917872893968', '1', 'admin', '登陆', '94', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:43:39');
+INSERT INTO `sys_log` VALUES ('1080662917872893969', '1', 'admin', '登陆', '99', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-03 15:48:32');
+INSERT INTO `sys_log` VALUES ('1080662917872893970', '1', 'admin', '登陆', '407', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-04 09:11:41');
+INSERT INTO `sys_log` VALUES ('1080662917872893971', '1', 'admin', '登陆', '9', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-04 09:39:42');
+INSERT INTO `sys_log` VALUES ('1080662917872893972', '1', 'admin', '登陆', '11', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-04 10:36:26');
+INSERT INTO `sys_log` VALUES ('1080662917872893973', '1', 'admin', '登陆', '210', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"a\"]}', '127.0.0.1', '2019-01-04 11:49:40');
+INSERT INTO `sys_log` VALUES ('1080662917872893974', '1', 'admin', '登陆', '657', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 15:20:25');
+INSERT INTO `sys_log` VALUES ('1080662917872893975', '1', 'admin', '登陆', '466', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 15:29:09');
+INSERT INTO `sys_log` VALUES ('1080662917872893976', '1', 'admin', '用户管理', '2', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-07 15:30:07');
+INSERT INTO `sys_log` VALUES ('1080662917872893977', '1', 'admin', '登陆', '305', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 15:46:43');
+INSERT INTO `sys_log` VALUES ('1080662917872893978', '1', 'admin', '登陆', '240', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 15:48:33');
+INSERT INTO `sys_log` VALUES ('1080662917872893979', '1', 'admin', '登陆', '34', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 15:51:36');
+INSERT INTO `sys_log` VALUES ('1080662917872893980', '1', 'admin', '添加', '6332', 'POST /common/config/save', '{\"k\":[\"测试1\"],\"v\":[\"测试1\"],\"remark\":[\"测试1\"],\"createtime\":[\"2019-01-07 16:11:28\"],\"kvtype\":[\"10022\"]}', '127.0.0.1', '2019-01-07 16:11:39');
+INSERT INTO `sys_log` VALUES ('1080662917872893981', '1', 'admin', '添加', '4004', 'POST /common/config/save', '{\"k\":[\"测试1\"],\"v\":[\"测试1\"],\"remark\":[\"测试1\"],\"createtime\":[\"2019-01-30 15:59:36\"],\"kvtype\":[\"10022\"]}', '127.0.0.1', '2019-01-07 16:13:09');
+INSERT INTO `sys_log` VALUES ('1080662917872893982', '1', 'admin', '添加', '137', 'POST /common/config/save', '{\"k\":[\"测试1\"],\"v\":[\"测试1\"],\"remark\":[\"测试1\"],\"createtime\":[\"2019-01-30 15:59:36\"],\"kvtype\":[\"10022\"]}', '127.0.0.1', '2019-01-07 16:14:33');
+INSERT INTO `sys_log` VALUES ('1080662917872893983', '1', 'admin', '删除', '9728', 'POST /common/config/remove', '{\"ids\":[\"29\"]}', '127.0.0.1', '2019-01-07 16:15:09');
+INSERT INTO `sys_log` VALUES ('1080662917872893984', '1', 'admin', '登陆', '10', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 16:21:18');
+INSERT INTO `sys_log` VALUES ('1080662917872893985', '1', 'admin', '批量删除', '4797', 'POST /common/config/batchRemove', '{\"ids\":[\"29\"]}', '127.0.0.1', '2019-01-07 16:21:27');
+INSERT INTO `sys_log` VALUES ('1080662917872893986', '1', 'admin', '登陆', '10', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-07 16:24:43');
+INSERT INTO `sys_log` VALUES ('1080662917872893987', '1', 'admin', '添加', '116', 'POST /common/config/save', '{\"k\":[\"测试1\"],\"v\":[\"测试1\"],\"remark\":[\"测试1\"],\"createtime\":[\"2019-01-30 15:59:36\"],\"kvtype\":[\"10022\"]}', '127.0.0.1', '2019-01-07 16:24:54');
+INSERT INTO `sys_log` VALUES ('1080662917872893988', '1', 'admin', '删除', '1029', 'POST /common/config/remove', '{\"id\":[\"30\"]}', '127.0.0.1', '2019-01-07 16:25:01');
+INSERT INTO `sys_log` VALUES ('1080662917872893989', '1', 'admin', '登陆', '896', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:14:53');
+INSERT INTO `sys_log` VALUES ('1080662917872893990', '1', 'admin', '批量删除', '14211', 'POST /common/config/batchRemove', '{\"ids[]\":[\"28\",\"27\"]}', '127.0.0.1', '2019-01-08 09:15:22');
+INSERT INTO `sys_log` VALUES ('1080662917872893991', '1', 'admin', '登陆', '172', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:41:45');
+INSERT INTO `sys_log` VALUES ('1080662917872893992', '1', 'admin', '用户列表', '49', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-08 09:42:58');
+INSERT INTO `sys_log` VALUES ('1080662917872893993', '1', 'admin', '登陆', '184', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:50:04');
+INSERT INTO `sys_log` VALUES ('1080662917872893994', '1', 'admin', '登陆', '198', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:51:34');
+INSERT INTO `sys_log` VALUES ('1080662917872893995', '1', 'admin', '登陆', '11', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:51:52');
+INSERT INTO `sys_log` VALUES ('1080662917872893996', '1', 'admin', '登陆', '8', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:52:03');
+INSERT INTO `sys_log` VALUES ('1080662917872893997', '1', 'admin', '登陆', '239', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:54:45');
+INSERT INTO `sys_log` VALUES ('1080662917872893998', '1', 'admin', '登陆', '190', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:55:37');
+INSERT INTO `sys_log` VALUES ('1080662917872893999', '1', 'admin', '登陆', '191', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:58:39');
+INSERT INTO `sys_log` VALUES ('1080662917872894000', '1', 'admin', '登陆', '168', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 09:58:39');
+INSERT INTO `sys_log` VALUES ('1080662917872894001', '1', 'admin', '登陆', '8', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 10:00:15');
+INSERT INTO `sys_log` VALUES ('1080662917872894002', '1', 'admin', '登陆', '9', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 10:00:40');
+INSERT INTO `sys_log` VALUES ('1080662917872894003', '1', 'admin', '登陆', '222', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 10:01:54');
+INSERT INTO `sys_log` VALUES ('1080662917872894004', '1', 'admin', '登陆', '159', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 10:03:38');
+INSERT INTO `sys_log` VALUES ('1080662917872894005', '1', 'admin', '登陆', '518', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 11:21:12');
+INSERT INTO `sys_log` VALUES ('1080662917872894006', '1', 'admin', '登陆', '175', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 11:26:39');
+INSERT INTO `sys_log` VALUES ('1080662917872894007', '1', 'admin', '登陆', '598', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 14:14:58');
+INSERT INTO `sys_log` VALUES ('1080662917872894008', '1', 'admin', '登陆', '250', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 14:39:26');
+INSERT INTO `sys_log` VALUES ('1080662917872894009', '1', 'admin', '登陆', '248', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 14:42:40');
+INSERT INTO `sys_log` VALUES ('1080662917872894010', '1', 'admin', '登陆', '215', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 14:47:06');
+INSERT INTO `sys_log` VALUES ('1080662917872894011', '1', 'admin', '登陆', '273', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 14:52:50');
+INSERT INTO `sys_log` VALUES ('1080662917872894012', '1', 'admin', '登陆', '320', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 16:30:02');
+INSERT INTO `sys_log` VALUES ('1080662917872894013', '1', 'admin', '登陆', '681', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 17:25:29');
+INSERT INTO `sys_log` VALUES ('1080662917872894014', '1', 'admin', '登陆', '353', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 17:34:07');
+INSERT INTO `sys_log` VALUES ('1082571736811048962', '1', 'admin', '登录', '66', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2019-01-08 17:36:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104386', '1', 'admin', '登录', '12', 'POST /login', '{\"username\":[\"admin\"],\"password\":[\"1\"]}', '127.0.0.1', '2019-01-08 17:38:21');
+INSERT INTO `sys_log` VALUES ('1082572203033104387', '1', 'admin', '登陆', '149', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-08 17:40:06');
+INSERT INTO `sys_log` VALUES ('1082572203033104388', '1', 'admin', '登陆', '641', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 09:51:04');
+INSERT INTO `sys_log` VALUES ('1082572203033104389', '1', 'admin', '用户列表', '203', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-09 09:51:32');
+INSERT INTO `sys_log` VALUES ('1082572203033104390', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-09 09:51:39');
+INSERT INTO `sys_log` VALUES ('1082572203033104391', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-09 09:51:40');
+INSERT INTO `sys_log` VALUES ('1082572203033104392', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-09 09:53:08');
+INSERT INTO `sys_log` VALUES ('1082572203033104393', '1', 'admin', '登陆', '203', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 09:57:51');
+INSERT INTO `sys_log` VALUES ('1082572203033104394', '1', 'admin', '登陆', '1128', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 12:08:16');
+INSERT INTO `sys_log` VALUES ('1082572203033104395', '1', 'admin', '用户列表', '507', 'POST /sys/user/userList', '{\"roleIds\":[\"1\"]}', '127.0.0.1', '2019-01-09 12:10:14');
+INSERT INTO `sys_log` VALUES ('1082572203033104396', '1', 'admin', '用户管理', '10', 'POST /sys/online/list', '{}', '127.0.0.1', '2019-01-09 12:17:38');
+INSERT INTO `sys_log` VALUES ('1082572203033104397', '1', 'admin', '登陆', '347', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:22:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104398', '1', 'admin', '登陆', '384', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:28:36');
+INSERT INTO `sys_log` VALUES ('1082572203033104399', '1', 'admin', 'api测试-登录', '56150', 'POST /api/user/login', '{\"uname\":[\"admin\"],\"passwd\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:30:56');
+INSERT INTO `sys_log` VALUES ('1082572203033104400', '1', 'admin', '登陆', '346', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:39:50');
+INSERT INTO `sys_log` VALUES ('1082572203033104401', '1', 'admin', '登陆', '355', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:43:44');
+INSERT INTO `sys_log` VALUES ('1082572203033104402', '1', 'admin', '登陆', '348', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:46:46');
+INSERT INTO `sys_log` VALUES ('1082572203033104403', '1', 'admin', '登陆', '356', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:50:10');
+INSERT INTO `sys_log` VALUES ('1082572203033104404', '1', 'admin', '登陆', '7', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:51:41');
+INSERT INTO `sys_log` VALUES ('1082572203033104405', '1', 'admin', '登陆', '6', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 14:53:07');
+INSERT INTO `sys_log` VALUES ('1082572203033104406', '1', 'admin', 'api测试-需要认证才能访问', '1', 'GET /api/user/require_auth', '{}', '127.0.0.1', '2019-01-09 14:53:37');
+INSERT INTO `sys_log` VALUES ('1082572203033104407', '1', 'admin', '登陆', '334', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 15:12:59');
+INSERT INTO `sys_log` VALUES ('1082572203033104408', '1', 'admin', '登陆', '372', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 15:14:28');
+INSERT INTO `sys_log` VALUES ('1082572203033104409', '1', 'admin', '登陆', '486', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 16:30:07');
+INSERT INTO `sys_log` VALUES ('1082572203033104410', '1', 'admin', '登陆', '568', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-09 17:23:44');
+INSERT INTO `sys_log` VALUES ('1082572203033104411', '1', 'admin', '登陆', '968', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"ss\"]}', '127.0.0.1', '2019-01-17 09:04:33');
+INSERT INTO `sys_log` VALUES ('1082572203033104412', '1', 'admin', '用户列表', '93', 'null null', '{}', null, '2019-01-17 09:04:40');
+INSERT INTO `sys_log` VALUES ('1082572203033104413', '1', 'admin', '用户列表', '6', 'null null', '{}', null, '2019-01-17 09:04:52');
+INSERT INTO `sys_log` VALUES ('1082572203033104414', '1', 'admin', '用户列表', '304', 'null null', '{}', null, '2019-01-17 09:04:56');
+INSERT INTO `sys_log` VALUES ('1082572203033104415', '1', 'admin', '用户列表', '9', 'null null', '{}', null, '2019-01-17 09:04:58');
+INSERT INTO `sys_log` VALUES ('1082572203033104416', '1', 'admin', '登陆', '375', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-17 09:23:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104417', '1', 'admin', '登陆', '579', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"123\"]}', '127.0.0.1', '2019-01-18 11:57:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104418', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-18 11:57:40');
+INSERT INTO `sys_log` VALUES ('1082572203033104419', '1', 'admin', '登陆', '418', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"123\"]}', '127.0.0.1', '2019-01-18 12:05:01');
+INSERT INTO `sys_log` VALUES ('1082572203033104420', '1', 'admin', '登陆', '398', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-18 12:06:54');
+INSERT INTO `sys_log` VALUES ('1082572203033104421', '1', 'admin', '用户列表', '42', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-18 12:07:02');
+INSERT INTO `sys_log` VALUES ('1082572203033104422', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-18 12:07:05');
+INSERT INTO `sys_log` VALUES ('1082572203033104423', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-18 12:07:07');
+INSERT INTO `sys_log` VALUES ('1082572203033104424', '1', 'admin', '用户列表', '130', 'POST /sys/user/userList', '{\"deptId\":[\"7\"]}', '127.0.0.1', '2019-01-18 12:07:10');
+INSERT INTO `sys_log` VALUES ('1082572203033104425', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"8\"]}', '127.0.0.1', '2019-01-18 12:07:12');
+INSERT INTO `sys_log` VALUES ('1082572203033104426', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"7\"]}', '127.0.0.1', '2019-01-18 12:07:13');
+INSERT INTO `sys_log` VALUES ('1082572203033104427', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"16\"]}', '127.0.0.1', '2019-01-18 12:07:14');
+INSERT INTO `sys_log` VALUES ('1082572203033104428', '1', 'admin', '用户列表', '4', 'POST /sys/user/userList', '{\"deptId\":[\"12\"]}', '127.0.0.1', '2019-01-18 12:07:15');
+INSERT INTO `sys_log` VALUES ('1082572203033104429', '1', 'admin', '用户列表', '3', 'POST /sys/user/userList', '{\"deptId\":[\"14\"]}', '127.0.0.1', '2019-01-18 12:07:17');
+INSERT INTO `sys_log` VALUES ('1082572203033104430', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"15\"]}', '127.0.0.1', '2019-01-18 12:07:18');
+INSERT INTO `sys_log` VALUES ('1082572203033104431', '1', 'admin', '用户列表', '3', 'POST /sys/user/userList', '{\"deptId\":[\"18\"]}', '127.0.0.1', '2019-01-18 12:07:18');
+INSERT INTO `sys_log` VALUES ('1082572203033104432', '1', 'admin', '用户列表', '4', 'POST /sys/user/userList', '{\"deptId\":[\"21\"]}', '127.0.0.1', '2019-01-18 12:07:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104433', '1', 'admin', '用户列表', '3', 'POST /sys/user/userList', '{\"deptId\":[\"19\"]}', '127.0.0.1', '2019-01-18 12:07:20');
+INSERT INTO `sys_log` VALUES ('1082572203033104434', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-18 12:07:37');
+INSERT INTO `sys_log` VALUES ('1082572203033104435', '1', 'admin', '用户列表', '11', 'POST /sys/user/userList', '{\"deptId\":[\"7\"]}', '127.0.0.1', '2019-01-18 12:08:03');
+INSERT INTO `sys_log` VALUES ('1082572203033104436', '1', 'admin', '登陆', '728', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-20 23:07:38');
+INSERT INTO `sys_log` VALUES ('1082572203033104437', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-20 23:07:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104438', '1', 'admin', '登陆', '379', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-20 23:08:16');
+INSERT INTO `sys_log` VALUES ('1082572203033104439', '1', 'admin', '用户管理', '0', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-20 23:08:19');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -335,86 +465,88 @@ CREATE TABLE `sys_menu` (
   `orderNum` int(11) DEFAULT NULL COMMENT '排序',
   `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
   `gmtModified` datetime DEFAULT NULL COMMENT '修改时间',
+  `delFlag` int(11) DEFAULT '0' COMMENT '是否删除。0-否，1-是',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1034090238251876355 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
-INSERT INTO `sys_menu` VALUES ('1', '0', '基础管理', '', '', '0', 'fa fa-bars', '0', '2017-08-09 22:49:47', null);
-INSERT INTO `sys_menu` VALUES ('2', '3', '系统菜单', 'sys/menu/', 'sys:menu:menu', '1', 'fa fa-th-list', '2', '2017-08-09 22:55:15', null);
-INSERT INTO `sys_menu` VALUES ('3', '0', '系统管理', null, null, '0', 'fa fa-desktop', '1', '2017-08-09 23:06:55', '2017-08-14 14:13:43');
-INSERT INTO `sys_menu` VALUES ('6', '3', '用户管理', 'sys/user/', 'sys:user:user', '1', 'fa fa-user', '0', '2017-08-10 14:12:11', null);
-INSERT INTO `sys_menu` VALUES ('7', '3', '角色管理', 'sys/role', 'sys:role:role', '1', 'fa fa-paw', '1', '2017-08-10 14:13:19', null);
-INSERT INTO `sys_menu` VALUES ('12', '6', '新增', '', 'sys:user:add', '2', '', '0', '2017-08-14 10:51:35', null);
-INSERT INTO `sys_menu` VALUES ('13', '6', '编辑', '', 'sys:user:edit', '2', '', '0', '2017-08-14 10:52:06', null);
-INSERT INTO `sys_menu` VALUES ('14', '6', '删除', null, 'sys:user:remove', '2', null, '0', '2017-08-14 10:52:24', null);
-INSERT INTO `sys_menu` VALUES ('15', '7', '新增', '', 'sys:role:add', '2', '', '0', '2017-08-14 10:56:37', null);
-INSERT INTO `sys_menu` VALUES ('20', '2', '新增', '', 'sys:menu:add', '2', '', '0', '2017-08-14 10:59:32', null);
-INSERT INTO `sys_menu` VALUES ('21', '2', '编辑', '', 'sys:menu:edit', '2', '', '0', '2017-08-14 10:59:56', null);
-INSERT INTO `sys_menu` VALUES ('22', '2', '删除', '', 'sys:menu:remove', '2', '', '0', '2017-08-14 11:00:26', null);
-INSERT INTO `sys_menu` VALUES ('24', '6', '批量删除', '', 'sys:user:batchRemove', '2', '', '0', '2017-08-14 17:27:18', null);
-INSERT INTO `sys_menu` VALUES ('25', '6', '停用', null, 'sys:user:disable', '2', null, '0', '2017-08-14 17:27:43', null);
-INSERT INTO `sys_menu` VALUES ('26', '6', '重置密码', '', 'sys:user:resetPwd', '2', '', '0', '2017-08-14 17:28:34', null);
-INSERT INTO `sys_menu` VALUES ('27', '91', '系统日志', 'common/log', 'common:log', '1', 'fa fa-warning', '0', '2017-08-14 22:11:53', null);
-INSERT INTO `sys_menu` VALUES ('28', '27', '刷新', null, 'sys:log:list', '2', null, '0', '2017-08-14 22:30:22', null);
-INSERT INTO `sys_menu` VALUES ('29', '27', '删除', null, 'sys:log:remove', '2', null, '0', '2017-08-14 22:30:43', null);
-INSERT INTO `sys_menu` VALUES ('30', '27', '清空', null, 'sys:log:clear', '2', null, '0', '2017-08-14 22:31:02', null);
-INSERT INTO `sys_menu` VALUES ('48', '77', '代码生成', 'common/generator', 'common:generator', '1', 'fa fa-code', '3', null, null);
-INSERT INTO `sys_menu` VALUES ('55', '7', '编辑', '', 'sys:role:edit', '2', '', null, null, null);
-INSERT INTO `sys_menu` VALUES ('56', '7', '删除', '', 'sys:role:remove', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('57', '91', '运行监控', '/druid/index.html', '', '1', 'fa fa-caret-square-o-right', '1', null, null);
-INSERT INTO `sys_menu` VALUES ('61', '2', '批量删除', '', 'sys:menu:batchRemove', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('62', '7', '批量删除', '', 'sys:role:batchRemove', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('71', '1', '文件管理', '/common/sysFile', 'oss:file:file', '1', 'fa fa-folder-open', '2', null, null);
-INSERT INTO `sys_menu` VALUES ('72', '77', '计划任务', 'common/job', 'common:taskScheduleJob', '1', 'fa fa-hourglass-1', '4', null, null);
-INSERT INTO `sys_menu` VALUES ('73', '3', '部门管理', '/sys/dept', 'system:sysDept:sysDept', '1', 'fa fa-users', '3', null, null);
-INSERT INTO `sys_menu` VALUES ('74', '73', '增加', '/sys/dept/add', 'system:sysDept:add', '2', null, '1', null, null);
-INSERT INTO `sys_menu` VALUES ('75', '73', '刪除', 'sys/dept/remove', 'system:sysDept:remove', '2', null, '2', null, null);
-INSERT INTO `sys_menu` VALUES ('76', '73', '编辑', '/sys/dept/edit', 'system:sysDept:edit', '2', null, '3', null, null);
-INSERT INTO `sys_menu` VALUES ('77', '0', '系统工具', '', '', '0', 'fa fa-gear', '4', null, null);
-INSERT INTO `sys_menu` VALUES ('78', '1', '数据字典', '/common/sysDict', 'common:sysDict:sysDict', '1', 'fa fa-book', '1', null, null);
-INSERT INTO `sys_menu` VALUES ('79', '78', '增加', '/common/sysDict/add', 'common:sysDict:add', '2', null, '2', null, null);
-INSERT INTO `sys_menu` VALUES ('80', '78', '编辑', '/common/sysDict/edit', 'common:sysDict:edit', '2', null, '2', null, null);
-INSERT INTO `sys_menu` VALUES ('81', '78', '删除', '/common/sysDict/remove', 'common:sysDict:remove', '2', '', '3', null, null);
-INSERT INTO `sys_menu` VALUES ('83', '78', '批量删除', '/common/sysDict/batchRemove', 'common:sysDict:batchRemove', '2', '', '4', null, null);
-INSERT INTO `sys_menu` VALUES ('91', '0', '系统监控', '', '', '0', 'fa fa-video-camera', '5', null, null);
-INSERT INTO `sys_menu` VALUES ('92', '91', '在线用户', 'sys/online', '', '1', 'fa fa-user', null, null, null);
-INSERT INTO `sys_menu` VALUES ('97', '0', '图表管理', '', '', '0', 'fa fa-bar-chart', '7', null, null);
-INSERT INTO `sys_menu` VALUES ('98', '97', '百度chart', '/chart/graph_echarts.html', '', '1', 'fa fa-area-chart', null, null, null);
-INSERT INTO `sys_menu` VALUES ('175', '1', '系统配置', '/common/config', null, '1', 'fa fa-file-code-o', '6', null, null);
-INSERT INTO `sys_menu` VALUES ('176', '175', '查看', null, 'common:config:config', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('177', '175', '新增', null, 'common:config:add', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('178', '175', '修改', null, 'common:config:edit', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('179', '175', '删除', null, 'common:config:remove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('180', '175', '批量删除', null, 'common:config:batchRemove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('181', '199', '公众号管理', '/wxmp/mpConfig', null, '1', 'fa fa-file-code-o', '6', null, null);
-INSERT INTO `sys_menu` VALUES ('182', '181', '查看', null, 'wxmp:mpConfig:mpConfig', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('183', '181', '新增', null, 'wxmp:mpConfig:add', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('184', '181', '修改', null, 'wxmp:mpConfig:edit', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('185', '181', '删除', null, 'wxmp:mpConfig:remove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('186', '181', '批量删除', null, 'wxmp:mpConfig:batchRemove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('187', '199', '微信粉丝表', '/wxmp/mpFans', null, '1', 'fa fa-file-code-o', '6', null, null);
-INSERT INTO `sys_menu` VALUES ('188', '187', '查看', null, 'wxmp:mpFans:mpFans', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('189', '187', '新增', null, 'wxmp:mpFans:add', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('190', '187', '修改', null, 'wxmp:mpFans:edit', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('191', '187', '删除', null, 'wxmp:mpFans:remove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('192', '187', '批量删除', null, 'wxmp:mpFans:batchRemove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('193', '71', '增加', '/common/sysFile/add', 'oss:file:add', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('194', '71', '列表', '/common/sysFile/list', 'oss:file:list', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('195', '71', '编辑', '/common/sysFile/edit', 'oss:file:update', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('196', '71', '查询', '/common/sysFile/info', 'oss:file:info', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('197', '71', '删除', '/common/sysFile/remove', 'oss:file:remove', '2', null, null, null, null);
-INSERT INTO `sys_menu` VALUES ('199', '0', '微信公众号', null, null, '0', 'fa fa-file-code-o', '3', null, null);
-INSERT INTO `sys_menu` VALUES ('205', '187', '同步', null, 'wxmp:mpFans:sync', '2', 'fa fa-refresh', '5', null, null);
-INSERT INTO `sys_menu` VALUES ('206', '1', '[Demo]基础表', '/demo/demoBase', '', '1', 'fa fa-file-code-o', '6', null, null);
-INSERT INTO `sys_menu` VALUES ('207', '206', '查看', null, 'demo:demoBase:demoBase', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('208', '206', '新增', null, 'demo:demoBase:add', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('209', '206', '修改', null, 'demo:demoBase:edit', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('210', '206', '删除', null, 'demo:demoBase:remove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('211', '206', '批量删除', null, 'demo:demoBase:batchRemove', '2', null, '6', null, null);
-INSERT INTO `sys_menu` VALUES ('1034089959238385666', '0', 'api测试-用户更新', '', 'api:user:update', '2', '', null, null, null);
-INSERT INTO `sys_menu` VALUES ('1034090238251876354', '0', 'api测试-appUser角色', '', 'api:user:role', '2', '', null, null, null);
+INSERT INTO `sys_menu` VALUES ('1', '0', '基础管理', '', '', '0', 'fa fa-bars', '0', '2017-08-09 22:49:47', null, '0');
+INSERT INTO `sys_menu` VALUES ('2', '3', '系统菜单', 'sys/menu/', 'sys:menu:menu', '1', 'fa fa-th-list', '2', '2017-08-09 22:55:15', null, '0');
+INSERT INTO `sys_menu` VALUES ('3', '0', '系统管理', null, null, '0', 'fa fa-desktop', '1', '2017-08-09 23:06:55', '2017-08-14 14:13:43', '0');
+INSERT INTO `sys_menu` VALUES ('6', '3', '用户管理', 'sys/user/', 'sys:user:user', '1', 'fa fa-user', '0', '2017-08-10 14:12:11', null, '0');
+INSERT INTO `sys_menu` VALUES ('7', '3', '角色管理', 'sys/role/', 'sys:role:role', '1', 'fa fa-paw', '1', '2017-08-10 14:13:19', null, '0');
+INSERT INTO `sys_menu` VALUES ('12', '6', '新增', '', 'sys:user:add', '2', '', '0', '2017-08-14 10:51:35', null, '0');
+INSERT INTO `sys_menu` VALUES ('13', '6', '编辑', '', 'sys:user:edit', '2', '', '0', '2017-08-14 10:52:06', null, '0');
+INSERT INTO `sys_menu` VALUES ('14', '6', '删除', null, 'sys:user:remove', '2', null, '0', '2017-08-14 10:52:24', null, '0');
+INSERT INTO `sys_menu` VALUES ('15', '7', '新增', '', 'sys:role:add', '2', '', '0', '2017-08-14 10:56:37', null, '0');
+INSERT INTO `sys_menu` VALUES ('20', '2', '新增', '', 'sys:menu:add', '2', '', '0', '2017-08-14 10:59:32', null, '0');
+INSERT INTO `sys_menu` VALUES ('21', '2', '编辑', '', 'sys:menu:edit', '2', '', '0', '2017-08-14 10:59:56', null, '0');
+INSERT INTO `sys_menu` VALUES ('22', '2', '删除', '', 'sys:menu:remove', '2', '', '0', '2017-08-14 11:00:26', null, '0');
+INSERT INTO `sys_menu` VALUES ('24', '6', '批量删除', '', 'sys:user:batchRemove', '2', '', '0', '2017-08-14 17:27:18', null, '0');
+INSERT INTO `sys_menu` VALUES ('25', '6', '停用', null, 'sys:user:disable', '2', null, '0', '2017-08-14 17:27:43', null, '0');
+INSERT INTO `sys_menu` VALUES ('26', '6', '重置密码', '', 'sys:user:resetPwd', '2', '', '0', '2017-08-14 17:28:34', null, '0');
+INSERT INTO `sys_menu` VALUES ('27', '91', '系统日志', 'common/log/', 'common:log', '1', 'fa fa-warning', '0', '2017-08-14 22:11:53', null, '0');
+INSERT INTO `sys_menu` VALUES ('28', '27', '刷新', null, 'sys:log:list', '2', null, '0', '2017-08-14 22:30:22', null, '0');
+INSERT INTO `sys_menu` VALUES ('29', '27', '删除', null, 'sys:log:remove', '2', null, '0', '2017-08-14 22:30:43', null, '0');
+INSERT INTO `sys_menu` VALUES ('30', '27', '清空', null, 'sys:log:clear', '2', null, '0', '2017-08-14 22:31:02', null, '0');
+INSERT INTO `sys_menu` VALUES ('48', '77', '代码生成', 'common/generator/', 'common:generator', '1', 'fa fa-code', '3', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('55', '7', '编辑', '', 'sys:role:edit', '2', '', null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('56', '7', '删除', '', 'sys:role:remove', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('57', '91', '运行监控', '/druid/index.html', '', '1', 'fa fa-caret-square-o-right', '1', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('61', '2', '批量删除', '', 'sys:menu:batchRemove', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('62', '7', '批量删除', '', 'sys:role:batchRemove', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('71', '1', '文件管理', '/common/sysFile', 'oss:file:file', '1', 'fa fa-folder-open', '2', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('72', '77', '计划任务', 'common/job', 'common:taskScheduleJob', '1', 'fa fa-hourglass-1', '4', null, null, '1');
+INSERT INTO `sys_menu` VALUES ('73', '3', '部门管理', '/sys/dept/', 'system:sysDept:sysDept', '1', 'fa fa-users', '3', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('74', '73', '增加', '/sys/dept/add', 'system:sysDept:add', '2', null, '1', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('75', '73', '刪除', 'sys/dept/remove', 'system:sysDept:remove', '2', null, '2', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('76', '73', '编辑', '/sys/dept/edit', 'system:sysDept:edit', '2', null, '3', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('77', '0', '系统工具', '', '', '0', 'fa fa-gear', '4', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('78', '1', '数据字典', '/base/dict/', 'common:sysDict:sysDict', '1', 'fa fa-book', '1', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('79', '78', '增加', '/common/sysDict/add', 'common:sysDict:add', '2', null, '2', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('80', '78', '编辑', '/common/sysDict/edit', 'common:sysDict:edit', '2', null, '2', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('81', '78', '删除', '/common/sysDict/remove', 'common:sysDict:remove', '2', '', '3', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('83', '78', '批量删除', '/common/sysDict/batchRemove', 'common:sysDict:batchRemove', '2', '', '4', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('91', '0', '系统监控', '', '', '0', 'fa fa-video-camera', '5', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('92', '91', '在线用户', 'sys/online/', '', '1', 'fa fa-user', null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('97', '0', '图表管理', '', '', '0', 'fa fa-bar-chart', '7', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('98', '97', '百度chart', '/chart/graph_echarts.html', '', '1', 'fa fa-area-chart', null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('175', '1', '系统配置', '/common/config/', null, '1', 'fa fa-file-code-o', '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('176', '175', '查看', null, 'common:config:config', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('177', '175', '新增', null, 'common:config:add', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('178', '175', '修改', null, 'common:config:edit', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('179', '175', '删除', null, 'common:config:remove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('180', '175', '批量删除', null, 'common:config:batchRemove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('181', '199', '公众号管理', '/wxmp/mpConfig', null, '1', 'fa fa-file-code-o', '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('182', '181', '查看', null, 'wxmp:mpConfig:mpConfig', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('183', '181', '新增', null, 'wxmp:mpConfig:add', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('184', '181', '修改', null, 'wxmp:mpConfig:edit', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('185', '181', '删除', null, 'wxmp:mpConfig:remove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('186', '181', '批量删除', null, 'wxmp:mpConfig:batchRemove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('187', '199', '微信粉丝表', '/wxmp/mpFans', null, '1', 'fa fa-file-code-o', '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('188', '187', '查看', null, 'wxmp:mpFans:mpFans', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('189', '187', '新增', null, 'wxmp:mpFans:add', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('190', '187', '修改', null, 'wxmp:mpFans:edit', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('191', '187', '删除', null, 'wxmp:mpFans:remove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('192', '187', '批量删除', null, 'wxmp:mpFans:batchRemove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('193', '71', '增加', '/common/sysFile/add', 'oss:file:add', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('194', '71', '列表', '/common/sysFile/list', 'oss:file:list', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('195', '71', '编辑', '/common/sysFile/edit', 'oss:file:update', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('196', '71', '查询', '/common/sysFile/info', 'oss:file:info', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('197', '71', '删除', '/common/sysFile/remove', 'oss:file:remove', '2', null, null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('199', '0', '微信公众号', null, null, '0', 'fa fa-file-code-o', '3', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('205', '187', '同步', null, 'wxmp:mpFans:sync', '2', 'fa fa-refresh', '5', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('206', '1', '[Demo]基础表', '/demo/demoBase', '', '1', 'fa fa-file-code-o', '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('207', '206', '查看', null, 'demo:demoBase:demoBase', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('208', '206', '新增', null, 'demo:demoBase:add', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('209', '206', '修改', null, 'demo:demoBase:edit', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('210', '206', '删除', null, 'demo:demoBase:remove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('211', '206', '批量删除', null, 'demo:demoBase:batchRemove', '2', null, '6', null, null, '0');
+INSERT INTO `sys_menu` VALUES ('212', '0', 'api测试-用户更新', '', 'api:user:update', '2', '', null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('213', '0', 'api测试-appUser角色', '', 'api:user:role', '2', '', null, null, null, '0');
+INSERT INTO `sys_menu` VALUES ('214', '213', '测试下级123', '测试地址', '测试标识', '1', '1', '1', null, null, '0');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -429,14 +561,14 @@ CREATE TABLE `sys_role` (
   `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
   `gmtModified` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES ('1', '超级用户角色', 'adminRole', '超级管理员', '2', '2017-08-12 00:43:52', '2017-08-12 19:14:59');
-INSERT INTO `sys_role` VALUES ('56', '普通用户', null, '普通用户', null, null, null);
 INSERT INTO `sys_role` VALUES ('2', '前端API', 'apiRole', '前端API', null, null, null);
+INSERT INTO `sys_role` VALUES ('56', '普通用户', null, '普通用户', null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -447,7 +579,7 @@ CREATE TABLE `sys_role_menu` (
   `roleId` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menuId` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4547 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=5210 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -602,66 +734,124 @@ INSERT INTO `sys_role_menu` VALUES ('3182', '56', '51');
 INSERT INTO `sys_role_menu` VALUES ('3183', '56', '50');
 INSERT INTO `sys_role_menu` VALUES ('3184', '56', '49');
 INSERT INTO `sys_role_menu` VALUES ('3185', '56', '-1');
-INSERT INTO `sys_role_menu` VALUES ('4487', '1', '193');
-INSERT INTO `sys_role_menu` VALUES ('4488', '1', '194');
-INSERT INTO `sys_role_menu` VALUES ('4489', '1', '195');
-INSERT INTO `sys_role_menu` VALUES ('4490', '1', '196');
-INSERT INTO `sys_role_menu` VALUES ('4491', '1', '197');
-INSERT INTO `sys_role_menu` VALUES ('4492', '1', '79');
-INSERT INTO `sys_role_menu` VALUES ('4493', '1', '80');
-INSERT INTO `sys_role_menu` VALUES ('4494', '1', '81');
-INSERT INTO `sys_role_menu` VALUES ('4495', '1', '83');
-INSERT INTO `sys_role_menu` VALUES ('4496', '1', '176');
-INSERT INTO `sys_role_menu` VALUES ('4497', '1', '177');
-INSERT INTO `sys_role_menu` VALUES ('4498', '1', '178');
-INSERT INTO `sys_role_menu` VALUES ('4499', '1', '179');
-INSERT INTO `sys_role_menu` VALUES ('4500', '1', '180');
-INSERT INTO `sys_role_menu` VALUES ('4501', '1', '207');
-INSERT INTO `sys_role_menu` VALUES ('4502', '1', '208');
-INSERT INTO `sys_role_menu` VALUES ('4503', '1', '209');
-INSERT INTO `sys_role_menu` VALUES ('4504', '1', '210');
-INSERT INTO `sys_role_menu` VALUES ('4505', '1', '211');
-INSERT INTO `sys_role_menu` VALUES ('4506', '1', '20');
-INSERT INTO `sys_role_menu` VALUES ('4507', '1', '21');
-INSERT INTO `sys_role_menu` VALUES ('4508', '1', '22');
-INSERT INTO `sys_role_menu` VALUES ('4509', '1', '61');
-INSERT INTO `sys_role_menu` VALUES ('4510', '1', '12');
-INSERT INTO `sys_role_menu` VALUES ('4511', '1', '13');
-INSERT INTO `sys_role_menu` VALUES ('4512', '1', '14');
-INSERT INTO `sys_role_menu` VALUES ('4513', '1', '24');
-INSERT INTO `sys_role_menu` VALUES ('4514', '1', '25');
-INSERT INTO `sys_role_menu` VALUES ('4515', '1', '26');
-INSERT INTO `sys_role_menu` VALUES ('4516', '1', '15');
-INSERT INTO `sys_role_menu` VALUES ('4517', '1', '55');
-INSERT INTO `sys_role_menu` VALUES ('4518', '1', '56');
-INSERT INTO `sys_role_menu` VALUES ('4519', '1', '62');
-INSERT INTO `sys_role_menu` VALUES ('4520', '1', '74');
-INSERT INTO `sys_role_menu` VALUES ('4521', '1', '75');
-INSERT INTO `sys_role_menu` VALUES ('4522', '1', '76');
-INSERT INTO `sys_role_menu` VALUES ('4523', '1', '48');
-INSERT INTO `sys_role_menu` VALUES ('4524', '1', '72');
-INSERT INTO `sys_role_menu` VALUES ('4525', '1', '28');
-INSERT INTO `sys_role_menu` VALUES ('4526', '1', '29');
-INSERT INTO `sys_role_menu` VALUES ('4527', '1', '30');
-INSERT INTO `sys_role_menu` VALUES ('4528', '1', '57');
-INSERT INTO `sys_role_menu` VALUES ('4529', '1', '92');
-INSERT INTO `sys_role_menu` VALUES ('4530', '1', '71');
-INSERT INTO `sys_role_menu` VALUES ('4531', '1', '78');
-INSERT INTO `sys_role_menu` VALUES ('4532', '1', '175');
-INSERT INTO `sys_role_menu` VALUES ('4533', '1', '206');
-INSERT INTO `sys_role_menu` VALUES ('4534', '1', '1');
-INSERT INTO `sys_role_menu` VALUES ('4535', '1', '2');
-INSERT INTO `sys_role_menu` VALUES ('4536', '1', '6');
-INSERT INTO `sys_role_menu` VALUES ('4537', '1', '7');
-INSERT INTO `sys_role_menu` VALUES ('4538', '1', '73');
-INSERT INTO `sys_role_menu` VALUES ('4539', '1', '3');
-INSERT INTO `sys_role_menu` VALUES ('4540', '1', '77');
-INSERT INTO `sys_role_menu` VALUES ('4541', '1', '27');
-INSERT INTO `sys_role_menu` VALUES ('4542', '1', '91');
-INSERT INTO `sys_role_menu` VALUES ('4543', '1', '-1');
 INSERT INTO `sys_role_menu` VALUES ('4544', '1034088931742957569', '1034089959238385666');
 INSERT INTO `sys_role_menu` VALUES ('4545', '1034088931742957569', '1034090238251876354');
 INSERT INTO `sys_role_menu` VALUES ('4546', '1034088931742957569', '-1');
+INSERT INTO `sys_role_menu` VALUES ('4547', '1074171417978761218', '57');
+INSERT INTO `sys_role_menu` VALUES ('4548', '1074171417978761218', '92');
+INSERT INTO `sys_role_menu` VALUES ('4549', '1074171417978761218', '29');
+INSERT INTO `sys_role_menu` VALUES ('4550', '1074171417978761218', '28');
+INSERT INTO `sys_role_menu` VALUES ('4551', '1074171417978761218', '30');
+INSERT INTO `sys_role_menu` VALUES ('4633', '1074183961095254018', '176');
+INSERT INTO `sys_role_menu` VALUES ('4634', '1074183961095254018', '177');
+INSERT INTO `sys_role_menu` VALUES ('4635', '1074183961095254018', '178');
+INSERT INTO `sys_role_menu` VALUES ('4636', '1074183961095254018', '179');
+INSERT INTO `sys_role_menu` VALUES ('4637', '1074183961095254018', '180');
+INSERT INTO `sys_role_menu` VALUES ('4638', '1074183961095254018', '207');
+INSERT INTO `sys_role_menu` VALUES ('4639', '1074183961095254018', '209');
+INSERT INTO `sys_role_menu` VALUES ('4640', '1074183961095254018', '210');
+INSERT INTO `sys_role_menu` VALUES ('4641', '1074183961095254018', '211');
+INSERT INTO `sys_role_menu` VALUES ('4642', '1074183961095254018', '208');
+INSERT INTO `sys_role_menu` VALUES ('4643', '1074183961095254018', '193');
+INSERT INTO `sys_role_menu` VALUES ('4644', '1074183961095254018', '197');
+INSERT INTO `sys_role_menu` VALUES ('4645', '1074183961095254018', '194');
+INSERT INTO `sys_role_menu` VALUES ('4646', '1074183961095254018', '196');
+INSERT INTO `sys_role_menu` VALUES ('4647', '1074183961095254018', '195');
+INSERT INTO `sys_role_menu` VALUES ('4648', '1074183961095254018', '83');
+INSERT INTO `sys_role_menu` VALUES ('4649', '1074183961095254018', '81');
+INSERT INTO `sys_role_menu` VALUES ('4650', '1074183961095254018', '79');
+INSERT INTO `sys_role_menu` VALUES ('4651', '1074183961095254018', '80');
+INSERT INTO `sys_role_menu` VALUES ('4899', '1', '1');
+INSERT INTO `sys_role_menu` VALUES ('4900', '1', '71');
+INSERT INTO `sys_role_menu` VALUES ('4901', '1', '193');
+INSERT INTO `sys_role_menu` VALUES ('4902', '1', '194');
+INSERT INTO `sys_role_menu` VALUES ('4903', '1', '195');
+INSERT INTO `sys_role_menu` VALUES ('4904', '1', '196');
+INSERT INTO `sys_role_menu` VALUES ('4905', '1', '197');
+INSERT INTO `sys_role_menu` VALUES ('4906', '1', '78');
+INSERT INTO `sys_role_menu` VALUES ('4907', '1', '79');
+INSERT INTO `sys_role_menu` VALUES ('4908', '1', '80');
+INSERT INTO `sys_role_menu` VALUES ('4909', '1', '81');
+INSERT INTO `sys_role_menu` VALUES ('4910', '1', '83');
+INSERT INTO `sys_role_menu` VALUES ('4911', '1', '175');
+INSERT INTO `sys_role_menu` VALUES ('4912', '1', '176');
+INSERT INTO `sys_role_menu` VALUES ('4913', '1', '177');
+INSERT INTO `sys_role_menu` VALUES ('4914', '1', '178');
+INSERT INTO `sys_role_menu` VALUES ('4915', '1', '179');
+INSERT INTO `sys_role_menu` VALUES ('4916', '1', '180');
+INSERT INTO `sys_role_menu` VALUES ('4917', '1', '206');
+INSERT INTO `sys_role_menu` VALUES ('4918', '1', '207');
+INSERT INTO `sys_role_menu` VALUES ('4919', '1', '208');
+INSERT INTO `sys_role_menu` VALUES ('4920', '1', '209');
+INSERT INTO `sys_role_menu` VALUES ('4921', '1', '210');
+INSERT INTO `sys_role_menu` VALUES ('4922', '1', '211');
+INSERT INTO `sys_role_menu` VALUES ('4923', '1', '3');
+INSERT INTO `sys_role_menu` VALUES ('4924', '1', '2');
+INSERT INTO `sys_role_menu` VALUES ('4925', '1', '20');
+INSERT INTO `sys_role_menu` VALUES ('4926', '1', '21');
+INSERT INTO `sys_role_menu` VALUES ('4927', '1', '22');
+INSERT INTO `sys_role_menu` VALUES ('4928', '1', '61');
+INSERT INTO `sys_role_menu` VALUES ('4929', '1', '6');
+INSERT INTO `sys_role_menu` VALUES ('4930', '1', '12');
+INSERT INTO `sys_role_menu` VALUES ('4931', '1', '13');
+INSERT INTO `sys_role_menu` VALUES ('4932', '1', '14');
+INSERT INTO `sys_role_menu` VALUES ('4933', '1', '24');
+INSERT INTO `sys_role_menu` VALUES ('4934', '1', '25');
+INSERT INTO `sys_role_menu` VALUES ('4935', '1', '26');
+INSERT INTO `sys_role_menu` VALUES ('4936', '1', '7');
+INSERT INTO `sys_role_menu` VALUES ('4937', '1', '15');
+INSERT INTO `sys_role_menu` VALUES ('4938', '1', '55');
+INSERT INTO `sys_role_menu` VALUES ('4939', '1', '56');
+INSERT INTO `sys_role_menu` VALUES ('4940', '1', '62');
+INSERT INTO `sys_role_menu` VALUES ('4941', '1', '73');
+INSERT INTO `sys_role_menu` VALUES ('4942', '1', '74');
+INSERT INTO `sys_role_menu` VALUES ('4943', '1', '75');
+INSERT INTO `sys_role_menu` VALUES ('4944', '1', '76');
+INSERT INTO `sys_role_menu` VALUES ('4945', '1', '77');
+INSERT INTO `sys_role_menu` VALUES ('4946', '1', '48');
+INSERT INTO `sys_role_menu` VALUES ('4947', '1', '72');
+INSERT INTO `sys_role_menu` VALUES ('4948', '1', '91');
+INSERT INTO `sys_role_menu` VALUES ('4949', '1', '27');
+INSERT INTO `sys_role_menu` VALUES ('4950', '1', '28');
+INSERT INTO `sys_role_menu` VALUES ('4951', '1', '29');
+INSERT INTO `sys_role_menu` VALUES ('4952', '1', '30');
+INSERT INTO `sys_role_menu` VALUES ('4953', '1', '57');
+INSERT INTO `sys_role_menu` VALUES ('4954', '1', '92');
+INSERT INTO `sys_role_menu` VALUES ('4955', '1074194776175218690', '1');
+INSERT INTO `sys_role_menu` VALUES ('4956', '1074194776175218690', '175');
+INSERT INTO `sys_role_menu` VALUES ('4957', '1074194776175218690', '176');
+INSERT INTO `sys_role_menu` VALUES ('4958', '1074194776175218690', '177');
+INSERT INTO `sys_role_menu` VALUES ('4959', '1074194776175218690', '178');
+INSERT INTO `sys_role_menu` VALUES ('4960', '1074194776175218690', '179');
+INSERT INTO `sys_role_menu` VALUES ('4961', '1074194776175218690', '180');
+INSERT INTO `sys_role_menu` VALUES ('4962', '1074194776175218690', '206');
+INSERT INTO `sys_role_menu` VALUES ('4963', '1074194776175218690', '207');
+INSERT INTO `sys_role_menu` VALUES ('4964', '1074194776175218690', '209');
+INSERT INTO `sys_role_menu` VALUES ('4965', '1074194776175218690', '210');
+INSERT INTO `sys_role_menu` VALUES ('4966', '1074194776175218690', '211');
+INSERT INTO `sys_role_menu` VALUES ('4967', '1074194776175218690', '208');
+INSERT INTO `sys_role_menu` VALUES ('4968', '1074194776175218690', '71');
+INSERT INTO `sys_role_menu` VALUES ('4969', '1074194776175218690', '193');
+INSERT INTO `sys_role_menu` VALUES ('4970', '1074194776175218690', '197');
+INSERT INTO `sys_role_menu` VALUES ('4971', '1074194776175218690', '194');
+INSERT INTO `sys_role_menu` VALUES ('4972', '1074194776175218690', '196');
+INSERT INTO `sys_role_menu` VALUES ('4973', '1074194776175218690', '195');
+INSERT INTO `sys_role_menu` VALUES ('4974', '1074194776175218690', '78');
+INSERT INTO `sys_role_menu` VALUES ('4975', '1074194776175218690', '83');
+INSERT INTO `sys_role_menu` VALUES ('4976', '1074194776175218690', '81');
+INSERT INTO `sys_role_menu` VALUES ('4977', '1074194776175218690', '79');
+INSERT INTO `sys_role_menu` VALUES ('4978', '1074194776175218690', '80');
+INSERT INTO `sys_role_menu` VALUES ('4979', '1074194776175218690', '77');
+INSERT INTO `sys_role_menu` VALUES ('4980', '1074194776175218690', '72');
+INSERT INTO `sys_role_menu` VALUES ('4981', '1074194776175218690', '48');
+INSERT INTO `sys_role_menu` VALUES ('5202', '1074201842218528770', '213');
+INSERT INTO `sys_role_menu` VALUES ('5203', '1074201842218528770', '212');
+INSERT INTO `sys_role_menu` VALUES ('5204', '1074201842218528771', '213');
+INSERT INTO `sys_role_menu` VALUES ('5205', '1074201842218528771', '212');
+INSERT INTO `sys_role_menu` VALUES ('5206', '57', '213');
+INSERT INTO `sys_role_menu` VALUES ('5207', '57', '212');
+INSERT INTO `sys_role_menu` VALUES ('5208', '58', '213');
+INSERT INTO `sys_role_menu` VALUES ('5209', '59', '213');
 
 -- ----------------------------
 -- Table structure for sys_task
@@ -715,14 +905,49 @@ CREATE TABLE `sys_user` (
   `city` varchar(255) DEFAULT NULL COMMENT '所在城市',
   `district` varchar(255) DEFAULT NULL COMMENT '所在地区',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1034088697579159555 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', '33808479d49ca8a3cdc93d4f976d1e3d', '6', 'eriz@163.com', '15814525912', '1', '1', '2017-08-15 21:40:39', '2017-08-15 21:41:00', '96', '2018-04-02 00:00:00', '151', 'papapa', '', '广东省', '广州市', '番禺区');
-INSERT INTO `sys_user` VALUES ('2', 'test', '临时用户', 'b132f5f968c9373261f74025c23c2222', '6', 'test@163.com', '15278792752', '1', '1', '2017-08-14 13:43:05', '2017-08-14 21:15:36', '96', '2018-08-22 00:00:00', null, '', '', '北京市', '北京市市辖区', '东城区');
-INSERT INTO `sys_user` VALUES ('1034088697579159554', 'appUser', 'user', 'fc4d8bf7d69f03344a58f9381dd75dfe', '12', 'appUser@163.com', null, '1', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user` VALUES ('1', 'admin', '超级管理员', '33808479d49ca8a3cdc93d4f976d1e3d', '7', 'eriz@163.com', '15814525912', '1', '1', '2017-08-15 21:40:39', '2017-08-15 21:41:00', '96', '2018-04-02 00:00:00', '151', '创客基地', '', '广东省', '广州市', '番禺区');
+INSERT INTO `sys_user` VALUES ('2', 'test', '临时用户', 'b132f5f968c9373261f74025c23c2222', '7', 'test@ifast.com', '15278792752', '1', '1', '2017-08-14 13:43:05', '2017-08-14 21:15:36', '96', '2018-08-22 00:00:00', null, '', '', '北京市', '北京市市辖区', '东城区');
+INSERT INTO `sys_user` VALUES ('4', 'eriz', '测试', '123123', '15', 'eriz@163.com', null, '1', null, null, null, '0', null, null, null, null, null, null, null);
+
+-- ----------------------------
+-- Table structure for sys_user_copy
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_user_copy`;
+CREATE TABLE `sys_user_copy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '用户名',
+  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '密码',
+  `deptId` bigint(20) DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '邮箱',
+  `mobile` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '手机号',
+  `status` tinyint(255) DEFAULT NULL COMMENT '状态 0:禁用，1:正常',
+  `userIdCreate` bigint(255) DEFAULT NULL COMMENT '创建用户id',
+  `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
+  `gmtModified` datetime DEFAULT NULL COMMENT '修改时间',
+  `sex` bigint(2) DEFAULT NULL COMMENT '性别',
+  `birth` datetime DEFAULT NULL COMMENT '出身日期',
+  `picId` bigint(32) DEFAULT NULL,
+  `liveAddress` varchar(500) CHARACTER SET utf8 DEFAULT NULL COMMENT '现居住地',
+  `hobby` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '爱好',
+  `province` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '省份',
+  `city` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所在城市',
+  `district` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所在地区',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of sys_user_copy
+-- ----------------------------
+INSERT INTO `sys_user_copy` VALUES ('1', 'admin', '超级管理员', '33808479d49ca8a3cdc93d4f976d1e3d', '6', 'izenglong@163.com', '15277778888', '1', '1', '2017-08-15 21:40:39', '2017-08-15 21:41:00', '96', '2018-04-02 00:00:00', '151', '创客基地', '', '广东省', '广州市', '番禺区');
+INSERT INTO `sys_user_copy` VALUES ('2', 'test', '临时用户', 'b132f5f968c9373261f74025c23c2222', '6', 'test@ifast.com', '15278792752', '1', '1', '2017-08-14 13:43:05', '2017-08-14 21:15:36', '96', '2018-08-22 00:00:00', null, '', '', '北京市', '北京市市辖区', '东城区');
+INSERT INTO `sys_user_copy` VALUES ('3', 'appUser', 'user', 'fc4d8bf7d69f03344a58f9381dd75dfe', '12', 'appUser@ifast.com', null, '1', null, null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `sys_user_copy` VALUES ('4', 'eriz', '测试', '123123', '15', 'eriz@163.com', null, null, null, null, null, '0', null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -733,12 +958,12 @@ CREATE TABLE `sys_user_role` (
   `userId` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `roleId` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
-INSERT INTO `sys_user_role` VALUES ('73', '30', '48');
+INSERT INTO `sys_user_role` VALUES ('73', '56', '48');
 INSERT INTO `sys_user_role` VALUES ('74', '30', '49');
 INSERT INTO `sys_user_role` VALUES ('75', '30', '50');
 INSERT INTO `sys_user_role` VALUES ('76', '31', '48');
@@ -757,7 +982,7 @@ INSERT INTO `sys_user_role` VALUES ('88', '34', '51');
 INSERT INTO `sys_user_role` VALUES ('89', '34', '52');
 INSERT INTO `sys_user_role` VALUES ('110', '1', '1');
 INSERT INTO `sys_user_role` VALUES ('111', '2', '1');
-INSERT INTO `sys_user_role` VALUES ('117', '135', '1');
+INSERT INTO `sys_user_role` VALUES ('117', '135', '56');
 INSERT INTO `sys_user_role` VALUES ('120', '134', '1');
 INSERT INTO `sys_user_role` VALUES ('121', '134', '48');
 INSERT INTO `sys_user_role` VALUES ('124', null, '48');
@@ -765,7 +990,8 @@ INSERT INTO `sys_user_role` VALUES ('127', null, '1');
 INSERT INTO `sys_user_role` VALUES ('128', null, '1');
 INSERT INTO `sys_user_role` VALUES ('129', null, '1');
 INSERT INTO `sys_user_role` VALUES ('131', '137', '57');
-INSERT INTO `sys_user_role` VALUES ('133', '1034088697579159554', '1034088931742957569');
+INSERT INTO `sys_user_role` VALUES ('139', '1073159779293106178', '1');
+INSERT INTO `sys_user_role` VALUES ('140', '1073159779293106178', '1034088931742957569');
 
 -- ----------------------------
 -- Table structure for wx_mp_config
@@ -887,16 +1113,3 @@ CREATE TABLE `wx_mp_wechat_keys` (
 -- ----------------------------
 -- Records of wx_mp_wechat_keys
 -- ----------------------------
-
--------------------------------
--- 业务表
--------------------------------
-DROP TABLE IF EXISTS `module_book`;
-CREATE TABLE `module_book` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `name` varchar(100) DEFAULT NULL COMMENT '书名',
-  `remark` varchar(100) DEFAULT NULL COMMENT '备注',
-	`price` DECIMAL(10,2) DEFAULT '0' COMMENT '价格',
-  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='图书表';
