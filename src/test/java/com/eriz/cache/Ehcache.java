@@ -23,47 +23,18 @@ public class Ehcache {
     @Resource
     private RoleService roleService;
 
-    public static final String THING_ALL_KEY = "\"thing_all\"";
-    public static final String DEMO_CACHE_NAME = "role";
-
     @Test
     public void role() {
-        List<RoleDO> list = roleService.userRole(null);
-        EhcacheUtil.put("list", list);
-        Object o = EhcacheUtil.get("list");
-        System.out.println(o);
+
+        RoleDO roleDO = new RoleDO();
+        roleDO.setRoleName("超级用户角色");
+        List<RoleDO> list = roleService.all(roleDO);
+
         list.forEach(kv -> System.out.println(kv.getRoleName()));
-    }
+        System.out.println("==========分割线=============");
+        List<RoleDO> list1 = roleService.all(roleDO);
 
-    @Test
-    public void ehcache() {
-        System.out.println("ehcache 缓存开始：");
-        findAll();
-    }
-
-    @CacheEvict(cacheNames = DEMO_CACHE_NAME, key = THING_ALL_KEY)
-    public UserDO create(UserDO userDo) {
-        return userDo;
-    }
-
-    @Cacheable(value = DEMO_CACHE_NAME, key = "#userDo.getId()+'thing'")
-    public UserDO findById(Long id) {
-        System.err.println("没有走缓存！" + id);
-        UserDO userDo = new UserDO();
-        userDo.setId(id);
-        return userDo;
-    }
-
-    @Cacheable(cacheNames = DEMO_CACHE_NAME, key = THING_ALL_KEY)
-    public List<UserDO> findAll() {
-        System.out.println("进入缓存============");
-        List<UserDO> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            UserDO userDo = new UserDO();
-            userDo.setId(2L + i);
-            userDo.setName("didi" + i);
-        }
-        return list;
+        list1.forEach(k-> System.out.println(k.getRoleName()));
     }
 
 }

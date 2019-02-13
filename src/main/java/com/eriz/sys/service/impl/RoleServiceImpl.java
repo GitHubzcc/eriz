@@ -22,21 +22,31 @@ import java.util.List;
 public class RoleServiceImpl extends CoreServiceImpl<RoleDao, RoleDO> implements RoleService {
 
     /**
-     * 缓存的key
-     */
-    public static final String THING_ALL_KEY   = "\"thing_all\"";
-    /**
      * value属性表示使用哪个缓存策略，缓存策略在ehcache.xml
      */
     public static final String DEMO_CACHE_NAME = "demo";
 
-    @Cacheable(value = DEMO_CACHE_NAME, key = THING_ALL_KEY)
+    /**
+     * @Cacheable注解
+     * 使用ehcache缓存
+     * 属性介绍：
+     * value：如果value不写名称，则使用ehcache默认缓存配置方案
+     * Key 属性：给存储的值起个名称。在查询时如果有名称相同的，那么则知己从缓存中将数据返回
+     */
     @Override
     public List<RoleDO> userRole(Long uid) {
+
         if (uid != null) {
             return baseMapper.userRole(uid);
         }
         return baseMapper.selectList(null);
+    }
+
+    @Cacheable(value="role",key="#roleDO.roleName")
+    @Override
+    public List<RoleDO> all(RoleDO roleDO) {
+        System.out.println("走缓存============================");
+        return baseMapper.selAll(roleDO);
     }
 
     @Override

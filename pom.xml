@@ -32,7 +32,6 @@
         <kaptcha.version>0.0.9</kaptcha.version>
         <shiro.version>1.3.2</shiro.version>
         <jwtAu.version>3.2.0</jwtAu.version>
-        <ehcache.version>1.3.2</ehcache.version>
         <swagger2.version>2.6.1</swagger2.version>
     </properties>
 
@@ -195,12 +194,6 @@
             <version>${jwtAu.version}</version>
         </dependency>
         <!-- jwt E -->
-        <!-- shiro ehcache -->
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-ehcache</artifactId>
-            <version>${ehcache.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
@@ -244,6 +237,13 @@
             <version>${swagger2.version}</version>
         </dependency>
         <!-- swagger2 e -->
+        <!-- ehcache s-->
+        <dependency>
+            <groupId>net.sf.ehcache</groupId>
+            <artifactId>ehcache</artifactId>
+            <version>2.8.3</version>
+        </dependency>
+        <!-- ehcache e -->
     </dependencies>
 
     <build>

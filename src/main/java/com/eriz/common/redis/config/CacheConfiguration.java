@@ -34,11 +34,14 @@ public class CacheConfiguration {
 
     @Bean
     public CacheManager cacheManager(RedisTemplate<?, ?> redisTemplate) {
-        CacheManager cacheManager = new RedisCacheManager(redisTemplate);
-
-        return cacheManager;
+        return new RedisCacheManager(redisTemplate);
     }
 
+    /**
+     * 配置redisTemplate 在redisUtil时取出使用
+     * @param factory
+     * @return
+     */
     @Bean
     public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();

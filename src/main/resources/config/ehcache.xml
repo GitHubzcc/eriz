@@ -13,13 +13,18 @@
 		memoryStoreEvictionPolicy="LRU" 
 	/>
 
-	<cache name="demo" eternal="false"
-		   maxElementsInMemory="1000"
-		   overflowToDisk="false"
-		   diskPersistent="false"
-		   timeToIdleSeconds="0"
-		   timeToLiveSeconds="600"
-		   memoryStoreEvictionPolicy="LRU" />
+	<!-- 自定义缓存 -->
+	<cache name="demo"
+		   maxElementsInMemory="10000"
+		   eternal="false"
+		   timeToIdleSeconds="120"
+		   timeToLiveSeconds="120"
+		   maxElementsOnDisk="10000000"
+		   diskExpiryThreadIntervalSeconds="120"
+		   memoryStoreEvictionPolicy="LRU">
+		<persistence strategy="localTempSwap"/>
+	</cache>
+
 
 	<!-- @CacheConfig(cacheNames = {“role”})设置了ehcache的名称，这个名称就是ehcache.xml内的名称；  -->
 	<cache name="role" 

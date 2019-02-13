@@ -15,4 +15,6 @@ import java.util.List;
 public interface RoleService extends CoreService<RoleDO> {
 
     List<RoleDO> userRole(Long uid);
+
+    List<RoleDO> all(RoleDO roleDO);
 }
