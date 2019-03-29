@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2019-01-21 09:12:30
+Date: 2019-03-29 14:38:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -302,7 +302,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `gmtCreate` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1082572203033104440 DEFAULT CHARSET=utf8mb4 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=1082572203033104543 DEFAULT CHARSET=utf8mb4 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -449,6 +449,109 @@ INSERT INTO `sys_log` VALUES ('1082572203033104436', '1', 'admin', '登陆', '72
 INSERT INTO `sys_log` VALUES ('1082572203033104437', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-20 23:07:42');
 INSERT INTO `sys_log` VALUES ('1082572203033104438', '1', 'admin', '登陆', '379', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-20 23:08:16');
 INSERT INTO `sys_log` VALUES ('1082572203033104439', '1', 'admin', '用户管理', '0', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-20 23:08:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104440', '1', 'admin', '登陆', '482', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 09:16:14');
+INSERT INTO `sys_log` VALUES ('1082572203033104441', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 09:16:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104442', '1', 'admin', '登陆', '675', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 10:16:02');
+INSERT INTO `sys_log` VALUES ('1082572203033104443', '1', 'admin', '用户列表', '101', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:16:08');
+INSERT INTO `sys_log` VALUES ('1082572203033104444', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:16:11');
+INSERT INTO `sys_log` VALUES ('1082572203033104445', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:16:13');
+INSERT INTO `sys_log` VALUES ('1082572203033104446', '1', 'admin', '登陆', '379', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 10:18:29');
+INSERT INTO `sys_log` VALUES ('1082572203033104447', '1', 'admin', '用户列表', '42', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:18:31');
+INSERT INTO `sys_log` VALUES ('1082572203033104448', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:19:29');
+INSERT INTO `sys_log` VALUES ('1082572203033104449', '1', 'admin', '登陆', '428', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 10:42:58');
+INSERT INTO `sys_log` VALUES ('1082572203033104450', '1', 'admin', '用户列表', '35', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 10:43:01');
+INSERT INTO `sys_log` VALUES ('1082572203033104451', '1', 'admin', '登陆', '970', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 22:03:53');
+INSERT INTO `sys_log` VALUES ('1082572203033104452', '1', 'admin', '用户列表', '216', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:04:09');
+INSERT INTO `sys_log` VALUES ('1082572203033104453', '1', 'admin', '登陆', '32', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 22:14:45');
+INSERT INTO `sys_log` VALUES ('1082572203033104454', '1', 'admin', '用户列表', '14', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:14:50');
+INSERT INTO `sys_log` VALUES ('1082572203033104455', '1', 'admin', '登陆', '469', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-21 22:19:36');
+INSERT INTO `sys_log` VALUES ('1082572203033104456', '1', 'admin', '用户列表', '57', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:19:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104457', '1', 'admin', '用户列表', '9', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:20:57');
+INSERT INTO `sys_log` VALUES ('1082572203033104458', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:24:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104459', '1', 'admin', '用户列表', '17', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-21 22:26:29');
+INSERT INTO `sys_log` VALUES ('1082572203033104460', '1', 'admin', '登陆', '762', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-22 09:17:57');
+INSERT INTO `sys_log` VALUES ('1082572203033104461', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-22 09:18:04');
+INSERT INTO `sys_log` VALUES ('1082572203033104462', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-22 09:18:35');
+INSERT INTO `sys_log` VALUES ('1082572203033104463', '1', 'admin', '用户列表', '4', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-22 09:18:57');
+INSERT INTO `sys_log` VALUES ('1082572203033104464', '1', 'admin', '登陆', '459', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-24 15:59:37');
+INSERT INTO `sys_log` VALUES ('1082572203033104465', '1', 'admin', '用户列表', '151', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:00:02');
+INSERT INTO `sys_log` VALUES ('1082572203033104466', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:00:10');
+INSERT INTO `sys_log` VALUES ('1082572203033104467', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:00:11');
+INSERT INTO `sys_log` VALUES ('1082572203033104468', '1', 'admin', '登陆', '523', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-24 16:08:18');
+INSERT INTO `sys_log` VALUES ('1082572203033104469', '1', 'admin', '用户列表', '32', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:08:26');
+INSERT INTO `sys_log` VALUES ('1082572203033104470', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:08:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104471', '1', 'admin', '登陆', '424', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-24 16:11:17');
+INSERT INTO `sys_log` VALUES ('1082572203033104472', '1', 'admin', '用户列表', '35', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:11:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104473', '1', 'admin', '登陆', '444', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-24 16:12:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104474', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-01-24 16:12:24');
+INSERT INTO `sys_log` VALUES ('1082572203033104475', '1', 'admin', '用户列表', '33', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-24 16:12:29');
+INSERT INTO `sys_log` VALUES ('1082572203033104476', '1', 'admin', '登陆', '961', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-25 09:50:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104477', '1', 'admin', '登陆', '390', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-25 10:16:00');
+INSERT INTO `sys_log` VALUES ('1082572203033104478', '1', 'admin', '用户列表', '151', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-01-25 10:16:11');
+INSERT INTO `sys_log` VALUES ('1082572203033104479', '1', 'admin', '登陆', '364', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-01-25 10:17:06');
+INSERT INTO `sys_log` VALUES ('1082572203033104480', '1', 'admin', '登陆', '630', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-13 14:36:03');
+INSERT INTO `sys_log` VALUES ('1082572203033104481', '1', 'admin', '用户管理', '1', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-02-13 14:36:24');
+INSERT INTO `sys_log` VALUES ('1082572203033104482', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-13 14:36:39');
+INSERT INTO `sys_log` VALUES ('1082572203033104483', '1', 'admin', '登陆', '568', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-13 16:43:39');
+INSERT INTO `sys_log` VALUES ('1082572203033104484', '1', 'admin', '用户管理', '0', 'POST /sys/online/list', '{\"page\":[\"1\"],\"limit\":[\"10\"]}', '127.0.0.1', '2019-02-13 16:43:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104485', '1', 'admin', '用户列表', '50', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-13 16:43:44');
+INSERT INTO `sys_log` VALUES ('1082572203033104486', '1', 'admin', '登陆', '783', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-19 16:19:02');
+INSERT INTO `sys_log` VALUES ('1082572203033104487', '1', 'admin', '登陆', '569', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-19 17:29:44');
+INSERT INTO `sys_log` VALUES ('1082572203033104488', '1', 'admin', '用户列表', '42', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:30:38');
+INSERT INTO `sys_log` VALUES ('1082572203033104489', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:30:40');
+INSERT INTO `sys_log` VALUES ('1082572203033104490', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:30:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104491', '1', 'admin', '用户列表', '9', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:32:18');
+INSERT INTO `sys_log` VALUES ('1082572203033104492', '1', 'admin', '用户列表', '12', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:32:59');
+INSERT INTO `sys_log` VALUES ('1082572203033104493', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:34:25');
+INSERT INTO `sys_log` VALUES ('1082572203033104494', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:37:17');
+INSERT INTO `sys_log` VALUES ('1082572203033104495', '1', 'admin', '用户列表', '11', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:37:41');
+INSERT INTO `sys_log` VALUES ('1082572203033104496', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:40:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104497', '1', 'admin', '用户列表', '11', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:40:36');
+INSERT INTO `sys_log` VALUES ('1082572203033104498', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:43:51');
+INSERT INTO `sys_log` VALUES ('1082572203033104499', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:49:54');
+INSERT INTO `sys_log` VALUES ('1082572203033104500', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:50:06');
+INSERT INTO `sys_log` VALUES ('1082572203033104501', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:50:32');
+INSERT INTO `sys_log` VALUES ('1082572203033104502', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:51:10');
+INSERT INTO `sys_log` VALUES ('1082572203033104503', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:54:57');
+INSERT INTO `sys_log` VALUES ('1082572203033104504', '1', 'admin', '登陆', '382', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-19 17:55:42');
+INSERT INTO `sys_log` VALUES ('1082572203033104505', '1', 'admin', '用户列表', '38', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:55:46');
+INSERT INTO `sys_log` VALUES ('1082572203033104506', '1', 'admin', '用户列表', '8', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:56:03');
+INSERT INTO `sys_log` VALUES ('1082572203033104507', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:56:53');
+INSERT INTO `sys_log` VALUES ('1082572203033104508', '1', 'admin', '用户列表', '17', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:57:47');
+INSERT INTO `sys_log` VALUES ('1082572203033104509', '1', 'admin', '用户列表', '8', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:58:30');
+INSERT INTO `sys_log` VALUES ('1082572203033104510', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 17:59:26');
+INSERT INTO `sys_log` VALUES ('1082572203033104511', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:00:03');
+INSERT INTO `sys_log` VALUES ('1082572203033104512', '1', 'admin', '用户列表', '12', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:00:06');
+INSERT INTO `sys_log` VALUES ('1082572203033104513', '1', 'admin', '用户列表', '9', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:00:09');
+INSERT INTO `sys_log` VALUES ('1082572203033104514', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:01:15');
+INSERT INTO `sys_log` VALUES ('1082572203033104515', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:01:45');
+INSERT INTO `sys_log` VALUES ('1082572203033104516', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:03:03');
+INSERT INTO `sys_log` VALUES ('1082572203033104517', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:04:47');
+INSERT INTO `sys_log` VALUES ('1082572203033104518', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:04:53');
+INSERT INTO `sys_log` VALUES ('1082572203033104519', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:05:17');
+INSERT INTO `sys_log` VALUES ('1082572203033104520', '1', 'admin', '用户列表', '9', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:05:53');
+INSERT INTO `sys_log` VALUES ('1082572203033104521', '1', 'admin', '用户列表', '5', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:06:45');
+INSERT INTO `sys_log` VALUES ('1082572203033104522', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:08:56');
+INSERT INTO `sys_log` VALUES ('1082572203033104523', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:10:39');
+INSERT INTO `sys_log` VALUES ('1082572203033104524', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:11:19');
+INSERT INTO `sys_log` VALUES ('1082572203033104525', '1', 'admin', '用户列表', '6', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:13:01');
+INSERT INTO `sys_log` VALUES ('1082572203033104526', '1', 'admin', '用户列表', '8', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:13:23');
+INSERT INTO `sys_log` VALUES ('1082572203033104527', '1', 'admin', '用户列表', '4', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:16:28');
+INSERT INTO `sys_log` VALUES ('1082572203033104528', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-19 18:19:48');
+INSERT INTO `sys_log` VALUES ('1082572203033104529', '1', 'admin', '登陆', '711', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-02-28 11:01:39');
+INSERT INTO `sys_log` VALUES ('1082572203033104530', '1', 'admin', '用户列表', '89', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-28 11:01:47');
+INSERT INTO `sys_log` VALUES ('1082572203033104531', '1', 'admin', '用户列表', '8', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-28 11:02:21');
+INSERT INTO `sys_log` VALUES ('1082572203033104532', '1', 'admin', '用户列表', '9', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-28 11:02:51');
+INSERT INTO `sys_log` VALUES ('1082572203033104533', '1', 'admin', '用户列表', '10', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-28 11:04:33');
+INSERT INTO `sys_log` VALUES ('1082572203033104534', '1', 'admin', '用户列表', '7', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-02-28 11:04:44');
+INSERT INTO `sys_log` VALUES ('1082572203033104535', '1', 'admin', '登陆', '591', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-03-20 09:42:21');
+INSERT INTO `sys_log` VALUES ('1082572203033104536', '1', 'admin', '用户列表', '100', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-03-20 09:42:36');
+INSERT INTO `sys_log` VALUES ('1082572203033104537', '1', 'admin', '登陆', '6', 'POST /loginFrom', '{\"username\":[\"admin\"],\"password\":[\"1\"],\"kaptcha\":[\"1\"]}', '127.0.0.1', '2019-03-20 09:44:12');
+INSERT INTO `sys_log` VALUES ('1082572203033104538', '1', 'admin', '用户列表', '14', 'POST /sys/user/userList', '{\"deptId\":[\"\"]}', '127.0.0.1', '2019-03-20 09:44:22');
+INSERT INTO `sys_log` VALUES ('1082572203033104539', '1', 'zcc', null, null, 'saveLog', null, null, null);
+INSERT INTO `sys_log` VALUES ('1082572203033104540', '1', 'zcc', null, null, 'saveLog', null, null, null);
+INSERT INTO `sys_log` VALUES ('1082572203033104541', '1', 'zcc', null, null, 'saveLog', null, null, null);
+INSERT INTO `sys_log` VALUES ('1082572203033104542', '1', 'zcc', null, null, 'saveLog', null, null, null);
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -992,6 +1095,20 @@ INSERT INTO `sys_user_role` VALUES ('129', null, '1');
 INSERT INTO `sys_user_role` VALUES ('131', '137', '57');
 INSERT INTO `sys_user_role` VALUES ('139', '1073159779293106178', '1');
 INSERT INTO `sys_user_role` VALUES ('140', '1073159779293106178', '1034088931742957569');
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `book_name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for wx_mp_config
