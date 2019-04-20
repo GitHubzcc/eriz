@@ -18,8 +18,6 @@ public class Transcation {
 
     @Test
     public void transcation() {
-        UserDO userDO = userService.transcation("eriz");
-        System.out.println("-------------------------");
-        System.out.println(userDO.toString());
+
     }
 }
