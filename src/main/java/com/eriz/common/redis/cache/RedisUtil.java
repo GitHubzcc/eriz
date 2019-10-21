@@ -1,13 +1,13 @@
 package com.eriz.common.redis.cache;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.geo.Point;
+import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -20,6 +20,16 @@ public class RedisUtil {
         this.redisTemplate = redisTemplate;
     }
     //=============================common============================
+    private final String GEO_KEY = "ah-cities";
+
+    public boolean geoAdd(Collection<CityInfo> cityInfos){
+        Set<RedisGeoCommands.GeoLocation<String>> locations = new HashSet<>();
+        cityInfos.forEach(ci -> locations.add(new RedisGeoCommands.GeoLocation<String>(
+                ci.getCity(), new Point(ci.getLongitude(), ci.getLatitude())
+        )));
+        Long count = redisTemplate.opsForGeo().geoAdd(GEO_KEY, locations);
+        return count >0;
+    }
 
     /**
      * 指定缓存失效时间

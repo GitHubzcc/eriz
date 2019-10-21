@@ -4,8 +4,37 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ListTest {
+    static boolean Paddy;
     public static void main(String[] args) {
-        List<String> list = Arrays.asList("qw", "rt", "yu", "gfs");
-        list.forEach(k-> System.out.println(k+1));
+        System.out.println(Paddy);
+    }
+    static class A {
+        protected int value;
+        public A (int v) {
+            setValue(v);
+        }
+        public void setValue(int value) {
+            this.value= value;
+        }
+        public int getValue() {
+            try {
+                value ++;
+                return value;
+            } finally {
+                this.setValue(value);
+                System.out.println(value);
+            }
+        }
+    }
+    static class B extends A {
+        public B () {
+            super(5);
+            setValue(getValue()- 3);
+        }
+        public void setValue(int value) {
+            super.setValue(2 * value);
+        }
     }
 }
+
+

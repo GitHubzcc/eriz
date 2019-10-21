@@ -1,6 +1,9 @@
 package com.eriz.localTest;
 
 import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * 1248
@@ -13,6 +16,9 @@ import java.util.*;
  */
 
 public class Base {
+
+    public void Base(){}
+
     static int i;
     private String name = "name";
 
@@ -40,6 +46,13 @@ public class Base {
     }
 
     public static void main(String[] str) {
+        int count = 100;
+        for (int i = 0;i<100;i++){
+            count = count --;
+        }
+        System.out.println(count);
+        System.out.println("---------------------");
+
         LinkedList<String> linkedList = new LinkedList<>();
 
         linkedList.add("q");
